@@ -1,0 +1,15 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "NCAS Development",
+      "group": "NCAS",
+      "database": "ncas_equipment_development",
+      "username": "ncas",
+      "password": "cjm19876"
+    }
+  ]
+}
