@@ -40,7 +40,13 @@ class CreateInitialTables < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    create_join_table :assets, :checkouts
-    create_join_table :assets, :checkins
+    create_join_table :assets, :checkouts do |t|
+      t.index :asset_id
+      t.index :checkout_id
+    end
+    create_join_table :assets, :checkins do |t|
+      t.index :asset_id
+      t.index :checkin_id
+    end
   end
 end

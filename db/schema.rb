@@ -33,11 +33,15 @@ ActiveRecord::Schema.define(version: 2021_01_03_055940) do
   create_table "assets_checkins", id: false, force: :cascade do |t|
     t.bigint "asset_id", null: false
     t.bigint "checkin_id", null: false
+    t.index ["asset_id"], name: "index_assets_checkins_on_asset_id"
+    t.index ["checkin_id"], name: "index_assets_checkins_on_checkin_id"
   end
 
   create_table "assets_checkouts", id: false, force: :cascade do |t|
     t.bigint "asset_id", null: false
     t.bigint "checkout_id", null: false
+    t.index ["asset_id"], name: "index_assets_checkouts_on_asset_id"
+    t.index ["checkout_id"], name: "index_assets_checkouts_on_checkout_id"
   end
 
   create_table "checkins", force: :cascade do |t|
