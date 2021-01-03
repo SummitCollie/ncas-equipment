@@ -61,9 +61,11 @@ development:
 test:
   <<: *default
   database: ncas_equipment_test
+  <% unless ENV['DATABASE_URL'] %>
   username: <%= Rails.application.credentials.postgres[:username] %>
   password: <%= Rails.application.credentials.postgres[:password] %>
   host: localhost
+  <% end %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
