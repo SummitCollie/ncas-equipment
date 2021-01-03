@@ -31,6 +31,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'ruby-debug-ide', '~> 0.7.2'
+  gem 'solargraph', '~> 0.40.1'
+  gem "debase", "~> 0.2.4"
 end
 
 group :development do
