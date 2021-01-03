@@ -24,9 +24,11 @@ default: &default
 development:
   <<: *default
   database: ncas_equipment_development
+  <% unless ENV['DATABASE_URL'] %>
   username: <%= Rails.application.credentials.postgres[:username] %>
   password: <%= Rails.application.credentials.postgres[:password] %>
   host: localhost
+  <% end %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
