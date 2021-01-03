@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  requires_scan: false
+  donated_by: MyString
+  est_value_cents: 1
+
+two:
+  name: MyString
+  requires_scan: false
+  donated_by: MyString
+  est_value_cents: 1
