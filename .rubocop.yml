@@ -1,0 +1,7 @@
+AllCops:
+  Exclude:
+    - db/schema.rb
+    - db/migrate/*
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

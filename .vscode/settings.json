@@ -1,4 +1,10 @@
 {
+  "ruby.lint": {
+    "rubocop": {
+        "useBundler": true,
+        "forceExclusion": true
+    }
+  },
   "sqltools.connections": [
     {
       "previewLimit": 50,
