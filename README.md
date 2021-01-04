@@ -70,5 +70,15 @@ google_oauth2:
   client_secret: long_string_2_here
 ```
 
+In the google console, also set up your Authorized Redirect URIs for both local
+and any hosted environments. Examples:
+
+Authorized Redirect URIs:
+```
+http://localhost:3000/users/auth/google_oauth2/callback
+https://ncas.equipment/users/auth/google_oauth2/callback
+https://ncas-equipment.herokuapp.com/users/auth/google_oauth2/callback
+```
+
 ## How to run the test suite
 `rspec`
