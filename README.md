@@ -21,9 +21,40 @@ Heroku's `DATABASE_URL` env var to connect rather than the stuff in rails
 credentials.
 
 ## Database initialization
-Run `rails db:migrate` once to set up tables.
+Run `rails db:setup` once to set up tables. Adds test data on local.
 
 Local test data can be seeded by running `rails db:seed`.
+
+Running `rails db:seed` on prod will just add a default admin account, as
+specified in your rails credentials
+
+## Environment Variables
+These are stored in rails credentials. Here's all necessary keys:
+
+```yml
+# Default admin (google account) account to add on prod if
+# you run `rails db:seed` on your Heroku app
+prod_default_admin: myAdmin@gmail.com
+
+# Only used for local dev, app automatically overrides with
+# Heroku DATABASE_URL in prod
+postgres:
+  username: username_here
+  password: password_here
+
+# Used in both dev and prod for google oauth
+google_oauth2:
+  client_id: long_string_here
+  client_secret: long_string_2_here
+
+# Used as the base secret for all MessageVerifiers in Rails,
+# including the one protecting cookies.
+secret_key_base: long_secure_string_here
+```
+
+Make sure you set the environment var `RAILS_MASTER_KEY` on Heroku with
+the value of whatever's in config/master.key so the app can decrypt the stuff
+in Rails credentials.
 
 ## Google Authentication
 Make a project in the
@@ -39,9 +70,5 @@ google_oauth2:
   client_secret: long_string_2_here
 ```
 
-## Deployment
-Just make sure you set the environment var `RAILS_MASTER_KEY` on Heroku with
-the value of whatever's in config/master.key so the app can decrypt the stuff
-in Rails credentials.
-
 ## How to run the test suite
+`rspec`

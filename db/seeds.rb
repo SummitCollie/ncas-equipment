@@ -6,6 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 case Rails.env
+when 'production'
+  default_admin = Rails.application.credentials.prod_default_admin
+  User.create({ email: default_admin, password: Devise.friendly_token }) if default_admin
+
 when 'development'
   users = User.create(
     [
