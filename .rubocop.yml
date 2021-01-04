@@ -2,6 +2,8 @@ AllCops:
   Exclude:
     - db/schema.rb
     - db/migrate/*
+    - config/environments/*
+  NewCops: enable
 
 Style/FrozenStringLiteralComment:
   Enabled: false
