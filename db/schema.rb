@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_03_225000) do
+ActiveRecord::Schema.define(version: 2021_01_03_055940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,43 +18,27 @@ ActiveRecord::Schema.define(version: 2021_01_03_225000) do
   create_table "assets", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
-    t.text "identifier"
-    t.boolean "requires_scan", default: false, null: false
-    t.boolean "checked_out", default: false, null: false
-    t.bigint "current_location_id"
-    t.datetime "est_return"
+    t.text "barcode"
+    t.boolean "checkout_scan_required", default: false, null: false
     t.string "donated_by"
     t.integer "est_value_cents"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["current_location_id"], name: "index_assets_on_current_location_id"
-  end
-
-  create_table "assets_checkins", id: false, force: :cascade do |t|
-    t.bigint "asset_id", null: false
-    t.bigint "checkin_id", null: false
-    t.index ["asset_id"], name: "index_assets_checkins_on_asset_id"
-    t.index ["checkin_id"], name: "index_assets_checkins_on_checkin_id"
-  end
-
-  create_table "assets_checkouts", id: false, force: :cascade do |t|
-    t.bigint "asset_id", null: false
-    t.bigint "checkout_id", null: false
-    t.index ["asset_id"], name: "index_assets_checkouts_on_asset_id"
-    t.index ["checkout_id"], name: "index_assets_checkouts_on_checkout_id"
-  end
-
-  create_table "checkins", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "checkouts", force: :cascade do |t|
-    t.datetime "est_return"
+    t.bigint "asset_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "order_id", null: false
     t.bigint "location_id"
+    t.datetime "est_return"
+    t.datetime "returned_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["asset_id"], name: "index_checkouts_on_asset_id"
     t.index ["location_id"], name: "index_checkouts_on_location_id"
+    t.index ["order_id"], name: "index_checkouts_on_order_id"
+    t.index ["user_id"], name: "index_checkouts_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -73,6 +57,13 @@ ActiveRecord::Schema.define(version: 2021_01_03_225000) do
     t.index ["event_id"], name: "index_locations_on_event_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -85,7 +76,10 @@ ActiveRecord::Schema.define(version: 2021_01_03_225000) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "assets", "locations", column: "current_location_id"
+  add_foreign_key "checkouts", "assets"
   add_foreign_key "checkouts", "locations"
+  add_foreign_key "checkouts", "orders"
+  add_foreign_key "checkouts", "users"
   add_foreign_key "locations", "events"
+  add_foreign_key "orders", "users"
 end

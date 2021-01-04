@@ -7,6 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 case Rails.env
 when 'development'
+  users = User.create(
+    [
+      { email: 'dog@example.com', password: '123456' },
+      { email: 'cat@example.com', password: '123456' },
+    ]
+  )
   events = Event.create([{ name: 'FWA 2019' }, { name: 'FWA 2020', active: true }])
   locations = Location.create(
     [
@@ -23,47 +29,46 @@ when 'development'
     [
       {
         name: 'Sony 55" TV',
-        identifier: '001',
-        requires_scan: true,
+        barcode: '001',
+        checkout_scan_required: true,
         donated_by: 'Musky Husky',
         est_value_cents: 50_000,
       },
       {
         name: 'Nintendo 64',
-        identifier: '002',
+        barcode: '002',
         donated_by: 'Musky Husky',
         est_value_cents: 2000,
-        checked_out: true,
-        current_location_id: locations.third.id,
-        est_return: 2.days.from_now,
       },
       {
         name: 'Handheld Radio',
-        identifier: '003',
+        barcode: '003',
       },
     ]
   )
 
-  # Past checkout and checkin
+  # Past checkout
+  past_order = Order.create(
+    { user: users.first, created_at: 1.year.ago, updated_at: 1.year.ago }
+  )
   Checkout.create(
     {
-      assets: [assets.first],
+      asset: assets.first,
+      user: users.first,
+      order: past_order,
       location: locations.first,
-      est_return: 1.year.ago,
-    }
-  )
-  Checkin.create(
-    {
-      assets: [assets.first],
-      created_at: 1.year.ago + 1.day,
-      updated_at: 1.year.ago + 1.day,
+      est_return: 1.year.ago + 3.days,
+      returned_at: 1.year.ago + 2.days + 30.minutes,
     }
   )
 
   # Current checkout
+  current_order = Order.create({ user: users.second })
   Checkout.create(
     {
-      assets: [assets.second],
+      asset: assets.second,
+      user: users.second,
+      order: current_order,
       location: locations.third,
       est_return: 2.days.from_now,
     }

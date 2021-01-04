@@ -18,35 +18,29 @@ class CreateInitialTables < ActiveRecord::Migration[6.1]
     create_table :assets do |t|
       t.string :name, null: false
       t.text :description
-      t.text :identifier, unique: true
-      t.boolean :requires_scan, null: false, default: false
-      t.boolean :checked_out, null: false, default: false
-      t.belongs_to :current_location, index: true, foreign_key: { to_table: :locations }
-      t.datetime :est_return
+      t.text :barcode, unique: true
+      t.boolean :checkout_scan_required, null: false, default: false
       t.string :donated_by
       t.integer :est_value_cents
 
       t.timestamps
     end
 
+    create_table :orders do |t|
+      t.belongs_to :user, null: false, index: true, foreign_key: true
+
+      t.timestamps
+    end
+
     create_table :checkouts do |t|
-      t.datetime :est_return
+      t.belongs_to :asset, null: false, index: true, foreign_key: true
+      t.belongs_to :user, null: false, index: true, foreign_key: true
+      t.belongs_to :order, null: false, index: true, foreign_key: true
       t.belongs_to :location, index: true, foreign_key: true
+      t.datetime :est_return
+      t.datetime :returned_at
 
       t.timestamps
-    end
-
-    create_table :checkins do |t|
-      t.timestamps
-    end
-
-    create_join_table :assets, :checkouts do |t|
-      t.index :asset_id
-      t.index :checkout_id
-    end
-    create_join_table :assets, :checkins do |t|
-      t.index :asset_id
-      t.index :checkin_id
     end
   end
 end
