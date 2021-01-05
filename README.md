@@ -28,6 +28,12 @@ Local test data can be seeded by running `rails db:seed`.
 Running `rails db:seed` on prod will just add a default admin account, as
 specified in your rails credentials
 
+Default seeded users in development are:
+| username      | password | admin? |
+|---------------|----------|--------|
+|dog@example.com|123456    |✔️     |
+|cat@example.com|123456    |        |
+
 ## Environment Variables
 These are stored in rails credentials. Here's all necessary keys:
 

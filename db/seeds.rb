@@ -8,12 +8,12 @@
 case Rails.env
 when 'production'
   default_admin = Rails.application.credentials.prod_default_admin
-  User.create({ email: default_admin, password: Devise.friendly_token }) if default_admin
+  User.create({ email: default_admin, password: Devise.friendly_token, admin: true }) if default_admin
 
 when 'development'
   users = User.create(
     [
-      { email: 'dog@example.com', password: '123456' },
+      { email: 'dog@example.com', password: '123456', admin: true },
       { email: 'cat@example.com', password: '123456' },
     ]
   )
