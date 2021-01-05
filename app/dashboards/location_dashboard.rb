@@ -22,30 +22,30 @@ class LocationDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-  event
-  checkouts
-  id
-  name
+    id
+    name
+    event
+    checkouts
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-  event
-  checkouts
-  id
-  name
-  created_at
-  updated_at
+    event
+    checkouts
+    id
+    name
+    created_at
+    updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-  event
-  checkouts
-  name
+    event
+    checkouts
+    name
   ].freeze
 
   # COLLECTION_FILTERS

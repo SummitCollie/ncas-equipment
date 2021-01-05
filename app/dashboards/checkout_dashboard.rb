@@ -25,36 +25,36 @@ class CheckoutDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-  user
-  asset
-  order
-  location
+    user
+    asset
+    order
+    location
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-  user
-  asset
-  order
-  location
-  id
-  est_return
-  returned_at
-  created_at
-  updated_at
+    user
+    asset
+    order
+    location
+    id
+    est_return
+    returned_at
+    created_at
+    updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-  user
-  asset
-  order
-  location
-  est_return
-  returned_at
+    user
+    asset
+    order
+    location
+    est_return
+    returned_at
   ].freeze
 
   # COLLECTION_FILTERS
