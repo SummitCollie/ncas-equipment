@@ -5,4 +5,6 @@ Rails.application.routes.draw do
              controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   root 'dashboards#index'
+
+  resources :assets, only: [:index]
 end
