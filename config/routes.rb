@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
     resources :assets
-    resources :checkouts
     resources :events
     resources :locations
     resources :orders

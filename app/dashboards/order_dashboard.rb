@@ -8,7 +8,6 @@ class OrderDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    checkouts: Field::HasMany,
     assets: Field::HasMany,
     user: Field::BelongsTo,
     id: Field::Number,
@@ -29,7 +28,6 @@ class OrderDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    checkouts
     assets
     user
     id
@@ -41,7 +39,6 @@ class OrderDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    checkouts
     assets
     user
   ].freeze

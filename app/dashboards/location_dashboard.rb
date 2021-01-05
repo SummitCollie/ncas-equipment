@@ -9,7 +9,6 @@ class LocationDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     event: Field::BelongsTo,
-    checkouts: Field::HasMany,
     id: Field::Number,
     name: Field::String,
     created_at: Field::DateTime,
@@ -25,14 +24,12 @@ class LocationDashboard < Administrate::BaseDashboard
     id
     name
     event
-    checkouts
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     event
-    checkouts
     id
     name
     created_at
@@ -44,7 +41,6 @@ class LocationDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     event
-    checkouts
     name
   ].freeze
 

@@ -61,9 +61,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "devise", "~> 4.7"
-
 gem "omniauth", "~> 1.9"
-
 gem "omniauth-google-oauth2", "~> 0.8.1"
-
 gem "administrate", "~> 0.14.0"
