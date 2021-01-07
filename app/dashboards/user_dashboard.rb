@@ -10,6 +10,7 @@ class UserDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     orders: Field::HasMany,
     id: Field::Number,
+    display_name: Field::String,
     email: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -23,6 +24,7 @@ class UserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    display_name
     email
     orders
   ].freeze
@@ -32,6 +34,7 @@ class UserDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     orders
+    display_name
     email
     created_at
     updated_at
@@ -42,6 +45,7 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    display_name
     email
     orders
     admin
@@ -62,6 +66,6 @@ class UserDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   def display_resource(user)
-    user.email
+    user.display_name || user.email
   end
 end

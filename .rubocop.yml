@@ -2,11 +2,11 @@ inherit_gem:
   rubocop-shopify: rubocop.yml
 
 AllCops:
+  NewCops: enable
   Exclude:
     - db/schema.rb
     - db/migrate/*
     - config/environments/*
-  NewCops: enable
 
 Style/FrozenStringLiteralComment:
   Enabled: false
