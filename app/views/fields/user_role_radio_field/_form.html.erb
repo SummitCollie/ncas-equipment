@@ -1,0 +1,24 @@
+<div class="field-unit__label">
+  <%= f.label 'Role' %>
+</div>
+<div class="field-unit__field">
+  <div class="user-role-radios">
+    <div class="section">
+      <%= f.radio_button :admin, true, :checked => field.data == true %>
+      <%= label :user, :admin, 'Admin', value: true %>
+      <p class="description">
+        Can access this admin panel, create and delete users/assets,
+        add and remove other admins.
+      </p>
+    </div>
+
+    <div class="section">
+      <%= f.radio_button :admin, false, :checked => field.data == false %>
+      <%= label :user, :admin, 'Normal User', value: false %>
+      <p class="description">
+        Can only check-out and return assets. Cannot add assets,
+        see data about other users, or access this admin panel.
+      </p>
+    </div>
+  </div>
+</div>

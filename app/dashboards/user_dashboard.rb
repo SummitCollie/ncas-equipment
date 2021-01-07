@@ -13,7 +13,7 @@ class UserDashboard < Administrate::BaseDashboard
     email: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    admin: Field::Boolean,
+    admin: UserRoleRadioField,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
