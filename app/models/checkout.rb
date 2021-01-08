@@ -7,4 +7,8 @@ class Checkout < ApplicationRecord
   validates :user, presence: true
   validates :asset, presence: true
   validates :location, presence: true
+
+  def self.policy_class
+    OrderPolicy
+  end
 end

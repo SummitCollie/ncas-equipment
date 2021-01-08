@@ -7,11 +7,18 @@
 module Admin
   class ApplicationController < Administrate::ApplicationController
     include Admin::VerifyAdmin
+    include Administrate::Punditize
+
+    helper_method :filter_form_attributes
 
     # Override this value to specify the number of elements to display at a time
     # on index pages. Defaults to 20.
     # def records_per_page
     #   params[:per_page] || 20
     # end
+
+    def filter_form_attributes(attributes)
+      attributes
+    end
   end
 end

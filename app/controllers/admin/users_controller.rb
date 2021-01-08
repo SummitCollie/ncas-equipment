@@ -1,5 +1,10 @@
 module Admin
   class UsersController < Admin::ApplicationController
+    def filter_form_attributes(attributes)
+      return attributes if current_user.admin? && params[:id] == current_user.id.to_s
+      attributes.reject { |attr| attr.attribute == :display_name }
+    end
+
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
@@ -46,5 +51,11 @@ module Admin
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(policy(@user).permitted_attributes)
   end
 end
