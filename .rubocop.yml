@@ -16,3 +16,7 @@ Style/TrailingCommaInArrayLiteral:
 
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
+
+Lint/MissingSuper:
+  Exclude:
+    - 'app/policies/*'

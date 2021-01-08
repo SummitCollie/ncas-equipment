@@ -1,10 +1,8 @@
 {
-  "ruby.lint": {
-    "rubocop": {
-        "useBundler": true,
-        "forceExclusion": true
-    }
-  },
+  "solargraph.useBundler": true,
+  "solargraph.bundlerPath": "bundle",
+  "solargraph.diagnostics": true,
+
   "sqltools.connections": [
     {
       "previewLimit": 50,
