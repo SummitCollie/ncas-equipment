@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   belongs_to :user
 
   validates :user, presence: true
-  validates :has_assets
+  validate :has_assets
 
   private
 

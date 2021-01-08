@@ -5,6 +5,6 @@ class Checkout < ApplicationRecord
   belongs_to :location
 
   validates :user, presence: true
-  validates :asset, presense: true
+  validates :asset, presence: true
   validates :location, presence: true
 end
