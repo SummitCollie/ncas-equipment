@@ -1,5 +1,5 @@
 class DashboardsController < ApplicationController
-  before_action :authenticate_user!
-
-  def index; end
+  def index
+    authorize(current_user)
+  end
 end
