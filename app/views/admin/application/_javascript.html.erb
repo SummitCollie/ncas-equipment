@@ -8,8 +8,7 @@ by providing a `content_for(:javascript)` block.
 
 Administrate::Engine.javascripts.each do |js_path|
  <= echo javascript_include_tag js_path
-<% end
-%>
+<% end %>
 
 <%= yield :javascript %>
 

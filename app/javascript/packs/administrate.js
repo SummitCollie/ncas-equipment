@@ -19,5 +19,4 @@ require('channels')
 // require('@rails/actiontext')
 
 require('../administrate/index')
-
 import '../stylesheets/administrate.scss';
