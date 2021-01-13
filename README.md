@@ -37,6 +37,8 @@ Default seeded users in development are:
 ## Environment Variables
 These are stored in rails credentials. Here's all necessary keys:
 
+`EDITOR=nano rails credentials:edit`
+
 ```yml
 # Default admin (google account) account to add on prod if
 # you run `rails db:seed` on your Heroku app
