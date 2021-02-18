@@ -45,6 +45,7 @@ group :development do
   gem 'spring'
 
   gem "rubocop-shopify", "~> 1.0", require: false
+  gem "pry", "~> 0.14.0"
 end
 
 group :test do
