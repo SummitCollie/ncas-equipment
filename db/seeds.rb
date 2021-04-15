@@ -8,28 +8,36 @@
 case Rails.env
 when 'production'
   default_admin = Rails.application.credentials.prod_default_admin
-  User.create({ email: default_admin, password: Devise.friendly_token, admin: true }) if default_admin
+  if default_admin
+    User.create({
+      email: default_admin,
+      display_name: 'Site Admin',
+      password: Devise.friendly_token,
+      admin: true,
+    })
+  end
 
 when 'development'
-  users = User.create(
+  User.create(
     [
-      { email: 'dog@example.com', password: '123456', admin: true },
-      { email: 'cat@example.com', password: '123456' },
+      { email: 'dog@example.com', display_name: 'Dog', password: '123456', admin: true },
+      { email: 'cat@example.com', display_name: 'Cat', password: '123456' },
+      { email: 'JavaDog.Dev@gmail.com', display_name: 'Summit', password: '123456', admin: true },
     ]
   )
-  events = Event.create([{ name: 'FWA 2019' }, { name: 'FWA 2020', active: true }])
-  locations = Location.create(
+  Event.create([{ name: 'FWA 2019' }, { name: 'FWA 2020', active: true }])
+  Location.create(
     [
-      { name: 'Game Room', event: events.first },
-      { name: 'Con Ops', event: events.first },
+      { name: 'Game Room', event: Event.first },
+      { name: 'Con Ops', event: Event.first },
 
-      { name: 'Game Room', event: events.second },
-      { name: 'Con Ops', event: events.second },
-      { name: 'Main Events Hall', event: events.second },
+      { name: 'Game Room', event: Event.second },
+      { name: 'Con Ops', event: Event.second },
+      { name: 'Main Events Hall', event: Event.second },
     ]
   )
 
-  assets = Asset.create(
+  Asset.create(
     [
       {
         name: 'Sony 55" TV',
@@ -51,30 +59,34 @@ when 'development'
     ]
   )
 
-  # Past checkout
-  past_order = Order.create(
-    { user: users.first, created_at: 1.year.ago, updated_at: 1.year.ago }
-  )
-  Checkout.create(
+  # Past order
+  past_order = Order.new({
+    user: User.first,
+    location: Location.first,
+    created_at: 1.year.ago,
+    updated_at: 1.year.ago,
+  })
+  past_order.checkouts.build(
     {
-      asset: assets.first,
-      user: users.first,
-      order: past_order,
-      location: locations.first,
+      asset: Asset.first,
       est_return: 1.year.ago + 3.days,
       returned_at: 1.year.ago + 2.days + 30.minutes,
     }
   )
+  past_order.save!
 
-  # Current checkout
-  current_order = Order.create({ user: users.second })
-  Checkout.create(
+  # Recent order
+  recent_order = Order.new({
+    user: User.second,
+    location: Location.last,
+    created_at: 1.day.ago,
+    updated_at: 1.day.ago,
+  })
+  recent_order.checkouts.build(
     {
-      asset: assets.second,
-      user: users.second,
-      order: current_order,
-      location: locations.third,
+      asset: Asset.second,
       est_return: 2.days.from_now,
     }
   )
+  recent_order.save!
 end

@@ -1,7 +1,7 @@
 # NCAS Equipment
 
 ## Database creation
-Uses postgres locally and in production.
+Uses postgres 12.6 locally and in production.
 
 ### Local DB
 Locally, set postgres to listen on port 5432 and put credentials for a

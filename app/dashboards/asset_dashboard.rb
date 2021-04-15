@@ -72,7 +72,7 @@ class AssetDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how assets are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(asset)
-  #   "Asset ##{asset.id}"
-  # end
+  def display_resource(asset)
+    asset.name
+  end
 end

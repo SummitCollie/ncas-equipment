@@ -9,11 +9,34 @@ module Admin
     # end
 
     def create
-      Checkout.batch_create(
-        params[:asset_ids],
-        params[:user_id],
-        params[:location_id],
+      order = resource_class.new(resource_params)
+      authorize_resource(order)
+
+      order.transaction do
+        order.checkouts.each do |checkout|
+          checkout.user = order.user
+          checkout.location = order.location
+        end
+        order.save!
+      end
+
+      redirect_to(
+        [namespace, order],
+        notice: translate_with_resource("create.success"),
       )
+    rescue ActiveRecord::RecordInvalid => e
+      order = e.record
+      order.errors.delete(:checkouts, :invalid)
+      order.checkouts.each do |checkout|
+        next if checkout.valid?
+        checkout.errors.each do |error|
+          order.errors.import(error)
+        end
+      end
+
+      render(:new, locals: {
+        page: Administrate::Page::Form.new(dashboard, order),
+      }, status: :unprocessable_entity, error_messages_for: [:order, :checkout])
     end
 
     # Override this method to specify custom lookup behavior.

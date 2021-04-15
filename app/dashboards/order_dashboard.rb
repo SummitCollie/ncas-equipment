@@ -10,6 +10,7 @@ class OrderDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     assets: Field::HasMany,
     user: Field::BelongsTo,
+    location: Field::BelongsTo,
     id: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -41,6 +42,7 @@ class OrderDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     assets
     user
+    location
   ].freeze
 
   # COLLECTION_FILTERS

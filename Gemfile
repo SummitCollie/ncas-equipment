@@ -46,6 +46,7 @@ group :development do
 
   gem "rubocop-shopify", "~> 1.0", require: false
   gem "pry", "~> 0.14.0"
+  gem "pry-byebug", "~> 3.8"
 end
 
 group :test do
@@ -62,6 +63,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "devise", "~> 4.7"
 gem "omniauth", "~> 1.9"
 gem "omniauth-google-oauth2", "~> 0.8.1"
-gem "administrate", "~> 0.14.0"
+gem "administrate", "~> 0.15.0"
 gem "pundit", "~> 2.1"
 gem "acts-as-taggable-on", "~> 7.0"
