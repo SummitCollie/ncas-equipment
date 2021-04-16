@@ -25,7 +25,7 @@
 @import "administrate/components/search";
 @import "administrate/utilities/text-color";
 
-@import "selectize/dist/css/selectize";
+@import "selectize/dist/css/selectize.default.css";
 
 // Custom fields
 @import "administrate/components/user_role_radios";
@@ -64,6 +64,11 @@
   .field-unit__field {
     width: 80%;
   }
+}
+
+// Fix Selectize UI bug with drag & drop plugin
+.selectize-dropdown.plugin-drag_drop {
+  top: 36px !important;
 }
 
 @import "flatpickr/dist/flatpickr.min";

@@ -9,7 +9,8 @@
     "core-js": "^3.8.2",
     "expose-loader": "^1.0.3",
     "flatpickr": "^4.6.9",
-    "jquery": "^3.5.1",
+    "jquery": "^3.6.1",
+    "jquery-ui": "^1.12.1",
     "microplugin": "^0.0.3",
     "popper.js": "^1.16.1",
     "regenerator-runtime": "^0.13.7",
@@ -18,7 +19,7 @@
     "trix": "^1.3.1",
     "turbolinks": "^5.2.0"
   },
-  "version": "0.1.0",
+  "version": "1.0.0",
   "devDependencies": {
     "webpack-dev-server": "^3.11.1"
   }
