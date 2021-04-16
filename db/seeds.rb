@@ -45,16 +45,34 @@ when 'development'
         checkout_scan_required: true,
         donated_by: 'Musky Husky',
         est_value_cents: 50_000,
+        tag_list: 'electronics, tvs, gaming',
       },
       {
         name: 'Nintendo 64',
         barcode: '002',
         donated_by: 'Musky Husky',
         est_value_cents: 2000,
+        tag_list: 'electronics, game consoles',
       },
       {
         name: 'Handheld Radio',
         barcode: '003',
+        tag_list: 'electronics, communication, radios',
+      },
+      {
+        name: 'Loaner Fursuit',
+        description: "it's all wet...",
+        est_value_cents: 25,
+        tag_list: 'fursuits, cold, wet, sad',
+      },
+      {
+        name: 'Mixing Board',
+        tag_list: 'A/V Equipment, audio, electronics',
+      },
+      {
+        name: 'Stage Microphone',
+        description: 'Model #42069',
+        tag_list: 'A/V Equipment, audio, electronics',
       },
     ]
   )

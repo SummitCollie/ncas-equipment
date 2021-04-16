@@ -1,7 +1,7 @@
 class Asset < ApplicationRecord
   scope :checked_out, -> { joins(:checkouts).where('checkouts.returned_at IS NULL') }
 
-  acts_as_taggable_on :tags
+  acts_as_ordered_taggable
 
   has_many :checkouts
   has_many :orders, through: :checkouts

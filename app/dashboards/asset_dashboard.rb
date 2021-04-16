@@ -12,6 +12,7 @@ class AssetDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     description: Field::Text,
+    tags: TagListField,
     barcode: Field::Text,
     checkout_scan_required: Field::Boolean,
     donated_by: Field::String,
@@ -32,10 +33,10 @@ class AssetDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    orders
     id
     name
     description
+    tags
     barcode
     checkout_scan_required
     donated_by
@@ -48,9 +49,9 @@ class AssetDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    orders
     name
     description
+    tags
     barcode
     checkout_scan_required
     donated_by
