@@ -27,6 +27,9 @@
 
 @import "selectize/dist/css/selectize";
 
+// Custom fields
+@import "administrate/components/user_role_radios";
+
 // We need to override trix.css’s image gallery styles to accommodate the
 // <action-text-attachment> element we wrap around attachments. Otherwise,
 // images in galleries will be squished by the max-width: 33%; rule.
