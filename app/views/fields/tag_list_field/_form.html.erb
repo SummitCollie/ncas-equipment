@@ -6,7 +6,7 @@
       plugins: ['remove_button', 'drag_drop'],
     })[0].selectize;
 
-    const fixDropdownBug = () => selectize.positionDropdown.call(selectize);
+    const fixDropdownBug = selectize.positionDropdown;
     selectize.on('change', fixDropdownBug);
 
     selectize.on('destroy', () => {
