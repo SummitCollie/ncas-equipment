@@ -19,15 +19,6 @@ and is augmented with [Selectize].
 [Selectize]: http://brianreavis.github.io/selectize.js
 %>
 
-<script>
-  $(function() {
-    $('.field-unit--belongs-to select, .field-unit--polymorphic select').selectize({});
-    $('.field-unit--has-many select').selectize({
-      plugins: ['remove_button', 'drag_drop']
-    });
-  });
-</script>
-
 <div class="field-unit__label">
   <%= f.label field.attribute, for: "#{f.object_name}_#{field.attribute_key}" %>
 </div>

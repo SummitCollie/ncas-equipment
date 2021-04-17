@@ -27,6 +27,16 @@ By default, it renders:
     <%= stylesheet_pack_tag 'administrate', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= csrf_meta_tags %>
 
+    <%# Selectize built-in select fields on every page load %>
+    <script>
+      $(document).on('turbolinks:load', function() {
+        $('.field-unit--belongs-to select, .field-unit--polymorphic select').selectize({});
+        $('.field-unit--has-many select').selectize({
+          plugins: ['remove_button', 'drag_drop']
+        });
+      });
+    </script>
+
     <meta name="turbolinks-root" content="/admin">
   </head>
   <body>

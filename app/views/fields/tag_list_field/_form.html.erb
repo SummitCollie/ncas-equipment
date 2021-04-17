@@ -1,6 +1,16 @@
+<script>
+  $(function() {
+    $('.field-unit--has-many select').selectize({
+      plugins: ['remove_button', 'drag_drop']
+    });
+  });
+</script>
+
 <div class="field-unit__label">
-  <%= f.label field.attribute %>
+  <%= f.label field.attribute, for: "#{f.object_name}_tag_ids" %>
 </div>
 <div class="field-unit__field">
-  <%= f.text_field field.attribute %>
+  <%= f.select('tag_ids', nil, {}, multiple: true) do %>
+    <%= options_for_select(field.default_options, field.selected_tags) %>
+  <% end %>
 </div>
