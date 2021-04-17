@@ -1,16 +1,25 @@
 <script>
   $(function() {
-    $('.field-unit--has-many select').selectize({
-      plugins: ['remove_button', 'drag_drop']
-    });
+    const selectize = $('#<%= "#{f.object_name}_tag_list" %>').selectize({
+      create: true,
+      persist: false,
+      plugins: ['remove_button', 'drag_drop'],
+    })[0].selectize;
+
+    const fixDropdownBug = () => selectize.positionDropdown.call(selectize);
+    selectize.on('change', fixDropdownBug);
+
+    selectize.on('destroy', () => {
+      selectize.off('change', fixDropdownBug);
+    })
   });
 </script>
 
 <div class="field-unit__label">
-  <%= f.label field.attribute, for: "#{f.object_name}_tag_ids" %>
+  <%= f.label field.attribute, for: "#{f.object_name}_tag_list" %>
 </div>
 <div class="field-unit__field">
-  <%= f.select('tag_ids', nil, {}, multiple: true) do %>
+  <%= f.select('tag_list', nil, {}, multiple: true) do %>
     <%= options_for_select(field.default_options, field.selected_tags) %>
   <% end %>
 </div>

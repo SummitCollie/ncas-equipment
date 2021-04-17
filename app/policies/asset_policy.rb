@@ -1,8 +1,15 @@
 class AssetPolicy < ApplicationPolicy
-  attr_reader :user, :asset
-
-  def initialize(user, asset)
-    @user = user
-    @asset = asset
+  def permitted_attributes
+    if user.admin?
+      [
+        :name,
+        :description,
+        :barcode,
+        :checkout_scan_required,
+        :donated_by,
+        :est_value_cents,
+        tag_list: [],
+      ]
+    end
   end
 end

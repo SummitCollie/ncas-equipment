@@ -66,9 +66,4 @@
   }
 }
 
-// Fix Selectize UI bug with drag & drop plugin
-.selectize-dropdown.plugin-drag_drop {
-  top: 36px !important;
-}
-
 @import "flatpickr/dist/flatpickr.min";

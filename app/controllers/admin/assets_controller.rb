@@ -8,6 +8,20 @@ module Admin
     #   send_foo_updated_email(requested_resource)
     # end
 
+    def create
+      if params[:tag_list].present?
+        params[:tag_list] = params[:tag_list].join(', ')
+      end
+      super
+    end
+
+    def update
+      if params[:tag_list].present?
+        params[:tag_list] = params[:tag_list].join(', ')
+      end
+      super
+    end
+
     # Override this method to specify custom lookup behavior.
     # This will be used to set the resource for the `show`, `edit`, and `update`
     # actions.
@@ -30,15 +44,11 @@ module Admin
     # end
 
     # Override `resource_params` if you want to transform the submitted
-    # data before it's persisted. For example, the following would turn all
-    # empty values into nil values. It uses other APIs such as `resource_class`
-    # and `dashboard`:
-    #
-    # def resource_params
-    #   params.require(resource_class.model_name.param_key).
-    #     permit(dashboard.permitted_attributes).
-    #     transform_values { |value| value == "" ? nil : value }
-    # end
+    # data before it's persisted.
+    def resource_params
+      params.require(resource_class.model_name.param_key)
+        .permit(dashboard.permitted_attributes << { tag_list: [] })
+    end
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
