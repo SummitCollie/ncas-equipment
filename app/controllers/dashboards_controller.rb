@@ -1,5 +1,6 @@
 class DashboardsController < ApplicationController
   def index
+    skip_policy_scope
     authorize(:dashboard, :show)
   end
 

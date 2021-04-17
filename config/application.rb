@@ -30,5 +30,8 @@ module NcasEquipment
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.generators.assets = false
+    config.generators.helper = false
+    config.generators.stylesheets = false
   end
 end

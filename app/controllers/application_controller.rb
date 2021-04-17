@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   before_action :authenticate_user!
-  after_action :verify_authorized, unless: :devise_controller?
+  after_action :verify_authorized, unless: :devise_controller?, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   private
 
