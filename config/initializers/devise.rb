@@ -14,7 +14,8 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '380e2f364bbad1f9eb02df4bb31241c11831fc0ad719834fdabdee6b3d97983f88f864f625d10c4e2624f7f842efeabc6998b3666b69835032a04cea8b619c89'
+  # config.secret_key = '380e2f364bbad1f9eb02df4bb31241c11831fc0ad719834fdabdee6b3d97983f88f864f625d10c4e2624f7f842e'\
+  # 'feabc6998b3666b69835032a04cea8b619c89'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -126,7 +127,8 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '8a0037b961b19f7ca6dbd41aeed3f1e3b4a98ad1fe01bcb97b7911548b1cb79559b69b4944c0de305ef0321c589b3467b8b0f15ee378bcc74719a9d9fec5cdae'
+  # config.pepper = '8a0037b961b19f7ca6dbd41aeed3f1e3b4a98ad1fe01bcb97b7911548b1cb79559b69b4944c0de305ef0321c5'\
+  # '89b3467b8b0f15ee378bcc74719a9d9fec5cdae'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -271,13 +273,13 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :google_oauth2,
-                  Rails.application.credentials.google_oauth2[:client_id],
-                  Rails.application.credentials.google_oauth2[:client_secret],
-                  {
-                    scope: 'userinfo.email',
-                    prompt: 'select_account',
-                  }
+  config.omniauth(:google_oauth2,
+    Rails.application.credentials.google_oauth2[:client_id],
+    Rails.application.credentials.google_oauth2[:client_secret],
+    {
+      scope: 'userinfo.email',
+      prompt: 'select_account',
+    })
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

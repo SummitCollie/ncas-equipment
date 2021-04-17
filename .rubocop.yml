@@ -7,6 +7,7 @@ AllCops:
     - db/schema.rb
     - db/migrate/*
     - config/environments/*
+    - node_modules/**/*
 
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -16,6 +17,9 @@ Style/TrailingCommaInArrayLiteral:
 
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
 
 Lint/MissingSuper:
   Exclude:

@@ -31,7 +31,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'ruby-debug-ide', '~> 0.7.2'
   gem 'solargraph', '~> 0.40.1'
-  gem "debase", "~> 0.2.4"
+  gem 'debase', '~> 0.2.4'
 end
 
 group :development do
@@ -44,9 +44,10 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
-  gem "rubocop-shopify", "~> 1.0", require: false
-  gem "pry", "~> 0.14.0"
-  gem "pry-byebug", "~> 3.8"
+  gem 'rubocop', '~> 1.12.1', require: false
+  gem 'rubocop-shopify', '~> 2.0.1', require: false
+  gem 'pry', '~> 0.13.0'
+  gem 'pry-byebug', '~> 3.9.0'
 end
 
 group :test do
@@ -57,12 +58,9 @@ group :test do
   gem 'webdrivers'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-gem "devise", "~> 4.7"
-gem "omniauth", "~> 1.9"
-gem "omniauth-google-oauth2", "~> 0.8.1"
-gem "administrate", "~> 0.15.0"
-gem "pundit", "~> 2.1"
-gem "acts-as-taggable-on", "~> 7.0"
+gem 'devise', '~> 4.7'
+gem 'omniauth', '~> 1.9'
+gem 'omniauth-google-oauth2', '~> 0.8.1'
+gem 'administrate', '~> 0.15.0'
+gem 'pundit', '~> 2.1'
+gem 'acts-as-taggable-on', '~> 7.0'

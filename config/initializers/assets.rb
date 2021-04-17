@@ -17,5 +17,3 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 # Custom CSS for Administrate gem
 Rails.application.config.assets.precompile += %w[administrate/application.scss]
-
-

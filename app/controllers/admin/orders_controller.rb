@@ -22,7 +22,7 @@ module Admin
 
       redirect_to(
         [namespace, order],
-        notice: translate_with_resource("create.success"),
+        notice: translate_with_resource('create.success'),
       )
     rescue ActiveRecord::RecordInvalid => e
       order = e.record
