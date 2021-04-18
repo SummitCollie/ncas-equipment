@@ -9,7 +9,7 @@ class Asset < ApplicationRecord
   validates :name, presence: true
   validates :checkout_scan_required, inclusion: [true, false]
 
-  before_save :ensure_tag_colors_present
+  after_commit :ensure_tag_colors_present, on: [:create, :update]
 
   def available_to_check_out?
     last_checkout = checkouts.last
@@ -19,12 +19,11 @@ class Asset < ApplicationRecord
   private
 
   def ensure_tag_colors_present
-    uncolored_tag_ids = tags.filter { |tag| tag.color.blank? }.pluck(:id)
-    return if uncolored_tag_ids.empty?
+    uncolored_tags = tags.filter { |tag| tag.color.blank? }
+    return if uncolored_tags.blank?
 
     ActsAsTaggableOn::Tag.transaction do
-      uncolored_tag_ids.each do |tag_id|
-        tag = ActsAsTaggableOn::Tag.find(tag_id)
+      uncolored_tags.each do |tag|
         tag.update(color: "##{SecureRandom.hex(3)}")
       end
     end
