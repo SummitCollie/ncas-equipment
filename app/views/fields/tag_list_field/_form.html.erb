@@ -1,8 +1,28 @@
 <script>
+  const DEFAULT_OPTIONS = <%= raw(field.default_options.to_json) %>;
+
+  function searchTags(queryInput, callback) {
+    if (!queryInput) return callback();
+
+    const query = queryInput.trim();
+    if (query.length === 0) return callback();
+
+    $.get(`${window.location.origin}/tags/search`, { query })
+      .then(callback)
+      .catch(err => {
+        console.error('Error searching tags:\n', err);
+        callback();
+      });
+  }
+
   $(function() {
-    const selectize = $('#<%= "#{f.object_name}_tag_list" %>').selectize({
+    const selectize = $('#<%= f.object_name %>_tag_list').selectize({
       create: true,
       persist: false,
+      valueField: 'name',
+      labelField: 'name',
+      searchField: 'name',
+      load: searchTags,
       plugins: ['remove_button', 'drag_drop'],
     })[0].selectize;
 
@@ -11,7 +31,7 @@
 
     selectize.on('destroy', () => {
       selectize.off('change', fixDropdownBug);
-    })
+    });
   });
 </script>
 
