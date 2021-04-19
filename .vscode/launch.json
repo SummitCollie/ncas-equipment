@@ -9,6 +9,7 @@
       "type": "Ruby",
       "request": "launch",
       "preLaunchTask": "webpack-dev-server",
+      "postDebugTask": "kill-first-bg-task-hopefully-webpack",
       "cwd": "${workspaceFolder}",
       "program": "${workspaceFolder}/bin/rails",
       "showDebuggerOutput": true,
