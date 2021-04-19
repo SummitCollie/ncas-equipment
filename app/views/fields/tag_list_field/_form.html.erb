@@ -1,6 +1,6 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
-    (function() {
+    $(function() {
       const DEFAULT_OPTIONS = <%= raw(field.default_options.to_json) %>;
 
       function searchTags(queryInput, callback) {
@@ -17,32 +17,59 @@
           });
       }
 
-      $(function() {
-        const selectize = $('#<%= f.object_name %>_tag_list').selectize({
-          create: true,
-          persist: false,
-          valueField: 'name',
-          labelField: 'name',
-          searchField: 'name',
-          load: searchTags,
-          plugins: ['remove_button', 'drag_drop'],
-        })[0].selectize;
+      const selectize = $('#<%= f.object_name %>_tag_list').selectize({
+        create: true,
+        persist: false,
+        options: DEFAULT_OPTIONS,
+        valueField: 'name',
+        labelField: 'name',
+        searchField: 'name',
+        load: searchTags,
+        plugins: ['remove_button', 'drag_drop'],
+        render: {
+          item: (data, escape) =>`
+            <div class="tag-list__item">
+              <div
+                class="tag-list__color-dot"
+                style="background-color: ${data.color}"
+              >
+                &nbsp;
+              </div>
+              <div class="tag-list__item__text">
+                ${escape(data.name)}
+              </div>
+            </div>
+          `,
+          option: (data, escape) => `
+            <div class="tag-list__option">
+              <div
+                class="tag-list__color-dot"
+                style="background-color: ${data.color}"
+              >
+                &nbsp;
+              </div>
+              <div class="tag-list__option__text">
+                ${escape(data.name)}
+              </div>
+            </div>
+          `,
+        },
+      })[0].selectize;
 
-        const fixDropdownBug = selectize.positionDropdown;
-        selectize.on('change', fixDropdownBug);
+      const fixDropdownBug = selectize.positionDropdown;
+      selectize.on('change', fixDropdownBug);
 
-        selectize.on('destroy', () => {
-          selectize.off('change', fixDropdownBug);
-        });
+      selectize.on('destroy', () => {
+        selectize.off('change', fixDropdownBug);
       });
-    })();
+    });
   </script>
 <% end %>
 
 <div class="field-unit__label">
   <%= f.label field.attribute, for: "#{f.object_name}_tag_list" %>
 </div>
-<div class="field-unit__field">
+<div class="field-unit__field tag-list">
   <%= f.select('tag_list', nil, {}, multiple: true) do %>
     <%= options_for_select(field.default_options, field.selected_tags) %>
   <% end %>

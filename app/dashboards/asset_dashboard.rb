@@ -12,7 +12,7 @@ class AssetDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     description: Field::Text,
-    tag_list: TagListField,
+    tags: TagListField,
     barcode: Field::Text,
     checkout_scan_required: Field::Boolean,
     donated_by: Field::String,
@@ -36,7 +36,7 @@ class AssetDashboard < Administrate::BaseDashboard
     id
     name
     description
-    tag_list
+    tags
     barcode
     checkout_scan_required
     donated_by
@@ -51,7 +51,7 @@ class AssetDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     name
     description
-    tag_list
+    tags
     barcode
     checkout_scan_required
     donated_by

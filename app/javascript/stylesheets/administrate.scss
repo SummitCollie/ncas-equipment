@@ -29,6 +29,7 @@
 
 // Custom fields
 @import "administrate/components/user_role_radios";
+@import "administrate/components/tag_list";
 
 // We need to override trix.css’s image gallery styles to accommodate the
 // <action-text-attachment> element we wrap around attachments. Otherwise,

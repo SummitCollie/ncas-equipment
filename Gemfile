@@ -58,9 +58,9 @@ group :test do
   gem 'webdrivers'
 end
 
+gem 'acts-as-taggable-on', '~> 7.0'
+gem 'administrate', '~> 0.15.0'
 gem 'devise', '~> 4.7'
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-google-oauth2', '~> 0.8.1'
-gem 'administrate', '~> 0.15.0'
 gem 'pundit', '~> 2.1'
-gem 'acts-as-taggable-on', '~> 7.0'

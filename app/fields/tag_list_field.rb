@@ -6,10 +6,10 @@ class TagListField < Administrate::Field::Base
   end
 
   def default_options
-    (selected_tags + most_used_tags).uniq
+    (selected_tags + most_used_tags).uniq(&:name)
   end
 
   def most_used_tags
-    ActsAsTaggableOn::Tag.most_used(10).map(&:name)
+    ActsAsTaggableOn::Tag.most_used(10)
   end
 end
