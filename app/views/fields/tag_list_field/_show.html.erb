@@ -1,1 +1,15 @@
-<%= field.to_s %>
+<div class="show-tag-list__wrapper">
+  <% field.selected_tags.each do |tag| %>
+    <span class="tag-list__item">
+      <span
+        class="tag-list__color-dot"
+        style="background-color: <%= tag.color %>"
+      >
+        &nbsp;
+      </span>
+      <span class="tag-list__item__text">
+        <%= tag.name %>
+      </span>
+    </span>
+  <% end %>
+</div>
