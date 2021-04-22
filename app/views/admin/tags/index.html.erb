@@ -1,0 +1,29 @@
+<header class="main-content__header" role="banner">
+  <h1 class="main-content__page-title" id="page-title">
+    Tags
+  </h1>
+
+  <form class="search" role="search">
+    <label class="search__label" for="search">
+      <svg class="search__eyeglass-icon" role="img">
+        <title>
+          Filter Tags
+        </title>
+        <use xlink:href="#icon-eyeglass"></use>
+      </svg>
+    </label>
+
+    <input class="search__input" id="search" type="search" name="search" placeholder="Filter Tags" value="">
+
+    <a class="search__clear-link" href="/admin/tags">
+      <svg class="search__clear-icon" role="img">
+        <title>Clear filter</title>
+        <use xlink:href="#icon-cancel"></use>
+      </svg>
+    </a>
+  </form>
+</header>
+
+<section class="main-content__body main-content__body--flush tags__index">
+  <%= render partial: 'shared/asset_tag', collection: @tags %>
+</section>
