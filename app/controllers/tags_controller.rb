@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   def search
-    authorize(:tag, :index?)
+    authorize(:tags, :index?)
     return head(:bad_request) unless params[:query].present?
 
     puts params[:query]
