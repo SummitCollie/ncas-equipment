@@ -1,6 +1,28 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
     $(function() {
+      const FULL_TAG_LIST = <%= raw(@tags.to_json) %>;
+
+      /** Tag Filter **/
+      const $searchInput = $('.tag-search__input');
+      $searchInput.on('input', function() {
+        applyFilter($(this).val());
+      });
+
+      function applyFilter(filter) {
+        if (filter.trim().length === 0) {
+          // Show all rows when filter cleared
+          return $("[id^=asset-tag-row-]").show(250);
+        }
+
+        // Hide rows that don't match
+        const matching = FULL_TAG_LIST.filter(tag => tag.name.indexOf(filter) > -1);
+        const notMatching = FULL_TAG_LIST.filter(tag => tag.name.indexOf(filter) === -1);
+        matching.forEach(tag => $(`#asset-tag-row-${tag.id}`).show(250));
+        notMatching.forEach(tag => $(`#asset-tag-row-${tag.id}`).hide(250));
+      }
+
+      /** Buttons **/
       $('.tag-edit-btn').click(onEditClick);
       $('.tag-destroy-btn').click(onEditClick);
 
@@ -15,6 +37,14 @@
         const tagId = $(this).data('tag-id');
         console.log(`Destroy clicked on ${tagId}`);
       }
+
+      // Prevent form submit on search box
+      $('.tag-search__form').submit(e => e.preventDefault());
+      $('.tag-search__form__clear-btn').click(e => {
+        e.preventDefault();
+        $searchInput.val('');
+        $searchInput.trigger('input');
+      });
     });
   </script>
 <% end %>
@@ -24,7 +54,7 @@
     Tags
   </h1>
 
-  <form class="search" role="search" style="margin-right: 0;">
+  <form class="search tag-search__form" role="search" style="margin-right: 0;">
     <label class="search__label" for="search">
       <svg class="search__eyeglass-icon" role="img">
         <title>
@@ -34,9 +64,16 @@
       </svg>
     </label>
 
-    <input class="search__input" id="search" type="search" name="search" placeholder="Filter Tags" value="">
+    <input
+      class="search__input tag-search__input"
+      id="search"
+      type="search"
+      name="search"
+      placeholder="Filter Tags"
+      value=""
+    />
 
-    <a class="search__clear-link" href="/admin/tags">
+    <a class="search__clear-link tag-search__form__clear-btn" href="/admin/tags">
       <svg class="search__clear-icon" role="img">
         <title>Clear filter</title>
         <use xlink:href="#icon-cancel"></use>
@@ -47,7 +84,7 @@
 
 <section class="main-content__body main-content__body--flush tag-list__index">
   <% @tags.each do |tag| %>
-    <div class="tag-list__index__tag-row">
+    <div id="asset-tag-row-<%= tag.id %>" class="tag-list__index__tag-row">
       <%= render partial: 'shared/asset_tag', object: tag %>
 
       <%= link_to(

@@ -64,6 +64,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 0 0.5em;
+  border-bottom: 1px solid #dfe0e1;
 
   @media (min-width: 960px) {
     grid-template-columns: repeat(2, 1fr);
@@ -93,10 +94,6 @@
 
     &:hover {
       background-color: #e6e6e6;
-    }
-
-    &:not(:last-of-type) {
-      border-bottom: 1px solid #dfe0e1;
     }
   }
 }
