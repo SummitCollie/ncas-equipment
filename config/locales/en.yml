@@ -35,3 +35,6 @@ en:
       order:
         one: Check-Out
         other: Check-Outs
+  administrate:
+    actions:
+      destroy: Delete

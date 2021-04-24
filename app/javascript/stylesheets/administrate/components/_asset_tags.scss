@@ -61,8 +61,44 @@
 
 /* Tag Index Page */
 .tag-list__index {
-  display: flex;
-  flex-flow: column wrap;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 0.5em;
+
+  @media (min-width: 960px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &__tag-row {
+    display: flex;
+    align-items: center;
+
+    padding: 0.75em;
+
+    .asset-tag {
+      margin-right: auto;
+    }
+
+    .tag-edit-btn {
+      margin-left: 1em;
+    }
+
+    .tag-destroy-btn {
+      margin-left: 1em;
+    }
+
+    &:hover {
+      background-color: #e6e6e6;
+    }
+
+    &:not(:last-of-type) {
+      border-bottom: 1px solid #dfe0e1;
+    }
+  }
 }
 
 /* views/shared/_asset_tag partial */

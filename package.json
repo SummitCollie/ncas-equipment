@@ -6,6 +6,7 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.2.1",
+    "@simonwep/pickr": "^1.8.0",
     "core-js": "^3.8.2",
     "expose-loader": "^1.0.3",
     "flatpickr": "^4.6.9",

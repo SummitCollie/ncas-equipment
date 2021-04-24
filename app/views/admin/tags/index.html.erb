@@ -1,9 +1,30 @@
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      $('.tag-edit-btn').click(onEditClick);
+      $('.tag-destroy-btn').click(onEditClick);
+
+      function onEditClick(e) {
+        e.preventDefault();
+        const tagId = $(this).data('tag-id');
+        console.log(`Edit clicked on ${tagId}`);
+      }
+
+      function onDestroyClick(e) {
+        e.preventDefault();
+        const tagId = $(this).data('tag-id');
+        console.log(`Destroy clicked on ${tagId}`);
+      }
+    });
+  </script>
+<% end %>
+
 <header class="main-content__header" role="banner">
   <h1 class="main-content__page-title" id="page-title">
     Tags
   </h1>
 
-  <form class="search" role="search">
+  <form class="search" role="search" style="margin-right: 0;">
     <label class="search__label" for="search">
       <svg class="search__eyeglass-icon" role="img">
         <title>
@@ -24,6 +45,28 @@
   </form>
 </header>
 
-<section class="main-content__body main-content__body--flush tags__index">
-  <%= render partial: 'shared/asset_tag', collection: @tags %>
+<section class="main-content__body main-content__body--flush tag-list__index">
+  <% @tags.each do |tag| %>
+    <div class="tag-list__index__tag-row">
+      <%= render partial: 'shared/asset_tag', object: tag %>
+
+      <%= link_to(
+        t("administrate.actions.edit"),
+        '#',
+        class: "tag-edit-btn action-edit",
+        data: { tag_id: tag.id }
+      ) %>
+
+      <%= link_to(
+        t("administrate.actions.destroy"),
+        '#',
+        class: "tag-destroy-btn text-color-red",
+        method: :delete,
+        data: {
+          tag_id: tag.id,
+          confirm: t("administrate.actions.confirm"),
+        }
+      ) %>
+    </div>
+  <% end %>
 </section>
