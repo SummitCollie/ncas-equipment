@@ -66,11 +66,15 @@
   </script>
 <% end %>
 
-<div class="field-unit__label">
+<div class="field-unit__label" style="margin-top: 0.6em; margin-bottom: auto;">
   <%= f.label field.attribute, for: "#{f.object_name}_tag_list" %>
 </div>
 <div class="field-unit__field tag-list">
   <%= f.select('tag_list', nil, {}, multiple: true) do %>
     <%= options_for_select(field.default_options, field.selected_tags) %>
   <% end %>
+  <p class="info-text">
+    First tag in the list is treated as the "primary tag," determines the color
+    of the dot displayed next to this asset on other pages.
+  </p>
 </div>

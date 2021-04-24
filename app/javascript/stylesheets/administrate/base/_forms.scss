@@ -105,3 +105,8 @@ select {
     outline-offset: $focus-outline-offset;
   }
 }
+
+p.info-text {
+  margin: 0;
+  font-size: 14px;
+}
