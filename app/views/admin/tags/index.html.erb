@@ -12,7 +12,8 @@
       function applyFilter(filter) {
         if (filter.trim().length === 0) {
           // Show all rows when filter cleared
-          return $("[id^=asset-tag-row-]").show(250);
+          FULL_TAG_LIST.forEach(tag => $(`#asset-tag-row-${tag.id}`).show(250));
+          return;
         }
 
         // Hide rows that don't match
@@ -24,7 +25,7 @@
 
       /** Buttons **/
       $('.tag-edit-btn').click(onEditClick);
-      $('.tag-destroy-btn').click(onEditClick);
+      $('.tag-destroy-btn').click(onDestroyClick);
 
       function onEditClick(e) {
         e.preventDefault();
@@ -32,10 +33,24 @@
         console.log(`Edit clicked on ${tagId}`);
       }
 
-      function onDestroyClick(e) {
-        e.preventDefault();
+      function onDestroyClick(e, response) {
+        if (!window.confirm(
+          "This will PERMANENTLY delete this tag and remove it from all assets currently tagged with it."
+            + " \n\nReally delete?")
+        ) return;
+
         const tagId = $(this).data('tag-id');
-        console.log(`Destroy clicked on ${tagId}`);
+
+        $.ajax(`/admin/tags/${tagId}`, { method: 'DELETE' })
+          .then(() => {
+            // Hide row for deleted tag
+            $(`#asset-tag-row-${tagId}`).hide(250);
+
+            // Remove from FULL_TAG_LIST so search doesn't bring it back
+            const index = FULL_TAG_LIST.findIndex(tag => tag.id === tagId);
+            if (index > -1) FULL_TAG_LIST.splice(index, 1);
+          })
+          .catch(e => console.error(`Error deleting tag with ID ${tagId}:\n`, e));
       }
 
       // Prevent form submit on search box
@@ -94,16 +109,15 @@
         data: { tag_id: tag.id }
       ) %>
 
-      <%= link_to(
-        t("administrate.actions.destroy"),
-        '#',
-        class: "tag-destroy-btn text-color-red",
-        method: :delete,
-        data: {
-          tag_id: tag.id,
-          confirm: t("administrate.actions.confirm"),
-        }
-      ) %>
+      <a
+        class="tag-destroy-btn text-color-red"
+        data-tag-id="<%= tag.id %>"
+        data-remote="true"
+        rel="nofollow"
+        href="#"
+      >
+        Delete
+      </a>
     </div>
   <% end %>
 </section>

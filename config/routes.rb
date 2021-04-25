@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
     resources :assets
-    resources :tags, only: [:index]
+    resources :tags, only: [:index, :update, :destroy]
     resources :events
     resources :locations
     resources :orders
