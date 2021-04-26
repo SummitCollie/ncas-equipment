@@ -1,3 +1,5 @@
+@import '@simonwep/pickr/dist/themes/nano.min.css';
+
 /* Tag List Form */
 .field-unit .tag-list {
   .selectize-input {
@@ -74,11 +76,20 @@
   }
 
   &__tag-row {
-    display: flex;
-    align-items: center;
-
     padding: 0.75em;
     border-bottom: 1px solid #dfe0e1;
+
+    .tag-row__show-view,
+    .tag-row__edit-view {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+
+      button {
+        margin-left: auto;
+        padding: 0.5em 0.75em;
+      }
+    }
 
     .asset-tag {
       margin-right: auto;
@@ -95,6 +106,15 @@
     &:hover {
       background-color: #e6e6e6;
     }
+  }
+
+  &__tag-row__show {
+    .tag-row__show-view { display: flex; }
+    .tag-row__edit-view { display: none; }
+  }
+  &__tag-row__edit {
+    .tag-row__show-view { display: none; }
+    .tag-row__edit-view { display: flex; }
   }
 }
 

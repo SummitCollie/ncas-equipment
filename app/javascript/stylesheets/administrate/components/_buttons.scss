@@ -42,6 +42,17 @@ input[type="submit"],
   }
 }
 
+.button--red {
+  background-color: $red;
+
+  &:hover {
+    background-color: darken($red, 10%);
+  }
+  &:focus {
+    outline: 3px solid transparentize($red, 0.4);
+  }
+}
+
 .button--alt {
   background-color: transparent;
   border: $base-border;

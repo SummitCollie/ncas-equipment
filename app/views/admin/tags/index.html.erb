@@ -26,17 +26,23 @@
       /** Buttons **/
       $('.tag-edit-btn').click(onEditClick);
       $('.tag-destroy-btn').click(onDestroyClick);
+      $('.cancel-button').click(onCancelClick);
+      $('.save-button').click(onSaveClick);
 
       function onEditClick(e) {
         e.preventDefault();
         const tagId = $(this).data('tag-id');
-        console.log(`Edit clicked on ${tagId}`);
+        const $row = $(`#asset-tag-row-${tagId}`);
+        $row.removeClass('tag-list__index__tag-row__show');
+        $row.addClass('tag-list__index__tag-row__edit');
       }
 
-      function onDestroyClick(e, response) {
-        if (!window.confirm(
-          "This will PERMANENTLY delete this tag and remove it from all assets currently tagged with it."
-            + " \n\nReally delete?")
+      function onDestroyClick(e) {
+        e.preventDefault();
+        if (
+          !window.confirm(
+            "This will PERMANENTLY delete this tag and remove it from all assets"
+            + " currently tagged with it.\n\nReally delete?")
         ) return;
 
         const tagId = $(this).data('tag-id');
@@ -51,6 +57,22 @@
             if (index > -1) FULL_TAG_LIST.splice(index, 1);
           })
           .catch(e => console.error(`Error deleting tag with ID ${tagId}:\n`, e));
+      }
+
+      function onCancelClick(e) {
+        e.preventDefault();
+        const tagId = $(this).data('tag-id');
+        const $row = $(`#asset-tag-row-${tagId}`);
+        $row.removeClass('tag-list__index__tag-row__edit');
+        $row.addClass('tag-list__index__tag-row__show');
+      }
+
+      function onSaveClick(e) {
+        e.preventDefault();
+        const tagId = $(this).data('tag-id');
+        const $row = $(`#asset-tag-row-${tagId}`);
+        $row.removeClass('tag-list__index__tag-row__edit');
+        $row.addClass('tag-list__index__tag-row__show');
       }
 
       // Prevent form submit on search box
@@ -99,25 +121,54 @@
 
 <section class="main-content__body main-content__body--flush tag-list__index">
   <% @tags.each do |tag| %>
-    <div id="asset-tag-row-<%= tag.id %>" class="tag-list__index__tag-row">
-      <%= render partial: 'shared/asset_tag', object: tag %>
+    <div
+      id="asset-tag-row-<%= tag.id %>"
+      class="tag-list__index__tag-row tag-list__index__tag-row__show"
+    >
+      <div class="tag-row__show-view">
+        <%= render partial: 'shared/asset_tag', object: tag %>
 
-      <%= link_to(
-        t("administrate.actions.edit"),
-        '#',
-        class: "tag-edit-btn action-edit",
-        data: { tag_id: tag.id }
-      ) %>
+        <%= link_to(
+          t("administrate.actions.edit"),
+          '#',
+          class: "tag-edit-btn action-edit",
+          data: { tag_id: tag.id }
+        ) %>
 
-      <a
-        class="tag-destroy-btn text-color-red"
-        data-tag-id="<%= tag.id %>"
-        data-remote="true"
-        rel="nofollow"
-        href="#"
-      >
-        Delete
-      </a>
+        <a
+          class="tag-destroy-btn text-color-red"
+          data-tag-id="<%= tag.id %>"
+          data-remote="true"
+          rel="nofollow"
+          href="#"
+        >
+          Delete
+        </a>
+      </div>
+
+      <div class="tag-row__edit-view">
+        <div class="tag-row__color__edit">
+          <div class="asset-tag__color-dot" style="background-color: <%= tag.color %>"></div>
+        </div>
+
+        <input type="text" value="<%= tag.name %>" />
+
+        <button
+          type="button"
+          data-tag-id="<%= tag.id %>"
+          class="save-button"
+        >
+          Save
+        </button>
+
+        <button
+          type="button"
+          class="button button--red cancel-button"
+          data-tag-id="<%= tag.id %>"
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   <% end %>
 </section>
