@@ -23,7 +23,7 @@ tbody tr {
     background-color: $base-background-color;
   }
 
-  [role=link] {
+  [role='link'] {
     cursor: pointer;
   }
 
@@ -35,7 +35,7 @@ tbody tr {
 
 td,
 th {
-  font-feature-settings: "kern", "liga", "clig", "calt", "lnum", "tnum";
+  font-feature-settings: 'kern', 'liga', 'clig', 'calt', 'lnum', 'tnum';
   font-kerning: normal;
   font-variant-ligatures: common-ligatures, contextual;
   font-variant-numeric: lining-nums, tabular-nums;

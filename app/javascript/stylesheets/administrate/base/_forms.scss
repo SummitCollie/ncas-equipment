@@ -32,19 +32,19 @@ textarea {
   font-size: 16px;
 }
 
-[type="color"],
-[type="date"],
-[type="datetime-local"],
-[type="email"],
-[type="month"],
-[type="number"],
-[type="password"],
-[type="search"],
-[type="tel"],
-[type="text"],
-[type="time"],
-[type="url"],
-[type="week"],
+[type='color'],
+[type='date'],
+[type='datetime-local'],
+[type='email'],
+[type='month'],
+[type='number'],
+[type='password'],
+[type='search'],
+[type='tel'],
+[type='text'],
+[type='time'],
+[type='url'],
+[type='week'],
 input:not([type]),
 textarea {
   appearance: none;
@@ -82,13 +82,13 @@ textarea {
   resize: vertical;
 }
 
-[type="checkbox"],
-[type="radio"] {
+[type='checkbox'],
+[type='radio'] {
   display: inline;
   margin-right: $small-spacing / 2;
 }
 
-[type="file"] {
+[type='file'] {
   width: 100%;
 }
 
@@ -96,9 +96,9 @@ select {
   width: 100%;
 }
 
-[type="checkbox"],
-[type="radio"],
-[type="file"],
+[type='checkbox'],
+[type='radio'],
+[type='file'],
 select {
   &:focus {
     outline: $focus-outline;

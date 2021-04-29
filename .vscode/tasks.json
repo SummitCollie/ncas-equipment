@@ -21,7 +21,7 @@
           "background": {
             "activeOnStart": true,
             "beginsPattern": ".",
-            "endsPattern": ".",
+            "endsPattern": "."
           }
         }
       ]
@@ -29,10 +29,10 @@
     {
       "label": "kill-first-bg-task-hopefully-webpack",
       "type": "process",
-      "command":[
+      "command": [
         "${command:workbench.action.tasks.terminate}",
-        "${command:workbench.action.acceptSelectedQuickOpenItem}",
-      ],
+        "${command:workbench.action.acceptSelectedQuickOpenItem}"
+      ]
     }
   ]
 }

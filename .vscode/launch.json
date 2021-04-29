@@ -14,18 +14,14 @@
       "program": "${workspaceFolder}/bin/rails",
       "showDebuggerOutput": true,
       "useBundler": true,
-      "args": [
-        "server"
-      ]
+      "args": ["server"]
     },
     {
       "name": "Rails Tests",
       "type": "Ruby",
       "request": "launch",
       "program": "${workspaceFolder}/bin/rails",
-      "args": [
-        "test"
-      ]
-    },
+      "args": ["test"]
+    }
   ]
 }

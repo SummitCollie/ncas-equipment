@@ -1,35 +1,35 @@
 @charset "utf-8";
 
-@import "administrate/reset/normalize";
+@import 'administrate/reset/normalize';
 
-@import "administrate/library/clearfix";
-@import "administrate/library/data-label";
-@import "administrate/library/variables";
+@import 'administrate/library/clearfix';
+@import 'administrate/library/data-label';
+@import 'administrate/library/variables';
 
-@import "administrate/base/forms";
-@import "administrate/base/layout";
-@import "administrate/base/lists";
-@import "administrate/base/tables";
-@import "administrate/base/typography";
+@import 'administrate/base/forms';
+@import 'administrate/base/layout';
+@import 'administrate/base/lists';
+@import 'administrate/base/tables';
+@import 'administrate/base/typography';
 
-@import "administrate/components/app-container";
-@import "administrate/components/attributes";
-@import "administrate/components/buttons";
-@import "administrate/components/cells";
-@import "administrate/components/field-unit";
-@import "administrate/components/flashes";
-@import "administrate/components/form-actions";
-@import "administrate/components/main-content";
-@import "administrate/components/navigation";
-@import "administrate/components/pagination";
-@import "administrate/components/search";
-@import "administrate/utilities/text-color";
+@import 'administrate/components/app-container';
+@import 'administrate/components/attributes';
+@import 'administrate/components/buttons';
+@import 'administrate/components/cells';
+@import 'administrate/components/field-unit';
+@import 'administrate/components/flashes';
+@import 'administrate/components/form-actions';
+@import 'administrate/components/main-content';
+@import 'administrate/components/navigation';
+@import 'administrate/components/pagination';
+@import 'administrate/components/search';
+@import 'administrate/utilities/text-color';
 
-@import "selectize/dist/css/selectize.default.css";
+@import 'selectize/dist/css/selectize.default.css';
 
 // Custom fields
-@import "administrate/components/user_role_radios";
-@import "administrate/components/asset_tags";
+@import 'administrate/components/user_role_radios';
+@import 'administrate/components/asset_tags';
 
 // We need to override trix.css’s image gallery styles to accommodate the
 // <action-text-attachment> element we wrap around attachments. Otherwise,
@@ -67,4 +67,4 @@
   }
 }
 
-@import "flatpickr/dist/flatpickr.min";
+@import 'flatpickr/dist/flatpickr.min';

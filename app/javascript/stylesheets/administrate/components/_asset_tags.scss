@@ -109,12 +109,20 @@
   }
 
   &__tag-row__show {
-    .tag-row__show-view { display: flex; }
-    .tag-row__edit-view { display: none; }
+    .tag-row__show-view {
+      display: flex;
+    }
+    .tag-row__edit-view {
+      display: none;
+    }
   }
   &__tag-row__edit {
-    .tag-row__show-view { display: none; }
-    .tag-row__edit-view { display: flex; }
+    .tag-row__show-view {
+      display: none;
+    }
+    .tag-row__edit-view {
+      display: flex;
+    }
   }
 }
 
@@ -127,7 +135,7 @@
   border-radius: 3px;
   border: 1px solid #9b9b9b;
   background-color: white;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.2),inset 0 1px rgba(255,255,255,0.03);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.03);
   cursor: default;
 
   &__text {

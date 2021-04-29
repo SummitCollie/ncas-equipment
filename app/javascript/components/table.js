@@ -1,40 +1,43 @@
+/* eslint-disable */
 function bindTableLinks() {
-  const keycodes = { space: 32, enter: 13 }
+  const keycodes = { space: 32, enter: 13 };
 
   function visitDataUrl(event) {
     /** @type {HTMLTableRowElement} */
     const target = event.target.classList.contains('js-table-row')
       ? event.target
-      : event.target.closest('.js-table-row')
+      : event.target.closest('.js-table-row');
 
     if (!target) {
-      return
+      return;
     }
 
-    if (event.type === 'click' ||
-        event.keyCode === keycodes.space ||
-        event.keyCode === keycodes.enter) {
-
+    if (
+      event.type === 'click' ||
+      event.keyCode === keycodes.space ||
+      event.keyCode === keycodes.enter
+    ) {
       if (event.target.href) {
-        return
+        return;
       }
 
-      const dataUrl = target.getAttribute('data-url')
-      const selection = window.getSelection().toString()
+      const dataUrl = target.getAttribute('data-url');
+      const selection = window.getSelection().toString();
       if (selection.length === 0 && dataUrl) {
-        window.location = dataUrl
+        window.location = dataUrl;
       }
     }
   }
 
-  const tables = [...document.getElementsByTagName('table')]
+  const tables = [...document.getElementsByTagName('table')];
   tables.forEach(
-    /** @type {HTMLTableElement} */ (table) => {
-    table.addEventListener('click', visitDataUrl)
-    table.addEventListener('keydown', visitDataUrl)
-  })
+    /** @type {HTMLTableElement} */ table => {
+      table.addEventListener('click', visitDataUrl);
+      table.addEventListener('keydown', visitDataUrl);
+    }
+  );
 }
 
-document.addEventListener('turbolinks:load', function() {
-  bindTableLinks()
-})
+document.addEventListener('turbolinks:load', function () {
+  bindTableLinks();
+});

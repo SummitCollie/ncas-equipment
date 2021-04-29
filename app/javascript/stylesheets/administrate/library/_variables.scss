@@ -1,6 +1,6 @@
 // Typography
-$base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-  "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+$base-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+  'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif !default;
 $heading-font-family: $base-font-family !default;
 
@@ -50,10 +50,10 @@ $focus-outline-offset: 1px;
 
 // Flash Colors
 $flashes: (
-  "alert": $light-yellow,
-  "error": $light-red,
-  "notice": $light-blue,
-  "success": $light-green
+  'alert': $light-yellow,
+  'error': $light-red,
+  'notice': $light-blue,
+  'success': $light-green,
 ) !default;
 
 // Border

@@ -1,6 +1,7 @@
 {
   "name": "ncas-equipment",
   "private": true,
+  "version": "1.0.0",
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
@@ -20,8 +21,14 @@
     "trix": "^1.3.1",
     "turbolinks": "^5.2.0"
   },
-  "version": "1.0.0",
   "devDependencies": {
+    "babel-plugin-module-resolver": "^4.1.0",
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-babel-module": "^5.3.1",
+    "eslint-plugin-import": "^2.22.1",
+    "prettier": "2.2.1",
     "webpack-dev-server": "^3.11.1"
   }
 }
