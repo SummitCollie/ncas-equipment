@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable import/prefer-default-export */
 /* https://github.com/thoughtbot/administrate/wiki/Rails-6-&-Webpacker */
 
 // This file is automatically compiled by Webpack, along with any other files

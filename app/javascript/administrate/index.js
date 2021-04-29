@@ -1,4 +1,3 @@
-/* eslint-disable */
 import jQuery from 'jquery';
 import 'jquery-ui';
 import 'jquery-ui/ui/widgets/sortable';
