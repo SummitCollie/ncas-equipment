@@ -23,7 +23,15 @@
 
       button {
         margin-left: auto;
-        padding: 0.5em 0.75em;
+        padding: 0.65em 0.75em;
+      }
+    }
+
+    &:hover {
+      background-color: #e6e6e6;
+
+      .color-edit-toggle {
+        border-color: darkgray;
       }
     }
 
@@ -39,8 +47,16 @@
       margin-left: 1em;
     }
 
-    &:hover {
-      background-color: #e6e6e6;
+    .color-edit-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      position: relative;
+      padding: 0.7em;
+      border: 1px solid #dfe0e1;
+      border-radius: 4px;
+      cursor: pointer;
     }
   }
 
@@ -60,4 +76,9 @@
       display: flex;
     }
   }
+}
+
+// Library override
+.pcr-color-chooser {
+  margin-top: 0.75em !important;
 }

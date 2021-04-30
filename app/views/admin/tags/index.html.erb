@@ -68,11 +68,19 @@
       </div>
 
       <div class="tag-row__edit-view">
-        <div class="tag-row__color__edit">
-          <div class="asset-tag__color-dot" style="background-color: <%= tag.color %>"></div>
+        <div class="color-edit-toggle" id="color-edit-toggle-<%= tag.id %>">
+          <div
+            class="asset-tag__color-dot"
+            style="background-color: <%= tag.color %>"
+          ></div>
         </div>
 
-        <input type="text" value="<%= tag.name %>" />
+        <input
+          type="text"
+          class="tag-name-input"
+          data-tag-id="<%= tag.id %>"
+          value="<%= tag.name %>"
+        />
 
         <button
           type="button"

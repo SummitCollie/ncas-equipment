@@ -13,6 +13,7 @@
     "no-console": "off",
     "no-alert": "off",
     "func-names": "off",
-    "no-use-before-define": ["error", { "functions": false, "classes": true }]
+    "no-use-before-define": ["error", { "functions": false, "classes": true }],
+    "consistent-return": "off"
   }
 }

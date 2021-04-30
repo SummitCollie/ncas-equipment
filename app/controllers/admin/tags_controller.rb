@@ -5,6 +5,16 @@ module Admin
     end
 
     def update
+      tag = ActsAsTaggableOn::Tag.find(params[:id])
+      if tag.update(
+        params.require(:tag).permit(
+          Pundit.policy(current_user, :tags).permitted_attributes
+        )
+      )
+        head(:ok)
+      else
+        head(:unauthorized)
+      end
     end
 
     def destroy
