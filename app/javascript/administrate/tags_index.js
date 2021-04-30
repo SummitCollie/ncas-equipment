@@ -1,3 +1,7 @@
+// import Pickr from '@simonwep/pickr';
+
+import '@simonwep/pickr/dist/themes/nano.min.css';
+
 const initTagsIndex = FULL_TAG_LIST => {
   /* Tag Filter */
   const $searchInput = $('.tag-search__input');
