@@ -9,10 +9,10 @@ class UserPolicy < ApplicationPolicy
   def permitted_attributes
     attrs = []
     if user.admin?
-      attrs += [:email, :admin, :orders, :checkouts]
+      attrs += [:email, :admin, :checkouts, :checkins]
       attrs.push(:display_name) if user.id == the_user.id
     elsif user.id == the_user.id
-      attrs += [:email, :orders, :checkouts, :display_name]
+      attrs += [:email, :checkouts, :checkins, :display_name]
     end
     attrs
   end

@@ -4,8 +4,9 @@ class User < ApplicationRecord
   # :registerable, :validatable
   devise :database_authenticatable, :omniauthable, :rememberable
 
+  has_many :assets
   has_many :checkouts
-  has_many :orders
+  has_many :checkins
 
   validates :email, presence: true, uniqueness: true
   validates :display_name, presence: true, uniqueness: true

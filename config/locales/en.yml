@@ -32,9 +32,12 @@
 en:
   activerecord:
     models:
-      order:
+      checkout:
         one: Check-Out
         other: Check-Outs
+      checkin:
+        one: Check-In
+        other: Check-Ins
   administrate:
     actions:
       destroy: Delete

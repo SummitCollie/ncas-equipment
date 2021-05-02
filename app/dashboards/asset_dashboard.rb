@@ -8,13 +8,17 @@ class AssetDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    orders: Field::HasMany,
     id: Field::Number,
     name: Field::String,
     description: Field::Text,
     tags: TagListField,
+    location: Field::BelongsTo,
+    user: Field::BelongsTo,
+    checkouts: Field::HasMany,
+    checkins: Field::HasMany,
     barcode: Field::Text,
     checkout_scan_required: Field::Boolean,
+    locked: Field::Boolean,
     donated_by: Field::String,
     est_value_cents: Field::Number,
     created_at: Field::DateTime,
@@ -28,6 +32,8 @@ class AssetDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     name
+    user
+    location
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -37,8 +43,11 @@ class AssetDashboard < Administrate::BaseDashboard
     name
     description
     tags
+    location
+    user
     barcode
     checkout_scan_required
+    locked
     donated_by
     est_value_cents
     created_at
@@ -54,6 +63,7 @@ class AssetDashboard < Administrate::BaseDashboard
     tags
     barcode
     checkout_scan_required
+    locked
     donated_by
     est_value_cents
   ].freeze

@@ -18,26 +18,29 @@ when 'production'
   end
 
 when 'development'
-  User.create(
+  User.create!(
     [
       { email: 'dog@example.com', display_name: 'Dog', password: '123456', admin: true },
       { email: 'cat@example.com', display_name: 'Cat', password: '123456' },
       { email: 'JavaDog.Dev@gmail.com', display_name: 'Summit', password: '123456', admin: true },
     ]
   )
-  Event.create([{ name: 'FWA 2019' }, { name: 'FWA 2020', active: true }])
-  Location.create(
+  Event.create!([{ name: 'FWA 2019' }, { name: 'FWA 2020', active: true }])
+  Location.create!(
     [
-      { name: 'Game Room', event: Event.first },
-      { name: 'Con Ops', event: Event.first },
+      { name: 'Game Room', event: Event.first, for_checkout: true },
+      { name: 'Con Ops', event: Event.first, for_checkout: true },
 
-      { name: 'Game Room', event: Event.second },
-      { name: 'Con Ops', event: Event.second },
-      { name: 'Main Events Hall', event: Event.second },
+      { name: 'Game Room', event: Event.second, for_checkout: true },
+      { name: 'Con Ops', event: Event.second, for_checkout: true },
+      { name: 'Main Events Hall', event: Event.second, for_checkout: true },
+
+      { name: 'Storeroom', event: Event.first, for_checkin: true },
+      { name: 'Storeroom', event: Event.second, for_checkin: true },
     ]
   )
 
-  Asset.create(
+  Asset.create!(
     [
       {
         name: 'Sony 55" TV',
@@ -62,49 +65,50 @@ when 'development'
       {
         name: 'Loaner Fursuit',
         description: "it's all wet...",
+        location: Location.offset(6).limit(1).first,
+        user: nil,
         est_value_cents: 25,
         tag_list: 'fursuits, cold, wet, sad',
       },
       {
         name: 'Mixing Board',
+        location: Location.fifth,
+        user: User.second,
         tag_list: 'A/V Equipment, audio, electronics',
       },
       {
         name: 'Stage Microphone',
         description: 'Model #42069',
+        location: Location.fifth,
+        user: User.third,
         tag_list: 'A/V Equipment, audio, electronics',
       },
     ]
   )
 
-  # Past order
-  past_order = Order.new({
+  # Past Checkout and checkin
+  Checkout.create!({
     user: User.first,
+    assets: [Asset.first, Asset.second],
     location: Location.first,
+    est_return: 1.year.ago + 3.days,
     created_at: 1.year.ago,
     updated_at: 1.year.ago,
   })
-  past_order.checkouts.build(
-    {
-      asset: Asset.first,
-      est_return: 1.year.ago + 3.days,
-      returned_at: 1.year.ago + 2.days + 30.minutes,
-    }
-  )
-  past_order.save!
+  Checkin.create!({
+    user: User.first,
+    assets: [Asset.first, Asset.second],
+    location: Location.offset(5).limit(1).first,
+    returned_at: 1.year.ago + 2.days + 30.minutes,
+  })
 
-  # Recent order
-  recent_order = Order.new({
+  # Recent Checkout
+  Checkout.create!({
     user: User.second,
-    location: Location.last,
+    assets: [Asset.third],
+    location: Location.fourth,
+    est_return: 2.days.from_now,
     created_at: 1.day.ago,
     updated_at: 1.day.ago,
   })
-  recent_order.checkouts.build(
-    {
-      asset: Asset.second,
-      est_return: 2.days.from_now,
-    }
-  )
-  recent_order.save!
 end

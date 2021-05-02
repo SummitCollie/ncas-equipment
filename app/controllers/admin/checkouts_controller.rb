@@ -1,5 +1,5 @@
 module Admin
-  class OrdersController < Admin::ApplicationController
+  class CheckoutsController < Admin::ApplicationController
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
@@ -7,37 +7,6 @@ module Admin
     #   super
     #   send_foo_updated_email(requested_resource)
     # end
-
-    def create
-      order = resource_class.new(resource_params)
-      authorize_resource(order)
-
-      order.transaction do
-        order.checkouts.each do |checkout|
-          checkout.user = order.user
-          checkout.location = order.location
-        end
-        order.save!
-      end
-
-      redirect_to(
-        [namespace, order],
-        notice: translate_with_resource('create.success'),
-      )
-    rescue ActiveRecord::RecordInvalid => e
-      order = e.record
-      order.errors.delete(:checkouts, :invalid)
-      order.checkouts.each do |checkout|
-        next if checkout.valid?
-        checkout.errors.each do |error|
-          order.errors.import(error)
-        end
-      end
-
-      render(:new, locals: {
-        page: Administrate::Page::Form.new(dashboard, order),
-      }, status: :unprocessable_entity, error_messages_for: [:order, :checkout])
-    end
 
     # Override this method to specify custom lookup behavior.
     # This will be used to set the resource for the `show`, `edit`, and `update`

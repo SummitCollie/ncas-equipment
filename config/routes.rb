@@ -7,9 +7,10 @@ Rails.application.routes.draw do
     resources :users
     resources :assets
     resources :tags, only: [:index, :update, :destroy]
+    resources :checkouts
+    resources :checkins
     resources :events
     resources :locations
-    resources :orders
 
     root to: 'users#index'
   end

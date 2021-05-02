@@ -18,26 +18,54 @@ ActiveRecord::Schema.define(version: 2021_04_18_042132) do
   create_table "assets", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
+    t.bigint "location_id"
+    t.bigint "user_id"
     t.text "barcode"
+    t.boolean "locked", default: false, null: false
     t.boolean "checkout_scan_required", default: false, null: false
     t.string "donated_by"
     t.integer "est_value_cents"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["location_id"], name: "index_assets_on_location_id"
+    t.index ["user_id"], name: "index_assets_on_user_id"
   end
 
-  create_table "checkouts", force: :cascade do |t|
+  create_table "assets_checkins", force: :cascade do |t|
     t.bigint "asset_id", null: false
+    t.bigint "checkin_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["asset_id"], name: "index_assets_checkins_on_asset_id"
+    t.index ["checkin_id"], name: "index_assets_checkins_on_checkin_id"
+  end
+
+  create_table "assets_checkouts", force: :cascade do |t|
+    t.bigint "asset_id", null: false
+    t.bigint "checkout_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["asset_id"], name: "index_assets_checkouts_on_asset_id"
+    t.index ["checkout_id"], name: "index_assets_checkouts_on_checkout_id"
+  end
+
+  create_table "checkins", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "order_id", null: false
     t.bigint "location_id"
-    t.datetime "est_return"
     t.datetime "returned_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["asset_id"], name: "index_checkouts_on_asset_id"
+    t.index ["location_id"], name: "index_checkins_on_location_id"
+    t.index ["user_id"], name: "index_checkins_on_user_id"
+  end
+
+  create_table "checkouts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "location_id"
+    t.datetime "est_return"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["location_id"], name: "index_checkouts_on_location_id"
-    t.index ["order_id"], name: "index_checkouts_on_order_id"
     t.index ["user_id"], name: "index_checkouts_on_user_id"
   end
 
@@ -52,18 +80,11 @@ ActiveRecord::Schema.define(version: 2021_04_18_042132) do
   create_table "locations", force: :cascade do |t|
     t.string "name"
     t.bigint "event_id", null: false
+    t.boolean "for_checkout"
+    t.boolean "for_checkin"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_locations_on_event_id"
-  end
-
-  create_table "orders", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "location_id", null: false
-    t.index ["location_id"], name: "index_orders_on_location_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -107,12 +128,16 @@ ActiveRecord::Schema.define(version: 2021_04_18_042132) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "checkouts", "assets"
+  add_foreign_key "assets", "locations"
+  add_foreign_key "assets", "users"
+  add_foreign_key "assets_checkins", "assets"
+  add_foreign_key "assets_checkins", "checkins"
+  add_foreign_key "assets_checkouts", "assets"
+  add_foreign_key "assets_checkouts", "checkouts"
+  add_foreign_key "checkins", "locations"
+  add_foreign_key "checkins", "users"
   add_foreign_key "checkouts", "locations"
-  add_foreign_key "checkouts", "orders"
   add_foreign_key "checkouts", "users"
   add_foreign_key "locations", "events"
-  add_foreign_key "orders", "locations"
-  add_foreign_key "orders", "users"
   add_foreign_key "taggings", "tags"
 end

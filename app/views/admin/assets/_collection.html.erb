@@ -72,7 +72,7 @@ to display a collection of resources in an HTML table.
                 class="action-show"
                 style="display: inline-flex; align-items: center; gap: 0.5em;"
               >
-                <% if resource.tags.first&.color %>
+                <% if attribute.name == 'name' && resource.tags.first&.color %>
                   <span
                     class="asset-tag__color-dot"
                     style="background-color: <%= resource.tags.first.color %>"

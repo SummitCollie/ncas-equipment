@@ -1,10 +1,10 @@
 class Asset < ApplicationRecord
-  scope :checked_out, -> { joins(:checkouts).where('checkouts.returned_at IS NULL') }
-
   acts_as_ordered_taggable
 
-  has_many :checkouts
-  has_many :orders, through: :checkouts
+  belongs_to :location, optional: true
+  belongs_to :user, optional: true
+  has_and_belongs_to_many :checkouts
+  has_and_belongs_to_many :checkins
 
   validates :name, presence: true
   validates :checkout_scan_required, inclusion: [true, false]
@@ -12,8 +12,9 @@ class Asset < ApplicationRecord
   after_commit :ensure_tag_colors_present, on: [:create, :update]
 
   def available_to_check_out?
-    last_checkout = checkouts.last
-    last_checkout.nil? || last_checkout.returned_at.present?
+    return false if locked
+    return false if user.present?
+    location.blank? || location.for_checkin?
   end
 
   private
