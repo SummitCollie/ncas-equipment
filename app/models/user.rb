@@ -9,7 +9,6 @@ class User < ApplicationRecord
   has_many :checkins
 
   validates :email, presence: true, uniqueness: true
-  validates :display_name, presence: true, uniqueness: true
   validates :admin, inclusion: [true, false]
 
   def self.from_omniauth(access_token)

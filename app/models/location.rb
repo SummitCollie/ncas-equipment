@@ -4,5 +4,5 @@ class Location < ApplicationRecord
   has_many :checkouts
   has_many :checkins
 
-  validates :event, presence: true
+  validates :name, presence: true
 end

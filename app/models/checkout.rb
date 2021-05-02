@@ -6,8 +6,6 @@ class Checkout < ApplicationRecord
 
   after_save :update_assets
 
-  validates :user, presence: true
-  validates :location, presence: true
   validates :assets, presence: true
   validate :asset_not_checked_out, on: :create
 

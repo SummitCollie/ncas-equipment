@@ -6,8 +6,6 @@ class Checkin < ApplicationRecord
 
   after_save :update_assets
 
-  validates :user, presence: true
-  validates :location, presence: true
   validates :assets, presence: true
 
   private
