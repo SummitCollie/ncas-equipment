@@ -1,0 +1,8 @@
+<% if field.to_s.present? %>
+  <%= link_to(
+    field.to_s,
+    "https://t.me/#{field.to_s[1..]}",
+    class: 'fucking-blue-link',
+    target: '_blank'
+  ) %>
+<% end %>

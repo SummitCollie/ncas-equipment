@@ -10,6 +10,7 @@ class UserDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     display_name: Field::String,
+    telegram: TelegramUsernameField,
     email: Field::String,
     checkouts: Field::HasMany,
     checkins: Field::HasMany,
@@ -26,7 +27,7 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     display_name
-    email
+    telegram
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -34,6 +35,7 @@ class UserDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     display_name
+    telegram
     email
     checkouts
     checkins
@@ -47,6 +49,7 @@ class UserDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     display_name
+    telegram
     email
     admin
   ].freeze

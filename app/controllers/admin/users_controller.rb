@@ -2,7 +2,7 @@ module Admin
   class UsersController < Admin::ApplicationController
     def filter_form_attributes(attributes)
       return attributes if current_user.admin? && params[:id] == current_user.id.to_s
-      attributes.reject { |attr| attr.attribute == :display_name }
+      attributes.reject { |attr| [:display_name, :telegram].include?(attr.attribute) }
     end
 
     # Overwrite any of the RESTful controller actions to implement custom behavior
