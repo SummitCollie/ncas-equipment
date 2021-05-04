@@ -30,7 +30,7 @@ Run `rails db:setup` once to set up tables. Adds test data on local.
 Local test data can be seeded by running `rails db:seed`.
 
 Running `rails db:seed` on prod will just add a default admin account, as
-specified in your rails credentials
+specified in your rails credentials.
 
 Default seeded users in development are:
 | username | password | admin? |
@@ -59,6 +59,10 @@ postgres:
 google_oauth2:
   client_id: long_string_here
   client_secret: long_string_2_here
+
+# Used to control telegram bot for sending magic links, etc.
+telegram:
+  bot_token: paste_bot_token_here
 
 # Used as the base secret for all MessageVerifiers in Rails,
 # including the one protecting cookies.
@@ -97,4 +101,4 @@ https://ncas-equipment.herokuapp.com/users/auth/google_oauth2/callback
 
 ## How to run the test suite
 
-`rspec`
+TBD

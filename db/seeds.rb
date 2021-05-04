@@ -20,9 +20,24 @@ when 'production'
 when 'development'
   User.create!(
     [
-      { email: 'dog@example.com', display_name: 'Dog', password: '123456', admin: true },
-      { email: 'cat@example.com', display_name: 'Cat', password: '123456' },
-      { email: 'JavaDog.Dev@gmail.com', display_name: 'Summit', password: '123456', admin: true },
+      {
+        email: 'dog@example.com',
+        display_name: 'Dog',
+        password: '123456',
+        admin: true,
+      },
+      {
+        email: 'cat@example.com',
+        display_name: 'Cat',
+        password: '123456',
+      },
+      {
+        email: 'JavaDog.Dev@gmail.com',
+        telegram: '@SummitBC',
+        display_name: 'Summit',
+        password: '123456',
+        admin: true,
+      },
     ]
   )
   Event.create!([{ name: 'FWA 2019' }, { name: 'FWA 2020', active: true }])
