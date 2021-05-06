@@ -1,7 +1,7 @@
 <% if field.to_s.present? %>
   <%= link_to(
     field.to_s,
-    "tg://#{field.to_s[1..]}",
+    "tg://resolve?domain=#{field.to_s[1..]}",
     class: 'fucking-blue-link',
   ) %>
 <% end %>
