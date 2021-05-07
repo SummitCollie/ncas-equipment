@@ -12,7 +12,7 @@ class MagicToken < ApplicationRecord
 
   def assign_default_values
     self.token = Devise.friendly_token
-    self.expires = Time.current + 30.minutes unless self.expires.present?
+    self.expires = Time.current + 30.minutes unless expires.present?
   end
 
   def destroy_expired_tokens

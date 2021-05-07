@@ -1,5 +1,7 @@
 module Admin
   class UsersController < Admin::ApplicationController
+    TELEGRAM_BOT_NAME = Rails.application.credentials.telegram[:bot_name]
+
     def filter_form_attributes(attributes)
       return attributes if current_user.admin? && params[:id] == current_user.id.to_s
       attributes.reject { |attr| [:display_name, :telegram].include?(attr.attribute) }
@@ -13,8 +15,9 @@ module Admin
     #   send_foo_updated_email(requested_resource)
     # end
 
-    def update
-      super
+    def link_telegram_url
+      token = current_user.magic_tokens.create!(purpose: 'connect-telegram').token
+      render(plain: "https://t.me/#{TELEGRAM_BOT_NAME}?start=#{token}")
     end
 
     # Override this method to specify custom lookup behavior.

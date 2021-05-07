@@ -10,9 +10,9 @@ class UserPolicy < ApplicationPolicy
     attrs = []
     if user.admin?
       attrs += [:email, :admin, :checkouts, :checkins]
-      attrs.push(:display_name, :telegram) if user.id == the_user.id
+      attrs.push(:display_name) if user.id == the_user.id
     elsif user.id == the_user.id
-      attrs += [:email, :checkouts, :checkins, :display_name, :telegram]
+      attrs += [:email, :checkouts, :checkins, :display_name]
     end
     attrs
   end

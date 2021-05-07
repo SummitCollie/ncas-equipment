@@ -4,7 +4,11 @@ Rails.application.routes.draw do
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   namespace :admin do
-    resources :users
+    resources :users do
+      member do
+        get :link_telegram_url
+      end
+    end
     resources :assets
     resources :tags, only: [:index, :update, :destroy]
     resources :checkouts
@@ -18,6 +22,7 @@ Rails.application.routes.draw do
   root 'dashboards#index'
 
   get 'tags/search'
+  post 'webhooks/telegram/:token', to: 'webhooks#telegram', as: 'telegram_webhook'
 
   resources :assets, only: [:index]
 end

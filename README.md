@@ -62,6 +62,7 @@ google_oauth2:
 
 # Used to control telegram bot for sending magic links, etc.
 telegram:
+  bot_name: NCAS_Equipment_Bot # without the @
   bot_token: paste_bot_token_here
 
 # Used as the base secret for all MessageVerifiers in Rails,

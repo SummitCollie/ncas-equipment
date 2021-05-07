@@ -1,6 +1,30 @@
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      const getBotStartUrl = '<%= link_telegram_url_admin_user_path(current_user) %>';
+      $('.start-bot-link').click(e => {
+        e.preventDefault();
+        e.stopPropagation();
+        $.get(getBotStartUrl)
+          .then(url => window.open(url, '_blank'))
+          .catch(err => console.error('Error getting bot start URL:\n', err));
+      });
+    });
+  </script>
+<% end %>
+
 <div class="field-unit__label">
   <%= f.label field.attribute %>
 </div>
 <div class="field-unit__field">
-  <%= f.text_field field.attribute, placeholder: '@DarkShadowWolf69' %>
+  <% if current_user.telegram_chat_id.present? %>
+    Linked: <%= link_to(
+      field.to_s,
+      "tg://resolve?domain=#{field.to_s[1..]}",
+      class: 'fucking-blue-link',
+    ) %>
+  <% else %>
+    <a class="start-bot-link" href="#">Start our bot</a> to
+    link your Telegram
+  <% end %>
 </div>

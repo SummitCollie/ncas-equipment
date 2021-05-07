@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(version: 2021_05_07_023936) do
     t.string "display_name"
     t.boolean "active", default: true, null: false
     t.string "telegram"
+    t.string "telegram_chat_id"
     t.index ["display_name"], name: "index_users_on_display_name", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
   end
