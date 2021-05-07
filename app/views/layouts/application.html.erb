@@ -11,8 +11,15 @@
 
     <meta property="og:title" content="NCAS Equipment" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="<%= asset_pack_path 'media/images/mine.png' %>" />
     <meta property="og:description" content="So animals can manage stuff." />
+    <meta
+      property="og:image"
+      content="<%= request.base_url + asset_pack_path('media/images/mine.png') %>"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="<%= request.base_url + asset_pack_path('media/images/mine.png') %>"
+    />
   </head>
 
   <body>
