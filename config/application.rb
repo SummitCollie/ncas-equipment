@@ -35,5 +35,9 @@ module NcasEquipment
     config.generators.assets = false
     config.generators.helper = false
     config.generators.stylesheets = false
+
+    ActiveSupport::Inflector.inflections do |inflect|
+      inflect.acronym('API')
+    end
   end
 end
