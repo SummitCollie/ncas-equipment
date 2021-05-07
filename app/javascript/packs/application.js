@@ -12,6 +12,9 @@ import 'channels'; // eslint-disable-line import/no-unresolved
 
 import '../stylesheets/application.scss';
 
+// Serve files from app/javascript/images
+require.context('../images', true);
+
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();

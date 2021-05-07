@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>NcasEquipment</title>
+    <title>NCAS Equipment</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <meta property="og:title" content="NCAS Equipment" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="<%= asset_pack_path 'media/images/mine.png' %>" />
+    <meta property="og:description" content="So animals can manage stuff." />
   </head>
 
   <body>
