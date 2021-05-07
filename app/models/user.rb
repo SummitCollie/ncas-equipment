@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :assets
   has_many :checkouts
   has_many :checkins
+  has_many :magic_tokens
 
   before_validation :format_telegram_handle, if: -> { telegram.present? }
 

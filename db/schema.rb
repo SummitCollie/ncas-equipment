@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_04_032021) do
+ActiveRecord::Schema.define(version: 2021_05_07_023936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,16 @@ ActiveRecord::Schema.define(version: 2021_05_04_032021) do
     t.index ["event_id"], name: "index_locations_on_event_id"
   end
 
+  create_table "magic_tokens", force: :cascade do |t|
+    t.string "token", null: false
+    t.datetime "expires", null: false
+    t.string "purpose", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_magic_tokens_on_user_id"
+  end
+
   create_table "taggings", id: :serial, force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
@@ -140,5 +150,6 @@ ActiveRecord::Schema.define(version: 2021_05_04_032021) do
   add_foreign_key "checkouts", "locations"
   add_foreign_key "checkouts", "users"
   add_foreign_key "locations", "events"
+  add_foreign_key "magic_tokens", "users"
   add_foreign_key "taggings", "tags"
 end
