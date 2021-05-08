@@ -45,6 +45,10 @@ These are stored in rails credentials. Here's all necessary keys:
 `EDITOR=nano rails credentials:edit`
 
 ```yml
+# Domain where the app is hosted (no trailing slash)
+# (only used in prod for attaching Telegram webhook)
+base_url: https://ncas.equipment
+
 # Default admin (google account) account to add on prod if
 # you run `rails db:seed` on your Heroku app
 prod_default_admin: myAdmin@gmail.com
