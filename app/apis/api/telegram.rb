@@ -6,6 +6,7 @@ module API
     attr_accessor :options
     mattr_reader :stickers, default: {
       thumbs_up: 'CAACAgQAAxkBAAM3YJchASSXyGyiHfymqXr3sYIBYEQAAgIAA6jdCBKv7il3OAKdAx8E',
+      wat: 'CAACAgQAAxkBAANoYJdRHsB9ag9RZheMuFFhVb0bY04AAgcAA6jdCBJT9BM6g2HANR8E',
     }
 
     BOT_TOKEN = Rails.application.credentials.telegram[:bot_token]
@@ -40,6 +41,13 @@ module API
       unless result.ok?
         Rails.logger.error("Error sending Telegram sticker:\n#{result}")
       end
+    end
+
+    def get_sticker_set(name)
+      opts = options.merge({ body: {
+        name: name
+      .to_json }})
+      self.class.post('/getStickerSet', opts)
     end
 
     def self.connect_webhook

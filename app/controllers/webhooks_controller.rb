@@ -19,24 +19,37 @@ class WebhooksController < ApplicationController
     # Do nothing outside of private chats
     return head(:no_content) unless params.dig(:message, :chat, :type) == 'private'
 
+    telegram = API::Telegram.new(params.dig(:message, :chat, :id))
+
     # Handle messages
     case params.dig(:message, :text)
 
     # User ran /start command with connect_telegram magic token
-    when %r{^\/start (.+)}
+    when %r{^\/start(?: (.+))?}
       magic_token = MagicToken.where(
         token: Regexp.last_match(1),
         purpose: 'connect-telegram'
       ).first
+
+      unless magic_token.present?
+        telegram.send_message(
+          <<~HEREDOC
+            I couldn't figure out which user to link with this Telegram account :(
+
+            You've gotta use the link on your Edit User page to start this bot,
+            just running the /start command won't work.
+          HEREDOC
+        )
+      end
+
       user = magic_token.user
       user.update!(
         telegram: params.dig(:message, :chat, :username),
         telegram_chat_id: params.dig(:message, :chat, :id)
       )
 
-      telegram_api = API::Telegram.new(user.telegram_chat_id)
-      telegram_api.send_sticker(API::Telegram.stickers[:thumbs_up])
-      telegram_api.send_message(
+      telegram.send_sticker(API::Telegram.stickers[:thumbs_up])
+      telegram.send_message(
         <<~HEREDOC
           owo! Your ncas.equipment account has been linked!
 
@@ -45,8 +58,18 @@ class WebhooksController < ApplicationController
       )
 
       magic_token.destroy!
+    when 'owo', 'uwu', 'OwO', 'UwU'
+      sticker_set = telegram.get_sticker_set('uwumatedStickers')
+      telegram.send_sticker(sticker_set[:stickers].sample.file_id)
     else
       Rails.logger.warn("Don't know how to handle bot message '#{params.dig(:message, :text)}'")
+      telegram.send_sticker(API::Telegram.stickers[:wat])
+      telegram.send_message(
+        <<~HEREDOC
+          I don't know how to respond to messages :<
+          but thank you for talking to me :3
+        HEREDOC
+      )
     end
 
     head(:ok)
