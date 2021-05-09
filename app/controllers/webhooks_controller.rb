@@ -6,11 +6,23 @@ class WebhooksController < ApplicationController
   TELEGRAM_BOT_TOKEN = Rails.application.credentials.telegram[:bot_token]
 
   def telegram
+    # Make sure it's actually Telegram contacting us
     return head(:unauthorized) unless params[:token] == TELEGRAM_BOT_TOKEN
-    return head(:no_content) unless params.dig(:message, :chat, :type) == 'private'
-    head(:ok)
 
+    # Handle user blocking bot
+    if params.dig(:my_chat_member, :new_chat_member, :status) == 'kicked'
+      linked_user = User.find_by(telegram_chat_id: params.dig(:my_chat_member, :chat, :id))
+      linked_user.update(telegram: nil, telegram_chat_id: nil)
+      return head(:ok)
+    end
+
+    # Do nothing outside of private chats
+    return head(:no_content) unless params.dig(:message, :chat, :type) == 'private'
+
+    # Handle messages
     case params.dig(:message, :text)
+
+    # User ran /start command with connect_telegram magic token
     when %r{^\/start (.+)}
       magic_token = MagicToken.where(
         token: Regexp.last_match(1),
@@ -36,5 +48,7 @@ class WebhooksController < ApplicationController
     else
       Rails.logger.warn("Don't know how to handle bot message '#{params.dig(:message, :text)}'")
     end
+
+    head(:ok)
   end
 end

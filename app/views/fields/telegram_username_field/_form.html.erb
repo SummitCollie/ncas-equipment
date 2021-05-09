@@ -13,7 +13,7 @@
   </script>
 <% end %>
 
-<div class="field-unit__label">
+<div class="field-unit__label" style="margin-bottom: auto;">
   <%= f.label field.attribute %>
 </div>
 <div class="field-unit__field">
@@ -23,6 +23,10 @@
       "tg://resolve?domain=#{field.to_s[1..]}",
       class: 'fucking-blue-link',
     ) %>
+    <br />
+    <p class="info-text">
+      To unlink, use "Stop and block bot" in Telegram
+    </p>
   <% else %>
     Start our bot
     <a class="start-bot-link" href="#">using this link</a>

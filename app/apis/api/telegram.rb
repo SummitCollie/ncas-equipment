@@ -49,6 +49,7 @@ module API
           url: Rails.application.credentials.base_url +
             Rails.application.routes.url_helpers.telegram_webhook_path(BOT_TOKEN),
           drop_pending_updates: true,
+          allowed_updates: ['message', 'my_chat_member'],
         }.to_json,
       }
       post('/setWebhook', options)
