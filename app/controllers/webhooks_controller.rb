@@ -59,14 +59,14 @@ class WebhooksController < ApplicationController
 
       magic_token.destroy!
     when 'owo', 'uwu', 'OwO', 'UwU'
-      sticker_set = telegram.get_sticker_set('uwumatedStickers')
-      telegram.send_sticker(sticker_set[:stickers].sample.file_id)
+      sticker_set = telegram.get_stickers_in_set('AnuwumatedStickers')
+      telegram.send_sticker(sticker_set.sample['file_id'])
     else
       Rails.logger.warn("Don't know how to handle bot message '#{params.dig(:message, :text)}'")
       telegram.send_sticker(API::Telegram.stickers[:wat])
       telegram.send_message(
         <<~HEREDOC
-          I don't know how to respond to messages :<
+          I don't know how to respond to messages :&lt;
           but thank you for talking to me :3
         HEREDOC
       )

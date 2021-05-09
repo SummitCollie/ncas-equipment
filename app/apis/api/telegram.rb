@@ -43,11 +43,12 @@ module API
       end
     end
 
-    def get_sticker_set(name)
+    def get_stickers_in_set(name)
       opts = options.merge({ body: {
         name: name,
       }.to_json })
-      self.class.post('/getStickerSet', opts)
+      result = self.class.post('/getStickerSet', opts)
+      result['result']['stickers']
     end
 
     def self.connect_webhook
