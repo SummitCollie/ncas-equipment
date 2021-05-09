@@ -1,3 +1,3 @@
-const initBarcodeScanner = () => {};
+import jQuery from 'jquery';
 
-export default initBarcodeScanner;
+window.$ = window.jQuery = jQuery; // eslint-disable-line no-multi-assign

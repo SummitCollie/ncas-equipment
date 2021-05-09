@@ -1,3 +1,11 @@
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      Packs['barcode-scanner'].initBarcodeScanner();
+    });
+  </script>
+<% end %>
+
 <div class="barcode-scanner-app">
   barcode scanner view!
 </div>

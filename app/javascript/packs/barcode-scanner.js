@@ -7,9 +7,13 @@ import Rails from '@rails/ujs';
 import Turbolinks from 'turbolinks';
 import 'channels';
 
+// Support alternative browsers in iOS < 14.3
+// eslint-disable-next-line no-unused-vars
+import adapter from 'webrtc-adapter';
+
 import '../barcode-scanner/index';
 
 Rails.start();
 Turbolinks.start();
 
-export { default as initBarcodeScanner } from 'barcode-scanner/index';
+export { default as initBarcodeScanner } from 'barcode-scanner/init_barcode_scanner';
