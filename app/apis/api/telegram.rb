@@ -13,7 +13,7 @@ module API
 
     def initialize(chat_id)
       @chat_id = chat_id
-      @options = { headers: { 'Content-Type': 'application/json' }}
+      @options = { headers: { 'Content-Type': 'application/json' } }
     end
 
     def send_message(text)

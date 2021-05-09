@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class CheckinTest < ActiveSupport::TestCase
   # test "the truth" do
