@@ -40,6 +40,7 @@ class WebhooksController < ApplicationController
             just running the /start command won't work.
           HEREDOC
         )
+        return head(:ok)
       end
 
       user = magic_token.user
@@ -58,9 +59,11 @@ class WebhooksController < ApplicationController
       )
 
       magic_token.destroy!
+      return head(:ok)
     when 'owo', 'uwu', 'OwO', 'UwU'
       sticker_set = telegram.get_stickers_in_set('AnuwumatedStickers')
       telegram.send_sticker(sticker_set.sample['file_id'])
+      return head(:ok)
     else
       Rails.logger.warn("Don't know how to handle bot message '#{params.dig(:message, :text)}'")
       telegram.send_sticker(API::Telegram.stickers[:wat])
