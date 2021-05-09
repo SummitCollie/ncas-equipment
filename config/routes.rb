@@ -1,7 +1,9 @@
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
   devise_for :users,
-    controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+    controllers: {
+      omniauth_callbacks: 'users/omniauth_callbacks',
+    }
 
   namespace :admin do
     resources :users do
@@ -22,6 +24,8 @@ Rails.application.routes.draw do
   root 'dashboards#index'
 
   get 'tags/search'
+  get 'barcodes/start_scanner/:token', to: 'barcodes#start_scanner', as: 'start_barcode_scanner'
+  get 'barcodes/scanner'
   post 'webhooks/telegram/:token', to: 'webhooks#telegram', as: 'telegram_webhook'
 
   resources :assets, only: [:index]

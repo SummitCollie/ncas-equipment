@@ -1,0 +1,28 @@
+@import 'barcode-scanner/variables';
+@import 'barcode-scanner/barcode-scanner-app';
+@import 'barcode-scanner/error';
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  color: $base-font-color;
+  background-color: $base-background-color;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: $heading-line-height;
+  margin: 0;
+}

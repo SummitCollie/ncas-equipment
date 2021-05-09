@@ -1,0 +1,23 @@
+.barcode-scanner-error {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+  text-align: center;
+
+  img.warning-icon {
+    margin-top: 5em;
+    width: 5em;
+    height: 5em;
+  }
+
+  .error-title {
+    margin-top: 1.5em;
+  }
+
+  p.error-text {
+    margin-top: 1em;
+  }
+}
