@@ -45,8 +45,8 @@ module API
 
     def get_sticker_set(name)
       opts = options.merge({ body: {
-        name: name
-      .to_json }})
+        name: name,
+      }.to_json })
       self.class.post('/getStickerSet', opts)
     end
 
