@@ -1,8 +1,44 @@
 .barcode-scanner-app {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-
+  position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+
+  .starting-message {
+    margin: 4em auto auto;
+    text-align: center;
+  }
+
+  #video-element {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    z-index: -100;
+  }
+
+  .red-bar {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 1px;
+    margin-top: -1px;
+    background-color: red;
+    box-shadow: 0px 0px 7px 1px rgba(255, 0, 0, 0.35);
+    z-index: 100;
+  }
+
+  .message-container {
+    position: absolute;
+    top: 1em;
+    left: 0.5em;
+    right: 0.5em;
+  }
 }

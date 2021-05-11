@@ -1140,10 +1140,10 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@zxing/browser@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@zxing/browser/-/browser-0.0.9.tgz#1227bec71a7c9f9f4a697c2f029dc82ba0cbb56e"
-  integrity sha512-yqYz/FHQXbUnfSK+oeDXUa4ezC/qdXkVpqEFAnxM7LqIWvNWEQyUpdaTr0X6MGtIcP0Smakj5D8J7/l276plBw==
+"@zxing/browser@0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@zxing/browser/-/browser-0.0.8.tgz#20dfefe84c9c5dac54dcfb8900b88cbc202912dd"
+  integrity sha512-sYcMliNHm3oVjGJ7FhlhNuiukUeLHz+g7OmCCwDVWaZKc4TUS08XO2O1XIYF/FrPG3z4HspxqnszwynTpeEVRQ==
   optionalDependencies:
     "@zxing/text-encoding" "^0.9.0"
 
