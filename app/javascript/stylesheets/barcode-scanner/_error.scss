@@ -7,10 +7,15 @@
   height: 100%;
   text-align: center;
 
-  img.warning-icon {
-    margin-top: 5em;
-    width: 5em;
-    height: 5em;
+  .warning-icons {
+    font-size: 2em;
+    white-space: nowrap;
+
+    img.warning-icon {
+      margin-top: 5em;
+      width: 2em;
+      height: 2em;
+    }
   }
 
   .error-title {
