@@ -104,6 +104,6 @@ https://ncas.equipment/users/auth/google_oauth2/callback
 https://ncas-equipment.herokuapp.com/users/auth/google_oauth2/callback
 ```
 
-## How to run the test suite
+## Example barcodes
 
-TBD
+![Example Barcodes](./example-barcodes.png)
