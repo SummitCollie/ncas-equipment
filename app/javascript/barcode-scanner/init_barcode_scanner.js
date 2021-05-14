@@ -4,7 +4,7 @@ const initBarcodeScanner = () => {
   const videoElement = document.getElementById('video-element');
   // const $cycleCamerasButton = $('#cycle-cameras-button');
   let currentStream;
-  let cameraGroupIds = new Set();
+  const cameraGroupIds = new Set();
 
   const $switchCamButton = $('.btn-switch-cameras');
   $switchCamButton.on('click', switchCamera);
