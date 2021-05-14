@@ -1,5 +1,12 @@
 # NCAS Equipment
 
+## How to run locally
+
+1. Follow the below instructions to set up Postgres, rails credentials, Google auth, etc.
+2. Run the server with `rails s`
+3. Optionally, run `yarn start` in another process to start the webpack dev server.
+   Enables hot-reloading, much faster builds, etc. for front-end code.
+
 ## Database creation
 
 Uses postgres 12.6 locally and in production.
@@ -37,6 +44,9 @@ Default seeded users in development are:
 |---------------|:--------:|:------:|
 |dog@example.com| 123456 | ✔️ |
 |cat@example.com| 123456 | |
+
+(although now that Google auth is implemented, password auth is disabled so
+there's no login page where you can enter these passwords.)
 
 ## Environment Variables
 

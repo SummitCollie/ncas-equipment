@@ -1,4 +1,7 @@
 .barcode-scanner-app {
+  display: flex;
+  flex-flow: column nowrap;
+
   position: relative;
   width: 100%;
   height: 100%;
@@ -40,5 +43,20 @@
     top: 1em;
     left: 0.5em;
     right: 0.5em;
+  }
+
+  .bottom-buttons {
+    display: flex;
+    justify-content: flex-end;
+
+    margin: auto 1em 1em;
+
+    .btn-switch-cameras {
+      display: none;
+      width: 3em;
+      height: 3em;
+      opacity: 0.75;
+      cursor: pointer;
+    }
   }
 }
