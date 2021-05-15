@@ -1,10 +1,10 @@
-import { BrowserMultiFormatReader } from '@zxing/browser';
+import getFilteredCameraIds from 'barcode-scanner/utils/get_filtered_camera_ids';
+import waitForScanResult from 'barcode-scanner/wait_for_scan_result';
 
 const initBarcodeScanner = () => {
-  const videoElement = document.getElementById('video-element');
-  // const $cycleCamerasButton = $('#cycle-cameras-button');
   let currentStream;
-  const cameraGroupIds = new Set();
+  const videoElement = document.getElementById('video-element');
+  let cameraIds = new Set();
 
   const $switchCamButton = $('.btn-switch-cameras');
   $switchCamButton.on('click', switchCamera);
@@ -23,31 +23,29 @@ const initBarcodeScanner = () => {
       $('.starting-message').css('display', 'none');
       $('.red-bar').css('display', 'block');
 
-      return navigator.mediaDevices.enumerateDevices();
+      return getFilteredCameraIds();
     })
-    .then(devices => {
-      const detectedCams = devices.filter(
-        device => device.kind === 'videoinput'
-      );
-      detectedCams.forEach(cam => cameraGroupIds.add(cam.groupId));
-
-      if (cameraGroupIds.size > 1) {
+    .then(cameraDeviceIds => {
+      cameraIds = cameraDeviceIds;
+      if (cameraIds.size > 1) {
         $switchCamButton.css('display', 'block');
       }
+
+      waitForScanResult(videoElement);
     })
     .catch(err => console.error("Couldn't access cameras:\n", err));
 
   function switchCamera() {
-    const currentGroupId = currentStream.getVideoTracks()[0].getSettings()
-      .groupId;
-    const groupIds = [...cameraGroupIds];
+    const currentCamId = currentStream.getVideoTracks()[0].getSettings()
+      .deviceId;
+    const allCamIds = [...cameraIds];
 
     // Find next camera
     let nextCam;
-    groupIds.forEach((id, index) => {
-      if (id === currentGroupId) {
-        if (index !== groupIds.length - 1) nextCam = groupIds[index + 1];
-        else nextCam = groupIds[0]; // eslint-disable-line prefer-destructuring
+    allCamIds.forEach((id, index) => {
+      if (id === currentCamId) {
+        if (index !== allCamIds.length - 1) nextCam = allCamIds[index + 1];
+        else nextCam = allCamIds[0]; // eslint-disable-line prefer-destructuring
       }
     });
 
@@ -57,7 +55,7 @@ const initBarcodeScanner = () => {
     // Start new stream
     const newConstraints = {
       video: {
-        groupId: {
+        deviceId: {
           exact: nextCam,
         },
       },
@@ -66,6 +64,7 @@ const initBarcodeScanner = () => {
     navigator.mediaDevices.getUserMedia(newConstraints).then(stream => {
       currentStream = stream;
       videoElement.srcObject = stream;
+      waitForScanResult(videoElement);
     });
   }
 };
