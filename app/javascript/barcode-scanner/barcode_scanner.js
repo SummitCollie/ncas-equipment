@@ -42,14 +42,19 @@ class BarcodeScanner {
     try {
       let result;
       result = await this.codeReader.decodeFromVideoElement(this.videoElement);
-      this.onScanResult(result);
+      await this.onScanResult(result);
 
+      /* eslint-disable no-await-in-loop */
       while (!this.stopped) {
-        console.log('hit');
-        // eslint-disable-next-line no-await-in-loop, no-underscore-dangle
-        result = await this.codeReader._decodeOnLoadVideo(this.videoElement);
-        this.onScanResult(result);
+        await this.videoElement
+          .play()
+          // Wait a sec before scanning again, otherwise paused video frame from
+          // last loop will trigger a duplicate scan.
+          .then(() => new Promise(resolve => setTimeout(resolve, 1000)));
+        result = await this.codeReader.decodeOnce(this.videoElement);
+        await this.onScanResult(result);
       }
+      /* eslint-enable no-await-in-loop */
     } catch (err) {
       if (
         err.message ===
@@ -64,9 +69,12 @@ class BarcodeScanner {
     }
   }
 
-  onScanResult(result) {
-    this.videoElement.pause(); // _decodeOnLoadVideo calls .play() again
+  async onScanResult(result) {
+    await this.videoElement.pause();
     $('.message-container').text(result.getText());
+
+    // temporary - wait 3 seconds before scanning another
+    return new Promise(resolve => setTimeout(resolve, 3000));
   }
 
   stop() {
