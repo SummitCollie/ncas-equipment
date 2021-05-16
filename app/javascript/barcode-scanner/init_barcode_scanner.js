@@ -1,10 +1,11 @@
 import getFilteredCameraIds from 'barcode-scanner/utils/get_filtered_camera_ids';
-import waitForScanResult from 'barcode-scanner/wait_for_scan_result';
+import BarcodeScanner from 'barcode-scanner/barcode_scanner';
 
 const initBarcodeScanner = () => {
   let currentStream;
-  const videoElement = document.getElementById('video-element');
   let cameraIds = new Set();
+  const videoElement = document.getElementById('video-element');
+  const barcodeScanner = new BarcodeScanner();
 
   const $switchCamButton = $('.btn-switch-cameras');
   $switchCamButton.on('click', switchCamera);
@@ -31,9 +32,35 @@ const initBarcodeScanner = () => {
         $switchCamButton.css('display', 'block');
       }
 
-      waitForScanResult(videoElement);
+      barcodeScanner.initialize(videoElement).waitForScanResult(videoElement);
     })
-    .catch(err => console.error("Couldn't access cameras:\n", err));
+    .catch(err => {
+      console.error("Couldn't access cameras:\n", err);
+
+      switch (err.name) {
+        case 'NotAllowedError':
+          if (err.message === 'Permission dismissed') {
+            return showFatalError(
+              'Camera permission box closed',
+              'You closed the camera permissions box! Rude! Refresh the page and click allow next time.<br />( ͡°ᴥ ͡° ʋ)'
+            );
+          }
+          return showFatalError(
+            'Camera permission denied',
+            'I asked for camera permissions and you said no?! How silly! Figure out how tell your browser to allow me camera permission or your barcodes will go unscanned!<br />ʕ ᓀ ᴥ ᓂ ʔ'
+          );
+        case DOMException.NOT_FOUND_ERR:
+          return showFatalError(
+            'No cameras found',
+            "Couldn't find any cameras on this device! You kinda need one if you want to scan barcodes v__v"
+          );
+        default:
+          return showFatalError(
+            'Error starting camera',
+            'A ~mysterious~ unknown error occurred while trying to access the camera. Make sure no other apps or programs are using it!'
+          );
+      }
+    });
 
   function switchCamera() {
     const currentCamId = currentStream.getVideoTracks()[0].getSettings()
@@ -50,6 +77,7 @@ const initBarcodeScanner = () => {
     });
 
     // Stop current stream
+    barcodeScanner.stop();
     stopMediaTracks(currentStream);
 
     // Start new stream
@@ -64,7 +92,7 @@ const initBarcodeScanner = () => {
     navigator.mediaDevices.getUserMedia(newConstraints).then(stream => {
       currentStream = stream;
       videoElement.srcObject = stream;
-      waitForScanResult(videoElement);
+      barcodeScanner.initialize(videoElement).waitForScanResult(videoElement);
     });
   }
 };
@@ -73,6 +101,15 @@ function stopMediaTracks(stream) {
   stream.getTracks().forEach(track => {
     track.stop();
   });
+}
+
+function showFatalError(title, text) {
+  $('.starting-message').css('display', 'none');
+
+  const $errorContainer = $('.barcode-scanner-error');
+  $errorContainer.find('.error-title').text(title);
+  $errorContainer.find('.error-text').html(text);
+  $errorContainer.css('display', 'block');
 }
 
 export default initBarcodeScanner;

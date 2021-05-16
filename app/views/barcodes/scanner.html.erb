@@ -11,10 +11,21 @@
     <h3>Starting Scanner</h3>
     <p>Pwease wait UwU</p>
   </div>
-  <video id="video-element" autoplay="true"></video>
+
+  <video id="video-element"></video>
   <div class="red-bar">&nbsp;</div>
   <div class="bottom-buttons">
     <%= image_pack_tag 'media/images/switch-cameras.svg', class: 'btn-switch-cameras' %>
   </div>
   <div class="message-container"></div>
+
+  <div class="barcode-scanner-error">
+    <div class="warning-icons">
+      <%= image_pack_tag 'media/images/exclamation-circle.svg', class: 'warning-icon' %>
+      w
+      <%= image_pack_tag 'media/images/exclamation-circle.svg', class: 'warning-icon' %>
+    </div>
+    <h2 class="error-title"></h2>
+    <p class="error-text"></p>
+  </div>
 </div>
