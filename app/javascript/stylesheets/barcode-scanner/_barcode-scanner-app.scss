@@ -71,3 +71,8 @@
     z-index: 1000;
   }
 }
+
+/* Hide play/pause button on iOS in low-power mode */
+video::-webkit-media-controls {
+  display: none !important;
+}
