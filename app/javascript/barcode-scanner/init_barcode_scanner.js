@@ -8,7 +8,7 @@ const initBarcodeScanner = () => {
 
   cameraManager
     .initVideo()
-    .then(() => barcodeScanner.initialize(videoElement).waitForScanResult())
+    .then(() => barcodeScanner.initialize(videoElement).start())
     .catch(err => console.error('initVideo failed:\n', err));
 };
 
