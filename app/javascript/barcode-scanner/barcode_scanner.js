@@ -27,6 +27,7 @@ class BarcodeScanner {
   constructor() {
     this.videoElement = null;
     this.codeReader = null;
+    this.stopped = false;
   }
 
   initialize(videoElement) {
@@ -35,12 +36,20 @@ class BarcodeScanner {
     return this;
   }
 
-  async waitForScanResult() {
+  async start() {
+    this.stopped = false;
+
     try {
-      const result = await this.codeReader.decodeFromVideoElement(
-        this.videoElement
-      );
-      $('.message-container').text(result.getText());
+      let result;
+      result = await this.codeReader.decodeFromVideoElement(this.videoElement);
+      this.onScanResult(result);
+
+      while (!this.stopped) {
+        console.log('hit');
+        // eslint-disable-next-line no-await-in-loop, no-underscore-dangle
+        result = await this.codeReader._decodeOnLoadVideo(this.videoElement);
+        this.onScanResult(result);
+      }
     } catch (err) {
       if (
         err.message ===
@@ -55,7 +64,13 @@ class BarcodeScanner {
     }
   }
 
+  onScanResult(result) {
+    this.videoElement.pause(); // _decodeOnLoadVideo calls .play() again
+    $('.message-container').text(result.getText());
+  }
+
   stop() {
+    this.stopped = true;
     this.videoElement = null;
     this.codeReader.stopAsyncDecode();
     this.codeReader = null;

@@ -49,6 +49,11 @@ class CameraManager {
   }
 
   initVideo() {
+    setTimeout(
+      () => $('.starting-message .permission-prompt').css('opacity', '1'),
+      3000
+    );
+
     const constraints = {
       video: { facingMode: 'environment' },
       audio: false,
@@ -83,7 +88,7 @@ class CameraManager {
           case 'NotFoundError':
             showFatalError(
               'No cameras found',
-              "Couldn't find any cameras on this device! You kinda need one if you want to scan barcodes v__v" +
+              "Couldn't find any cameras on this device! You kinda need one if you want to scan barcodes &gt;__&gt;" +
                 '<br /><br />Maybe privacy settings in your browser or OS are blocking it?'
             );
             return err;
@@ -147,7 +152,7 @@ class CameraManager {
         this.videoElement.srcObject = stream;
         this.barcodeScanner
           .initialize(this.videoElement)
-          .waitForScanResult(this.videoElement);
+          .start(this.videoElement);
       })
       .finally(() => {
         this.isChangingCamera = false;
