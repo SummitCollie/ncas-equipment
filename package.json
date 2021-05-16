@@ -2,6 +2,7 @@
   "name": "ncas-equipment",
   "private": true,
   "version": "1.0.0",
+  "license": "SEE LICENSE IN LICENSE.txt",
   "scripts": {
     "start": "./bin/webpack-dev-server --progress"
   },
