@@ -8,9 +8,39 @@
   overflow: hidden;
   overscroll-behavior-y: none;
 
+  /* Disable double-tap-to-zoom */
+  touch-action: manipulation;
+
   .starting-message {
+    flex: 1 1 auto;
+
+    display: flex;
+    flex-flow: column nowrap;
+
     margin: 4em auto auto;
     text-align: center;
+
+    .permission-prompt {
+      margin: auto 0 1em;
+      color: $yellow;
+      opacity: 0;
+      transition: opacity 2s;
+      animation: updown 4s ease-in-out infinite;
+    }
+
+    @keyframes updown {
+      0% {
+        transform: translateY(-50%);
+      }
+
+      50% {
+        transform: translateY(50%);
+      }
+
+      100% {
+        transform: translateY(-50%);
+      }
+    }
   }
 
   #video-element {
@@ -70,9 +100,4 @@
     bottom: 0;
     z-index: 1000;
   }
-}
-
-/* Hide play/pause button on iOS in low-power mode */
-video::-webkit-media-controls {
-  display: none !important;
 }
