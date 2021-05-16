@@ -6,6 +6,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  overscroll-behavior-y: none;
 
   .starting-message {
     margin: 4em auto auto;
@@ -58,5 +59,15 @@
       opacity: 0.75;
       cursor: pointer;
     }
+  }
+
+  .barcode-scanner-error {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
   }
 }
