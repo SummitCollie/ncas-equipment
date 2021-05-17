@@ -1,0 +1,38 @@
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      const $dropdownToggle = $('.barcode-scanner-btn');
+      const $dropdownContent = $('.dropdown-content');
+
+      const handleClickOutsideDropdown = (event) => {
+        if (!$(event.target).closest('.dropdown-button').length) {
+          $dropdownContent.css('display', 'none');
+          $(document).off('click', handleClickOutsideDropdown);
+        }
+      };
+
+      $dropdownToggle.on('click', () => {
+        $dropdownContent.css('display', 'flex');
+        $(document).off('click', handleClickOutsideDropdown);
+        $(document).on('click', handleClickOutsideDropdown);
+      });
+    });
+  </script>
+<% end %>
+
+<header class="admin-app-header">
+  <div class="admin-app-header__content">
+    <h1>NCAS Asset Management</h1>
+
+    <div class="dropdown-wrapper">
+      <button class="button button--alt dropdown-button barcode-scanner-btn">
+        <%= image_pack_tag 'media/images/barcode-scanner.svg' %>
+        <span class="label-text">Barcode Scanner</span>
+      </button>
+
+      <div class="dropdown-content">
+        dropdown content yaaaay
+      </div>
+    </div>
+  </div>
+</header>

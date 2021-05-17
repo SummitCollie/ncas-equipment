@@ -1,0 +1,15 @@
+.dropdown-wrapper {
+  .dropdown-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dropdown-content {
+    display: none;
+    flex-flow: column nowrap;
+
+    position: absolute;
+    background-color: white;
+  }
+}
