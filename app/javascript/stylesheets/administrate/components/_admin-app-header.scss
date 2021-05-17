@@ -1,3 +1,5 @@
+@import 'administrate/components/dropdown-button';
+
 .admin-app-header {
   position: fixed;
   top: 0;
@@ -23,6 +25,36 @@
     h1 {
       user-select: none;
       cursor: default;
+    }
+
+    .dropdown-wrapper {
+      position: relative;
+      margin: auto 0 auto auto;
+    }
+    .barcode-scanner-btn {
+      padding: 0.25em 0.5em;
+      color: $grey-7;
+      border-color: $grey-5;
+      margin: 0;
+
+      & > img {
+        width: 1.5em;
+        height: 1.5em;
+      }
+
+      .label-text {
+        margin-left: 0.4em;
+        margin-bottom: 1px;
+        font-weight: normal;
+      }
+
+      &:hover {
+        color: $grey-0;
+        background-color: $grey-7;
+      }
+      &:focus {
+        outline: 3px solid rgba(103, 103, 103, 0.6);
+      }
     }
   }
 }
