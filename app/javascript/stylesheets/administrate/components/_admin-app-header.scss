@@ -56,5 +56,26 @@
         outline: 3px solid rgba(103, 103, 103, 0.6);
       }
     }
+    .dropdown-content {
+      right: 0;
+      width: 16em;
+      cursor: pointer;
+      border-radius: 0.25em;
+      box-shadow: 0px 5px 9px 0px rgba(0, 0, 0, 0.4);
+
+      li {
+        padding: 0.5em;
+        border-radius: 0.25em;
+        text-align: center;
+
+        &:hover {
+          background-color: $grey-0;
+        }
+
+        &:not(:last-of-type) {
+          border-bottom: 1px solid $grey-1;
+        }
+      }
+    }
   }
 }
