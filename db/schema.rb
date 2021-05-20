@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_07_023936) do
+ActiveRecord::Schema.define(version: 2021_05_20_031101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,15 @@ ActiveRecord::Schema.define(version: 2021_05_07_023936) do
     t.index ["user_id"], name: "index_magic_tokens_on_user_id"
   end
 
+  create_table "sent_telegram_messages", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "message_id", null: false
+    t.string "purpose", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_sent_telegram_messages_on_user_id"
+  end
+
   create_table "taggings", id: :serial, force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
@@ -152,5 +161,6 @@ ActiveRecord::Schema.define(version: 2021_05_07_023936) do
   add_foreign_key "checkouts", "users"
   add_foreign_key "locations", "events"
   add_foreign_key "magic_tokens", "users"
+  add_foreign_key "sent_telegram_messages", "users"
   add_foreign_key "taggings", "tags"
 end
