@@ -24,8 +24,11 @@ Rails.application.routes.draw do
   root 'dashboards#index'
 
   get 'tags/search'
+
   get 'barcodes/start_scanner/:token', to: 'barcodes#start_scanner', as: 'start_barcode_scanner'
+  get 'barcodes/send_telegram_link', to: 'barcodes#send_telegram_link'
   get 'barcodes/scanner'
+
   post 'webhooks/telegram/:token', to: 'webhooks#telegram', as: 'telegram_webhook'
 
   resources :assets, only: [:index]

@@ -13,7 +13,12 @@ module API
     base_uri "https://api.telegram.org/bot#{BOT_TOKEN}"
 
     def initialize(chat_id)
-      @chat_id = chat_id
+      @chat_id = if chat_id.is_a?(User)
+        chat_id.telegram_chat_id
+      else
+        chat_id
+      end
+
       @options = { headers: { 'Content-Type': 'application/json' } }
     end
 
