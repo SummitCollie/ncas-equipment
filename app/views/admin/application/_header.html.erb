@@ -28,7 +28,9 @@
 
       $('#send-telegram-btn').on('click', e => {
         e.preventDefault();
-        console.log('todo');
+        $.get('<%= barcodes_send_telegram_link_path %>').catch(err =>
+          console.error('Error generating start_scanner URL:\n', err)
+        );
       });
 
       $('#connect-telegram-btn').on('click', e => {

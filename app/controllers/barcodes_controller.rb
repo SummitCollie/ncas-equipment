@@ -2,6 +2,8 @@ class BarcodesController < ApplicationController
   skip_before_action :authenticate_user!, only: :start_scanner
   before_action :skip_authorization, only: :start_scanner
 
+  BASE_URL = Rails.application.credentials.base_url
+
   # Handles magic token auth
   def start_scanner
     return redirect_to(barcodes_scanner_path) if current_user.present?
@@ -17,6 +19,26 @@ class BarcodesController < ApplicationController
     sign_in(magic_token.user)
     magic_token.destroy
     redirect_to(barcodes_scanner_path)
+  end
+
+  def send_telegram_link
+    authorize(:asset, :show?)
+
+    token = MagicToken.create(user: current_user, purpose: 'scan-barcodes').token
+    link = BASE_URL + start_barcode_scanner_path(token)
+
+    telegram = API::Telegram.new(current_user)
+    telegram.send_message(
+      <<~HEREDOC
+        Here's a link that will auto-login and start the barcode scanner:
+
+        #{link}
+
+        Don't share it! Also, it only works one time!
+      HEREDOC
+    )
+
+    head(:ok)
   end
 
   def scanner
