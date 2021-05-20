@@ -34,6 +34,20 @@ module API
       unless result.ok?
         Rails.logger.error("Error sending Telegram message:\n#{result}")
       end
+      result
+    end
+
+    def delete_message(message_id)
+      opts = options.merge({ body: {
+        chat_id: chat_id,
+        message_id: message_id,
+      }.to_json })
+      result = self.class.post('/deleteMessage', opts)
+
+      unless result.ok?
+        Rails.logger.error("Error deleting Telegram message:\n#{result}")
+      end
+      result
     end
 
     def send_sticker(file_id)
@@ -46,6 +60,7 @@ module API
       unless result.ok?
         Rails.logger.error("Error sending Telegram sticker:\n#{result}")
       end
+      result
     end
 
     def get_stickers_in_set(name)

@@ -17,6 +17,13 @@ class BarcodesController < ApplicationController
     end
 
     sign_in(magic_token.user)
+
+    # Delete any outgoing Telegram messages with purpose: 'scan-barcodes'
+    SentTelegramMessage.where(
+      user: magic_token.user,
+      purpose: 'scan-barcodes'
+    ).destroy_all
+
     magic_token.destroy
     redirect_to(barcodes_scanner_path)
   end
@@ -28,7 +35,7 @@ class BarcodesController < ApplicationController
     link = BASE_URL + start_barcode_scanner_path(token)
 
     telegram = API::Telegram.new(current_user)
-    telegram.send_message(
+    result = telegram.send_message(
       <<~HEREDOC
         Here's a link that will auto-login and start the barcode scanner:
 
@@ -36,6 +43,13 @@ class BarcodesController < ApplicationController
 
         Don't share it! Also, it only works one time!
       HEREDOC
+    )
+
+    # Save the message_id so we can delete it after use
+    SentTelegramMessage.create(
+      user: current_user,
+      message_id: result.dig('result', 'message_id'),
+      purpose: 'scan-barcodes',
     )
 
     head(:ok)
