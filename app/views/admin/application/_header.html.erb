@@ -54,12 +54,19 @@
           <li id="open-on-device-btn">
             <%= link_to('Open on this device', barcodes_scanner_path) %>
           </li>
+
           <% if current_user.telegram.present? %>
-            <li id="send-telegram-btn">Send a link to my Telegram</li>
+            <li id="send-telegram-btn">
+              <%= image_pack_tag 'media/images/telegram-logo.svg', class: 'telegram-logo' %>
+              <a href="#">Send a link to my Telegram</a>
+            </li>
           <% else %>
             <li id="connect-telegram-btn">
-              <%= link_to('Connect your Telegram', edit_admin_user_path(current_user)) %>
-              and I can send a link to your phone!
+              <%= image_pack_tag 'media/images/telegram-logo.svg', class: 'telegram-logo' %>
+              <span>
+                <%= link_to('Connect your Telegram', edit_admin_user_path(current_user)) %>
+                and I can send a link to your phone!
+              </span>
             </li>
           <% end %>
         </ul>
