@@ -16,6 +16,25 @@
         $(document).off('click', handleClickOutsideDropdown);
         $(document).on('click', handleClickOutsideDropdown);
       });
+
+      $('#open-on-device-btn').on('click', e => {
+        e.preventDefault();
+        window.open(
+          '<%= barcodes_scanner_path %>',
+          'newwindow',
+          'width=400,height=600'
+        );
+      });
+
+      $('#send-telegram-btn').on('click', e => {
+        e.preventDefault();
+        console.log('todo');
+      });
+
+      $('#connect-telegram-btn').on('click', e => {
+        e.preventDefault();
+        window.location.href = '<%= edit_admin_user_path(current_user) %>';
+      });
     });
   </script>
 <% end %>
@@ -31,7 +50,19 @@
       </button>
 
       <div class="dropdown-content">
-        dropdown content yaaaay
+        <ul>
+          <li id="open-on-device-btn">
+            <%= link_to('Open on this device', barcodes_scanner_path) %>
+          </li>
+          <% if current_user.telegram.present? %>
+            <li id="send-telegram-btn">Send a link to my Telegram</li>
+          <% else %>
+            <li id="connect-telegram-btn">
+              <%= link_to('Connect your Telegram', edit_admin_user_path(current_user)) %>
+              and I can send a link to your phone!
+            </li>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>
