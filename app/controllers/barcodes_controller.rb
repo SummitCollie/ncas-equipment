@@ -6,13 +6,13 @@ class BarcodesController < ApplicationController
 
   # Handles magic token auth
   def start_scanner
-    return redirect_to(barcodes_scanner_path) if current_user.present?
+    sign_out(current_user) if current_user.present?
 
     magic_token = MagicToken.where(token: params[:token], purpose: 'scan-barcodes').first
     unless magic_token.present?
       @error_title = 'Unable to authenticate!'
       @error_text = 'Maybe the link you used has expired or was used already?'\
-      ' Try generating another one.'
+        ' Try generating another one.'
       return render('barcodes/error')
     end
 
