@@ -3,12 +3,12 @@ import showFatalError from 'barcode-scanner/utils/show_fatal_error';
 class CameraManager {
   /**
    * @param {HTMLVideoElement} videoElement to render into
-   * @param barcodeScanner - the current instance of ./utils/barcode_scanner.js
-   *  (unfortunately it needs to be involved in the camera cycle process)
+   * @param eventHandler - the current instance of ./utils/event_handler.js
+   *  (so we can trigger an event to stop/start scanner on camera switch)
    */
-  constructor(videoElement, barcodeScanner) {
+  constructor(videoElement, eventHandler) {
     this.videoElement = videoElement;
-    this.barcodeScanner = barcodeScanner;
+    this.eventHandler = eventHandler;
     this.currentStream = null;
     this.cameraIds = new Set();
     this.$switchCamButton = $('.btn-switch-cameras');
@@ -150,9 +150,9 @@ class CameraManager {
       .then(stream => {
         this.currentStream = stream;
         this.videoElement.srcObject = stream;
-        this.barcodeScanner
-          .initialize(this.videoElement)
-          .start(this.videoElement);
+        this.eventHandler.emit('camera-started', {
+          videoElement: this.videoElement,
+        });
       })
       .finally(() => {
         this.isChangingCamera = false;
@@ -160,9 +160,10 @@ class CameraManager {
   }
 
   stopMediaTracks() {
-    this.barcodeScanner.stop();
-    this.currentStream.getTracks().forEach(track => {
-      track.stop();
+    this.eventHandler.emit('camera-stopped', null, () => {
+      this.currentStream.getTracks().forEach(track => {
+        track.stop();
+      });
     });
   }
 }
