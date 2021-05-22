@@ -24,10 +24,16 @@ class CustomMultiFormatReader extends BrowserMultiFormatReader {
 }
 
 class BarcodeScanner {
-  constructor() {
+  constructor(eventHandler) {
+    this.eventHandler = eventHandler;
     this.videoElement = null;
     this.codeReader = null;
     this.stopped = false;
+
+    this.eventHandler.on('camera-stopped', () => this.stop());
+    this.eventHandler.on('camera-started', ({ videoElement }) =>
+      this.initialize(videoElement).start()
+    );
   }
 
   initialize(videoElement) {
