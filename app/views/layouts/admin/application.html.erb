@@ -18,14 +18,15 @@ By default, it renders:
     <meta charset="utf-8">
     <meta name="robots" content="noodp, noydir, index, follow">
     <meta name="viewport" content="initial-scale=1">
-    <title>
-      <%= content_for(:title) || 'Dashboard' %> - <%= Rails.application.class.module_parent_name.titlecase %>
-    </title>
-
     <%= csp_meta_tag %>
     <%= javascript_pack_tag 'administrate', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'administrate', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+
+    <title>
+      <%= content_for(:title) || 'Dashboard' %> - <%= Rails.application.class.module_parent_name.titlecase %>
+    </title>
 
     <%# Selectize built-in select fields on every page load %>
     <script>

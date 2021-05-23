@@ -79,6 +79,8 @@ class BarcodeScanner {
     await this.videoElement.pause();
     $('.message-container').text(result.getText());
 
+    this.eventHandler.emit('barcode-scanned', result.getText());
+
     // temporary - wait 3 seconds before scanning another
     return new Promise(resolve => setTimeout(resolve, 3000));
   }
