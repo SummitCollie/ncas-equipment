@@ -1,3 +1,4 @@
+import initSocketConsumer from 'barcode-scanner/init_socket_consumer';
 import CameraManager from 'barcode-scanner/utils/camera_manager';
 import BarcodeScanner from 'barcode-scanner/barcode_scanner';
 import EventHandler from './utils/event_handler';
@@ -7,6 +8,7 @@ const initBarcodeScanner = () => {
   const eventHandler = new EventHandler();
   const barcodeScanner = new BarcodeScanner(eventHandler);
   const cameraManager = new CameraManager(videoElement, eventHandler);
+  initSocketConsumer(eventHandler);
 
   cameraManager
     .initVideo()
