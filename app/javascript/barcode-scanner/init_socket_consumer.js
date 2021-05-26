@@ -12,6 +12,10 @@ const initSocketConsumer = eventHandler => {
         );
       },
 
+      received(data) {
+        console.log(`Got data: ${JSON.stringify(data, null, 2)}`);
+      },
+
       barcode_scanned(barcode) {
         this.perform('barcode_scanned', { barcode });
       },

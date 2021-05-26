@@ -7,10 +7,6 @@ class BarcodeWebChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def barcode_scanned(barcode)
-    puts "got barcode #{barcode}"
-  end
-
   def barcode_submitted
   end
 end
