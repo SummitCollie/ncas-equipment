@@ -7,6 +7,20 @@ class BarcodeScannerChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def barcode_scanned
+  def barcode_scanned(data)
+    barcode = data['barcode']
+    asset = Asset.find_by(barcode: barcode)
+
+    if asset.present?
+      transmit({
+        id: asset.id,
+        name: asset.name,
+        description: asset.description,
+        locked: asset.locked,
+        location: asset.location.present? ? "#{asset.location.event.name} - #{asset.location.name}" : 'Unset',
+        user: asset.user.present? ? (asset.user&.display_name || asset.user&.email) : 'Nobody',
+        tags: asset.tags.map { |tag| { name: tag.name, color: tag.color } },
+      })
+    end
   end
 end
