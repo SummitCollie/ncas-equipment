@@ -1,0 +1,52 @@
+button,
+input[type='button'],
+input[type='reset'],
+input[type='submit'],
+.button {
+  appearance: none;
+  background-color: $green;
+  border: 0;
+  border-radius: 4px;
+  color: #404040;
+  cursor: pointer;
+  display: inline-block;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0.75em 1em;
+  text-decoration: none;
+  transition: background-color 0.25s linear;
+  user-select: none;
+  vertical-align: middle;
+
+  &:hover {
+    background-color: darken($green, 10%);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.button--red {
+  background-color: $red;
+
+  &:hover {
+    background-color: darken($red, 10%);
+  }
+  &:focus {
+    outline: 3px solid transparentize($red, 0.4);
+  }
+}
+
+.button--gray {
+  color: white;
+  background-color: $grey-7;
+
+  &:hover {
+    background-color: darken($grey-7, 10%);
+  }
+}

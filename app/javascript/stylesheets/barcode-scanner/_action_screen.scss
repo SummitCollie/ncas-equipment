@@ -1,0 +1,28 @@
+.barcode-action-screen {
+  display: flex;
+  flex-flow: column nowrap;
+
+  position: absolute;
+  top: 1em;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1em;
+  background-color: $base-background-color;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  z-index: 200;
+
+  &__details {
+    margin-top: 1em;
+    overflow-y: scroll;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 1em;
+
+    margin-top: 1em;
+  }
+}
