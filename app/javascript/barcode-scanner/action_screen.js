@@ -8,10 +8,21 @@ class ActionScreen {
     this.$screen = $('.barcode-action-screen');
     this.$title = this.$screen.find('.barcode-action-screen__title');
     this.$content = this.$screen.find('.barcode-action-screen__details');
+    this.$cancelBtn = this.$screen.find('.cancel-btn');
+    this.$actionBtn = this.$screen.find('.action-btn');
 
     this.eventHandler.on('got-asset-data', data => {
       this.populateContent(data);
       this.show();
+    });
+
+    this.$cancelBtn.on('click', () => {
+      this.eventHandler.emit('resume-scanning');
+      this.hide();
+    });
+    this.$actionBtn.on('click', () => {
+      this.eventHandler.emit('resume-scanning');
+      this.hide();
     });
   }
 
@@ -21,9 +32,17 @@ class ActionScreen {
 
     this.$title.text(data.name);
 
-    const props = ['id', 'description', 'tags', 'user', 'location'];
-    props.forEach(propName => {
-      if (propName === 'tags') {
+    const props = {
+      id: 'ID',
+      name: 'Name',
+      tags: 'Tags',
+      description: 'Description',
+      user: 'User',
+      location: 'Location',
+    };
+
+    Object.keys(props).forEach(prop => {
+      if (prop === 'tags') {
         this.$content.append('<div class="asset-prop__name">Tags</div>');
         this.$content.append(() => {
           const content = ['<div class="asset-prop__tags">'];
@@ -48,10 +67,10 @@ class ActionScreen {
       } else {
         this.$content.append(
           `
-            <div class="asset-prop__name">${propName}</div>
+            <div class="asset-prop__name">${props[prop]}</div>
             <div class="asset-prop__value">${
-              typeof data[propName] !== 'undefined' && data[propName] !== null
-                ? data[propName]
+              typeof data[prop] !== 'undefined' && data[prop] !== null
+                ? data[prop]
                 : ''
             }</div>
           `.replace(/\s\s*$/gm, '')
