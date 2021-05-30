@@ -79,10 +79,11 @@ class BarcodeScanner {
     await this.videoElement.pause();
     $('.message-container').text(result.getText());
 
-    this.eventHandler.emit('barcode-scanned', result.getText());
-
-    // temporary - wait 3 seconds before scanning another
-    return new Promise(resolve => setTimeout(resolve, 3000));
+    // Scanning will resume when action_screen is closed
+    return new Promise(resolve => {
+      this.eventHandler.emit('barcode-scanned', result.getText());
+      this.eventHandler.once('resume-scanning', resolve);
+    });
   }
 
   stop() {
