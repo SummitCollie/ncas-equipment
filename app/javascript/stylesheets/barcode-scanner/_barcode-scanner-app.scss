@@ -53,6 +53,7 @@
     width: auto;
     height: auto;
     overflow: hidden;
+    user-select: none;
     z-index: -100;
   }
 
@@ -66,6 +67,7 @@
     margin-top: -1px;
     background-color: red;
     box-shadow: 0px 0px 7px 1px rgba(255, 0, 0, 0.35);
+    user-select: none;
     z-index: 100;
   }
 
@@ -74,6 +76,7 @@
     top: 1em;
     left: 0.5em;
     right: 0.5em;
+    user-select: none;
   }
 
   .bottom-buttons {
@@ -81,6 +84,7 @@
     justify-content: flex-end;
 
     margin: auto 1em 1em;
+    user-select: none;
 
     .btn-switch-cameras {
       display: none;
