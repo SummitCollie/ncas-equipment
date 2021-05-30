@@ -1,0 +1,49 @@
+/* views/shared/_asset_tag partial */
+.asset-tag {
+  display: flex;
+  align-items: center;
+
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid #9b9b9b;
+  background-color: white;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.03);
+  cursor: default;
+
+  &__text {
+    color: black;
+    font-size: 13px;
+    line-height: 1.75;
+    margin-left: 0.4em;
+    padding-bottom: 1px;
+  }
+}
+
+.asset-tag__color-dot {
+  $size: 14px;
+  flex: 0 0 auto;
+
+  display: inline-block;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background-color: gray;
+  box-shadow: 1px 2px 2px rgba(115, 115, 115, 0.7);
+  user-select: none;
+}
+
+/* Cool CSS invert text color thing I might use later */
+/*
+.tag-list__item {
+  background-color: white;
+  background-image: none;
+  background-repeat: repeat-x;
+  filter: none;
+
+  &__text {
+    color: white;
+    text-shadow: 1px 1px 1px gray;
+    mix-blend-mode: difference;
+  }
+}
+*/

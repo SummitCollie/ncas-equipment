@@ -17,8 +17,8 @@ class BarcodeScannerChannel < ApplicationCable::Channel
         name: asset.name,
         description: asset.description,
         locked: asset.locked,
-        location: asset.location.present? ? "#{asset.location.event.name} - #{asset.location.name}" : 'Unset',
-        user: asset.user.present? ? (asset.user&.display_name || asset.user&.email) : 'Nobody',
+        location: asset.location.present? ? "#{asset.location.event.name} - #{asset.location.name}" : nil,
+        user: asset.user.present? ? (asset.user&.display_name || asset.user&.email) : nil,
         tags: asset.tags.map { |tag| { name: tag.name, color: tag.color } },
       })
     end
