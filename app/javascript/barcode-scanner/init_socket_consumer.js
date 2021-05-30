@@ -14,6 +14,7 @@ const initSocketConsumer = eventHandler => {
 
       received(data) {
         console.log(`Got data: ${JSON.stringify(data, null, 2)}`);
+        eventHandler.emit('got-asset-data', data);
       },
 
       barcode_scanned(barcode) {
