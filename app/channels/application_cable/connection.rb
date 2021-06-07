@@ -1,9 +1,10 @@
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
-    identified_by :current_user
+    identified_by :current_user, :started_at
 
     def connect
       self.current_user = find_verified_user
+      self.started_at = Time.current
     end
 
     private
