@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  connection_identifier: MyString
+  user_id: one
+  last_used: 2021-06-06 16:28:42
+
+two:
+  connection_identifier: MyString
+  user_id: two
+  last_used: 2021-06-06 16:28:42

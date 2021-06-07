@@ -5,7 +5,6 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import Rails from '@rails/ujs';
 import Turbolinks from 'turbolinks';
-import 'channels';
 
 // Support alternative browsers in iOS < 14.3
 // eslint-disable-next-line no-unused-vars

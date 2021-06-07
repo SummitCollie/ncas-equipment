@@ -36,6 +36,8 @@ module NcasEquipment
     config.generators.helper = false
     config.generators.stylesheets = false
 
+    config.action_cable.mount_path = '/cable'
+
     ActiveSupport::Inflector.inflections do |inflect|
       inflect.acronym('API')
     end
