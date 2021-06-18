@@ -10,19 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_06_202842) do
+ActiveRecord::Schema.define(version: 2021_06_18_004538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "action_cable_connections", force: :cascade do |t|
-    t.string "connection_identifier", null: false
-    t.bigint "user_id", null: false
-    t.datetime "last_used", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_action_cable_connections_on_user_id"
-  end
 
   create_table "assets", force: :cascade do |t|
     t.string "name", null: false
@@ -154,11 +145,12 @@ ActiveRecord::Schema.define(version: 2021_06_06_202842) do
     t.boolean "active", default: true, null: false
     t.string "telegram"
     t.string "telegram_chat_id"
+    t.string "websocket_id"
+    t.string "websocket_action"
     t.index ["display_name"], name: "index_users_on_display_name", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "action_cable_connections", "users"
   add_foreign_key "assets", "locations"
   add_foreign_key "assets", "users"
   add_foreign_key "assets_checkins", "assets"

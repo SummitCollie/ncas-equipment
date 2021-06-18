@@ -4,14 +4,16 @@ const initSocketConsumer = () => {
   const socketConsumer = createConsumer();
 
   return socketConsumer.subscriptions.create(
-    { channel: 'BarcodeWebChannel' },
+    { channel: 'BarcodeWebChannel', url: window.location.pathname },
     {
-      connected() {
-        console.log('connected websocket');
-      },
+      connected() {},
 
       received(data) {
         console.log('got data: ', JSON.stringify(data, null, 2));
+      },
+
+      navigated() {
+        this.perform('navigated', { url: window.location.pathname });
       },
     }
   );

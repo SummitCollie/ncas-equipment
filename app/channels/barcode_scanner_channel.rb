@@ -1,6 +1,6 @@
 class BarcodeScannerChannel < ApplicationCable::Channel
   def subscribed
-    # stream_from "some_channel"
+    stream_from("barcode_scanner_channel:#{connection.current_user.id}")
   end
 
   def unsubscribed
