@@ -1,6 +1,8 @@
+require "#{Rails.root}/lib/barcode_utils.rb"
+
 class BarcodeScannerChannel < ApplicationCable::Channel
   def subscribed
-    stream_from("barcode_scanner_channel:#{connection.current_user.id}")
+    stream_for(current_user)
   end
 
   def unsubscribed
@@ -13,6 +15,7 @@ class BarcodeScannerChannel < ApplicationCable::Channel
 
     if asset.present?
       transmit({
+        message_type: BarcodeUtils.message_types[:ASSET_DATA],
         id: asset.id,
         name: asset.name,
         description: asset.description,

@@ -9,6 +9,9 @@
       "babel-module": {}
     }
   },
+  "globals": {
+    "BarcodeApp": true
+  },
   "rules": {
     "no-console": "off",
     "no-alert": "off",

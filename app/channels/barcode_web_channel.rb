@@ -31,6 +31,7 @@ class BarcodeWebChannel < ApplicationCable::Channel
     # Broadcast new action to all barcode scanners for this user
     BarcodeScannerChannel.broadcast_to(
       User.find(connection.current_user.id),
+      message_type: BarcodeUtils.message_types[:ACTION_CHANGED],
       action: BarcodeUtils.action_from_url(data['url'])
     )
   end

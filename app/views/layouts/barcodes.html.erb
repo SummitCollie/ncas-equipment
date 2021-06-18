@@ -1,3 +1,5 @@
+<% require "#{Rails.root}/lib/barcode_utils.rb" %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,6 +11,13 @@
 
     <%= stylesheet_pack_tag 'barcode-scanner', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'barcode-scanner', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <script type="text/javascript">
+      window.BarcodeApp = {
+        action_types: <%= raw(BarcodeUtils.action_types.to_json) %>,
+        message_types: <%= raw(BarcodeUtils.message_types.to_json) %>
+      };
+    </script>
   </head>
 
   <body>
