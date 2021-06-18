@@ -13,8 +13,20 @@ const initSocketConsumer = eventHandler => {
       },
 
       received(data) {
-        console.log(`incoming websocket data: ${data}`);
-        eventHandler.emit('got-asset-data', data);
+        switch (data.message_type) {
+          case BarcodeApp.message_types.ACTION_CHANGED:
+            console.log(`new action: ${data.action}`);
+            break;
+
+          case BarcodeApp.message_types.ASSET_DATA:
+            eventHandler.emit('got-asset-data', data);
+            break;
+
+          default:
+            console.error(
+              `Got unknown websocket message type '${data.message_type}'`
+            );
+        }
       },
 
       barcode_scanned(barcode) {
