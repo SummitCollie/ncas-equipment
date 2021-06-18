@@ -13,6 +13,7 @@ const initSocketConsumer = eventHandler => {
       },
 
       received(data) {
+        console.log(`incoming websocket data: ${data}`);
         eventHandler.emit('got-asset-data', data);
       },
 
