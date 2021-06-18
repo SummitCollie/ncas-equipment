@@ -1,5 +1,3 @@
-require "#{Rails.root}/lib/barcode_utils.rb"
-
 class BarcodeWebChannel < ApplicationCable::Channel
   def subscribed
     # Store connection_identifier in DB as "most recent"
@@ -8,6 +6,8 @@ class BarcodeWebChannel < ApplicationCable::Channel
       websocket_id: connection.connection_identifier,
       websocket_action: BarcodeUtils.action_from_url(params[:url])
     )
+
+    update_scanner_action(connection.current_user.id, BarcodeUtils.action_from_url(params[:url]))
   end
 
   def unsubscribed
@@ -28,14 +28,20 @@ class BarcodeWebChannel < ApplicationCable::Channel
       websocket_action: BarcodeUtils.action_from_url(data['url'])
     )
 
-    # Broadcast new action to all barcode scanners for this user
-    BarcodeScannerChannel.broadcast_to(
-      User.find(connection.current_user.id),
-      message_type: BarcodeUtils.message_types[:ACTION_CHANGED],
-      action: BarcodeUtils.action_from_url(data['url'])
-    )
+    update_scanner_action(connection.current_user.id, BarcodeUtils.action_from_url(data['url']))
   end
 
   def barcode_submitted
+  end
+
+  private
+
+  # Broadcast new action to all barcode scanners for this user
+  def update_scanner_action(user_id, action)
+    BarcodeScannerChannel.broadcast_to(
+      User.find(user_id),
+      message_type: BarcodeUtils.message_types[:ACTION_CHANGED],
+      action: action
+    )
   end
 end

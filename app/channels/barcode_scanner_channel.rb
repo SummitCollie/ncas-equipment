@@ -1,5 +1,3 @@
-require "#{Rails.root}/lib/barcode_utils.rb"
-
 class BarcodeScannerChannel < ApplicationCable::Channel
   def subscribed
     stream_for(current_user)
