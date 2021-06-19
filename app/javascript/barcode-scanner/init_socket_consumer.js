@@ -15,7 +15,7 @@ const initSocketConsumer = eventHandler => {
       received(data) {
         switch (data.message_type) {
           case BarcodeApp.message_types.ACTION_CHANGED:
-            console.log(`new action: ${data.action}`);
+            eventHandler.emit('action-changed', data.action);
             break;
 
           case BarcodeApp.message_types.ASSET_DATA:

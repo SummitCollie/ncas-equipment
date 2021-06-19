@@ -19,7 +19,7 @@ class BarcodeUtils
     def action_from_url(url)
       controller, action = Rails.application.routes.recognize_path(url).values_at(:controller, :action)
 
-      if controller == 'admin/assets' && (action == 'edit' || action == 'new')
+      if controller == 'admin/assets' && action.in?(['edit', 'new'])
         @@action_types[:SET_ASSET_BARCODE]
       elsif controller == 'admin/checkouts' && action == 'new'
         @@action_types[:ADD_TO_CHECKOUT]

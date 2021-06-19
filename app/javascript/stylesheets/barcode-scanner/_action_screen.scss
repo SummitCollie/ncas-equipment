@@ -41,12 +41,31 @@
     gap: 2px;
   }
 
+  &__no-web-session-error {
+    display: none;
+    justify-content: center;
+
+    margin: 1em 0 0;
+    padding: 0.4em;
+    font-size: 0.7rem;
+    line-height: 1.2;
+    text-align: center;
+    color: #323200;
+    background-color: lightyellow;
+    border-radius: 3px;
+    border: 1px solid yellow;
+  }
+
   &__buttons {
     display: flex;
     justify-content: space-around;
     gap: 1em;
 
     margin-top: 1em;
+
+    .button {
+      flex: 1 0 45%;
+    }
   }
 
   .asset-tag {

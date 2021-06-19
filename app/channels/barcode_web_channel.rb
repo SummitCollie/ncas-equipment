@@ -17,6 +17,9 @@ class BarcodeWebChannel < ApplicationCable::Channel
       # Clear out websocket columns cuz the "most recent" session ended.
       # This may not be 100% reliable but whatever, good enough
       user.update(websocket_id: nil, websocket_action: nil)
+
+      # Also tell barcode apps there's no action anymore
+      update_scanner_action(connection.current_user.id, nil)
     end
   end
 
