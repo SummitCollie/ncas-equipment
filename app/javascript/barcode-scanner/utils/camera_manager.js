@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 import showFatalError from 'barcode-scanner/utils/show_fatal_error';
 
 class CameraManager {
@@ -54,8 +56,14 @@ class CameraManager {
       3000
     );
 
+    // Check if we have a preferred camera from a previous session
+    const prevCamera = Cookies.get('camera-id');
+
     const constraints = {
-      video: { facingMode: 'environment' },
+      video: {
+        deviceId: prevCamera || undefined,
+        facingMode: prevCamera ? undefined : 'environment',
+      },
       audio: false,
     };
     return navigator.mediaDevices
@@ -132,6 +140,9 @@ class CameraManager {
         else nextCam = allCamIds[0]; // eslint-disable-line prefer-destructuring
       }
     });
+
+    // Save camera setting in cookie
+    Cookies.set('camera-id', nextCam, { expires: 365 });
 
     // Stop current stream + barcode scanner
     this.stopMediaTracks();
