@@ -8,6 +8,9 @@ class ActionScreen {
     this.$screen = $('.barcode-action-screen');
     this.$title = this.$screen.find('.barcode-action-screen__title');
     this.$content = this.$screen.find('.barcode-action-screen__details');
+    this.$noWebSessionWarning = this.$screen.find(
+      '.barcode-action-screen__no-web-session-error'
+    );
     this.$cancelBtn = this.$screen.find('.cancel-btn');
     this.$actionBtn = this.$screen.find('.action-btn');
 
@@ -15,6 +18,9 @@ class ActionScreen {
       this.populateContent(data);
       this.show();
     });
+    this.eventHandler.on('action-changed', newAction =>
+      this.setAction(newAction)
+    );
 
     this.$cancelBtn.on('click', () => {
       this.eventHandler.emit('resume-scanning');
@@ -24,6 +30,8 @@ class ActionScreen {
       this.eventHandler.emit('resume-scanning');
       this.hide();
     });
+
+    this.setAction(BarcodeApp.initial_action);
   }
 
   populateContent(data) {
@@ -85,6 +93,34 @@ class ActionScreen {
 
   hide() {
     this.$screen.removeClass('barcode-action-screen--visible');
+  }
+
+  setAction(newAction) {
+    if (!newAction) {
+      this.$noWebSessionWarning.css('display', 'block');
+      this.$actionBtn.css('display', 'none');
+      return;
+    }
+
+    this.$noWebSessionWarning.css('display', 'none');
+    this.$actionBtn.css('display', 'block').text(() => {
+      switch (newAction) {
+        case BarcodeApp.action_types.SET_ASSET_BARCODE:
+          return 'Set Asset Barcode';
+        case BarcodeApp.action_types.ADD_TO_CHECKOUT:
+          return 'Add to Checkout';
+        case BarcodeApp.action_types.ADD_TO_CHECKIN:
+          return 'Add to Checkin';
+        case BarcodeApp.action_types.OPEN_ON_PC:
+          return 'Open on PC';
+        default:
+          console.error(
+            `Couldn't change action to unknown value '${newAction}'`
+          );
+          this.$actionBtn.css('display', 'none');
+          return '';
+      }
+    });
   }
 }
 
