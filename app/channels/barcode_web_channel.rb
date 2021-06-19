@@ -14,9 +14,9 @@ class BarcodeWebChannel < ApplicationCable::Channel
     user = User.find(connection.current_user.id)
 
     if connection.connection_identifier == user.websocket_id
-      # Clear out websocket ID, the "most recent" session ended
+      # Clear out websocket columns cuz the "most recent" session ended.
       # This may not be 100% reliable but whatever, good enough
-      user.update(websocket_id: nil)
+      user.update(websocket_id: nil, websocket_action: nil)
     end
   end
 
