@@ -5,6 +5,8 @@
 class ActionScreen {
   constructor(eventHandler) {
     this.eventHandler = eventHandler;
+    this.currentAction = null;
+
     this.$screen = $('.barcode-action-screen');
     this.$title = this.$screen.find('.barcode-action-screen__title');
     this.$content = this.$screen.find('.barcode-action-screen__details');
@@ -27,6 +29,7 @@ class ActionScreen {
       this.hide();
     });
     this.$actionBtn.on('click', () => {
+      this.eventHandler.emit('confirm-action', this.currentAction);
       this.eventHandler.emit('resume-scanning');
       this.hide();
     });
@@ -97,11 +100,13 @@ class ActionScreen {
 
   setAction(newAction) {
     if (!newAction) {
+      this.currentAction = null;
       this.$noWebSessionWarning.css('display', 'block');
       this.$actionBtn.css('display', 'none');
       return;
     }
 
+    this.currentAction = newAction;
     this.$noWebSessionWarning.css('display', 'none');
     this.$actionBtn.css('display', 'block').text(() => {
       switch (newAction) {
