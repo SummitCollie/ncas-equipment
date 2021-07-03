@@ -30,7 +30,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'ruby-debug-ide', '~> 0.7.2'
-  gem 'solargraph', '~> 0.40.1'
   gem 'debase', '~> 0.2.4'
 end
 
@@ -46,6 +45,7 @@ group :development do
 
   gem 'rubocop', '~> 1.12.1', require: false
   gem 'rubocop-shopify', '~> 2.0.1', require: false
+  gem 'solargraph', '~> 0.42.3'
   gem 'pry', '~> 0.13.0'
   gem 'pry-byebug', '~> 3.9.0'
 end
