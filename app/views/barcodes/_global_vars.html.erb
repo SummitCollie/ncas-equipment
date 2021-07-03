@@ -1,0 +1,8 @@
+<%# Injects global barcode vars into both the desktop and scanner apps %>
+<script type="text/javascript">
+  window.BarcodeApp = {
+    action_types: <%= raw(BarcodeUtils.action_types.to_json) %>,
+    message_types: <%= raw(BarcodeUtils.message_types.to_json) %>,
+    initial_action: <%= current_user.websocket_action ? raw("'#{current_user.websocket_action}'") : 'null' %>
+  };
+</script>
