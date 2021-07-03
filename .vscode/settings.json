@@ -1,6 +1,5 @@
 {
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
 
   "solargraph.useBundler": true,
   "solargraph.bundlerPath": "bundle",

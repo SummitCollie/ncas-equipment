@@ -25,7 +25,11 @@ const initSocketConsumer = eventHandler => {
               break;
 
             case BarcodeApp.message_types.ASSET_DATA:
-              eventHandler.emit('got-asset-data', data);
+              if (data.unknown) {
+                eventHandler.emit('unknown-barcode-scanned', data);
+              } else {
+                eventHandler.emit('got-asset-data', data);
+              }
               break;
 
             default:

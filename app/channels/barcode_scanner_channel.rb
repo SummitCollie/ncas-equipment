@@ -55,6 +55,13 @@ class BarcodeScannerChannel < ApplicationCable::Channel
         user: asset.user.present? ? (asset.user&.display_name || asset.user&.email) : nil,
         tags: asset.tags.map { |tag| { name: tag.name, color: tag.color } },
       })
+    else
+      transmit({
+        target: 'scanner',
+        message_type: BarcodeUtils.message_types[:ASSET_DATA],
+        unknown: true,
+        barcode: barcode,
+      })
     end
   end
 
