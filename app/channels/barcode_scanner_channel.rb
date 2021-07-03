@@ -60,10 +60,10 @@ class BarcodeScannerChannel < ApplicationCable::Channel
 
   def confirm_action(data)
     user = User.find(connection.current_user.id)
-    action_name = data['actionName']
+    action_type = data['actionName']
     barcode = data['barcode']
     asset = Asset.find_by(barcode: barcode)
-    raise "Action or barcode was blank, can't do nothin" unless action_name && barcode
+    raise "Action or barcode was blank, can't do nothin" unless action_type && barcode
 
     # Tell desktop app to [do thing (action)] with barcode
     # (websocket id has to be filtered on desktop's client-side)
@@ -72,7 +72,7 @@ class BarcodeScannerChannel < ApplicationCable::Channel
       target: 'desktop',
       message_type: BarcodeUtils.message_types[:ACTION_PERFORMED],
       websocket_id: user.websocket_id,
-      action_name: action_name,
+      action_type: action_type,
       barcode: barcode,
       asset_id: asset&.id,
     )
