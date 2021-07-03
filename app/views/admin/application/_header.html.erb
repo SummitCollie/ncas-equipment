@@ -1,4 +1,6 @@
 <% content_for :javascript do %>
+  <%= render 'barcodes/global_vars' %>
+
   <script type="text/javascript">
     $(function() {
       const $dropdownToggle = $('.barcode-scanner-btn');
@@ -54,12 +56,13 @@
       <div class="dropdown-content">
         <ul>
           <li id="open-on-device-btn">
+            <%= image_pack_tag 'media/images/external-link.svg', class: 'dropdown-icon' %>
             <%= link_to('Open on this device', barcodes_scanner_path) %>
           </li>
 
           <% if current_user.telegram.present? %>
             <li id="send-telegram-btn">
-              <%= image_pack_tag 'media/images/telegram-logo.svg', class: 'telegram-logo' %>
+              <%= image_pack_tag 'media/images/telegram-logo.svg', class: 'dropdown-icon' %>
               <a href="#">Send a link to my Telegram</a>
             </li>
           <% else %>
