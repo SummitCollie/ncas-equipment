@@ -19,12 +19,22 @@
   }
 
   &__details {
+    flex: 1 1 auto;
+
     display: grid;
     grid-template-rows: auto auto;
+    align-content: start;
     gap: 0.5em 1em;
 
     margin-top: 1em;
     overflow-y: scroll;
+
+    p.unknown-barcode {
+      grid-column: 1 / span 2;
+      color: lightgray;
+      font-size: 0.9rem;
+      margin: 0 0 1em;
+    }
   }
 
   .asset-prop__name {

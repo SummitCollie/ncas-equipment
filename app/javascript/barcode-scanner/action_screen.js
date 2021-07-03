@@ -6,6 +6,7 @@ class ActionScreen {
   constructor(eventHandler) {
     this.eventHandler = eventHandler;
     this.currentAction = null;
+    this.isUnknownBarcode = false;
 
     this.$screen = $('.barcode-action-screen');
     this.$title = this.$screen.find('.barcode-action-screen__title');
@@ -17,7 +18,13 @@ class ActionScreen {
     this.$actionBtn = this.$screen.find('.action-btn');
 
     this.eventHandler.on('got-asset-data', data => {
+      this.isUnknownBarcode = false;
       this.populateContent(data);
+      this.show();
+    });
+    this.eventHandler.on('unknown-barcode-scanned', data => {
+      this.isUnknownBarcode = true;
+      this.onUnknownBarcode(data);
       this.show();
     });
     this.eventHandler.on('action-changed', newAction =>
@@ -88,6 +95,35 @@ class ActionScreen {
         );
       }
     });
+
+    // Refresh action button
+    this.setAction(this.currentAction);
+  }
+
+  onUnknownBarcode(data) {
+    this.$title.empty();
+    this.$content.empty();
+
+    this.$title.text('Unknown Barcode');
+
+    this.$content.append(
+      `
+      <p class="unknown-barcode">
+        This barcode doesn't exist in the database yet. You can add it
+        to a new or existing asset, but all other actions are unavailable.
+      </p>
+    `.replace(/\s\s*$/gm, '')
+    );
+
+    this.$content.append(
+      `
+      <div class="asset-prop__name">Barcode Contents</div>
+      <div class="asset-prop__value">${data.barcode}</div>
+    `.replace(/\s\s*$/gm, '')
+    );
+
+    // Refresh action button
+    this.setAction(this.currentAction);
   }
 
   show() {
@@ -126,6 +162,14 @@ class ActionScreen {
           return '';
       }
     });
+
+    // Only show certain actions if the barcode is for a known asset
+    if (
+      this.isUnknownBarcode &&
+      newAction !== BarcodeApp.action_types.SET_ASSET_BARCODE
+    ) {
+      this.$actionBtn.css('display', 'none');
+    }
   }
 }
 
