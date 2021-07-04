@@ -48,6 +48,7 @@ class BarcodeScannerChannel < ApplicationCable::Channel
         target: 'scanner',
         message_type: BarcodeUtils.message_types[:ASSET_DATA],
         id: asset.id,
+        barcode: barcode,
         name: asset.name,
         description: asset.description,
         locked: asset.locked,
