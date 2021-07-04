@@ -32,6 +32,7 @@ const initSocketConsumer = () => {
             case BarcodeApp.message_types.ACTION_PERFORMED:
               switch (data.action_type) {
                 case BarcodeApp.action_types.SET_ASSET_BARCODE:
+                  $('#asset_barcode').val(data.barcode);
                   break;
                 case BarcodeApp.action_types.ADD_TO_CHECKOUT:
                   break;
