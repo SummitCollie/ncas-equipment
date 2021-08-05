@@ -16,5 +16,11 @@ Administrate::Engine.javascripts.each do |js_path|
   <%= javascript_tag do %>
     $.fx.off = true;
     $.ajaxSetup({ async: false });
+
+    // Destroy all selectize instances before turbolinks caches a page
+    // TODO - breaks restoration of selectize fields after failed form submit
+    $(document).on('turbolinks:before-cache', function() {
+      $('[data-selectize]').each(function() { this.selectize.destroy() });
+    });
   <% end %>
 <% end %>

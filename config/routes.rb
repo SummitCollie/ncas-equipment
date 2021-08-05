@@ -31,5 +31,9 @@ Rails.application.routes.draw do
 
   post 'webhooks/telegram/:token', to: 'webhooks#telegram', as: 'telegram_webhook'
 
-  resources :assets, only: [:index]
+  resources :assets, only: [:index] do
+    collection do
+      get 'search'
+    end
+  end
 end

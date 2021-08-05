@@ -3,7 +3,6 @@ class TagsController < ApplicationController
     authorize(:tags, :index?)
     return head(:bad_request) unless params[:query].present?
 
-    puts params[:query]
     results = ActsAsTaggableOn::Tag.named_like(params[:query]).order(:name).limit(20)
     render(json: results)
   end

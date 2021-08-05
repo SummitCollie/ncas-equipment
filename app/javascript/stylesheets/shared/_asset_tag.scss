@@ -26,10 +26,17 @@
   display: inline-block;
   width: $size;
   height: $size;
+  border: 1px solid transparent;
   border-radius: 50%;
   background-color: gray;
-  box-shadow: 1px 2px 2px rgba(115, 115, 115, 0.7);
+  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.3);
   user-select: none;
+
+  &--colorless {
+    background-color: transparent;
+    border: 1px solid black;
+    box-shadow: none;
+  }
 }
 
 /* Cool CSS invert text color thing I might use later */

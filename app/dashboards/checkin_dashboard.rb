@@ -11,7 +11,7 @@ class CheckinDashboard < Administrate::BaseDashboard
     id: Field::Number,
     user: Field::BelongsTo,
     location: Field::BelongsTo,
-    assets: Field::HasMany,
+    assets: AssetListField,
     returned_at: Field::DateTime,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,

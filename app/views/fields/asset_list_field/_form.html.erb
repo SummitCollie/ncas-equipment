@@ -1,0 +1,84 @@
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() {
+      function searchAssets(queryInput, callback) {
+        if (!queryInput) return callback();
+
+        const query = queryInput.trim();
+        if (query.length === 0) return callback();
+
+        $.get(`${window.location.origin}/assets/search`, { query })
+          .then(callback)
+          .catch(err => {
+            console.error('Error searching assets:\n', err);
+            callback();
+          });
+      }
+
+      const selectize = $('#<%= f.object_name %>_assets').selectize({
+        create: false,
+        persist: false,
+        closeAfterSelect: true,
+        valueField: 'id',
+        labelField: 'name',
+        searchField: 'name',
+        load: searchAssets,
+        plugins: ['remove_button'],
+        placeholder: 'Search by asset name or scan a barcode',
+        render: {
+          item: (data, escape) =>`
+            <div class="tag-list__item">
+              ${data.primary_tag_color ? `
+                <div
+                  class="asset-tag__color-dot"
+                  style="background-color: ${data.primary_tag_color}"
+                >
+                  &nbsp;
+                </div>
+              ` : `
+                <div
+                  class="asset-tag__color-dot asset-tag__color-dot--colorless"
+                >
+                  &nbsp;
+                </div>
+              `}
+              <div class="tag-list__item__text">
+                ${escape(data.name)}
+              </div>
+            </div>
+          `,
+          option: (data, escape) => `
+            <div class="tag-list__option">
+              ${data.primary_tag_color ? `
+                <div
+                  class="asset-tag__color-dot"
+                  style="background-color: ${data.primary_tag_color}"
+                >
+                  &nbsp;
+                </div>
+              ` : `
+                <div
+                  class="asset-tag__color-dot asset-tag__color-dot--colorless"
+                >
+                  &nbsp;
+                </div>
+              `}
+              <div class="tag-list__option__text">
+                ${escape(data.name)}
+              </div>
+            </div>
+          `,
+        },
+      })[0].selectize;
+    });
+  </script>
+<% end %>
+
+<div class="field-unit__label" style="margin-top: 0.6em; margin-bottom: auto;">
+  <%= f.label field.attribute, for: "#{f.object_name}_asset_list" %>
+</div>
+<div class="field-unit__field asset-list">
+  <%= f.select('assets', nil, {}, multiple: true, style: 'width: 100%') do %>
+    <%= options_for_select(field.selected_assets) %>
+  <% end %>
+</div>
