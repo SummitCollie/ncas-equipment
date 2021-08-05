@@ -39,6 +39,8 @@ By default, it renders:
     </script>
 
     <meta name="turbolinks-root" content="/admin">
+
+    <%= yield :head %>
   </head>
   <body>
     <%= render "header" %>

@@ -17,6 +17,10 @@ class Asset < ApplicationRecord
     location.blank? || location.for_checkin?
   end
 
+  def primary_tag_color
+    tags.first&.color
+  end
+
   private
 
   def ensure_tag_colors_present
