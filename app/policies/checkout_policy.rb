@@ -5,9 +5,9 @@ class CheckoutPolicy < ApplicationPolicy
 
   def permitted_attributes
     if user.admin?
-      return [:user, :location, :est_return]
+      return [:assets, :user, :location, :est_return]
     end
 
-    [:location, :est_return]
+    [:assets, :location, :est_return]
   end
 end

@@ -5,9 +5,9 @@ class CheckinPolicy < ApplicationPolicy
 
   def permitted_attributes
     if user.admin?
-      return [:user, :location, :returned_at]
+      return [:assets, :user, :location, :returned_at]
     end
 
-    [:location, :returned_at]
+    [:assets, :location, :returned_at]
   end
 end
