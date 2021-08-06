@@ -15,7 +15,7 @@
           });
       }
 
-      const selectize = $('#<%= f.object_name %>_assets').selectize({
+      const selectize = $('#<%= f.object_name %>_asset_ids').selectize({
         create: false,
         persist: false,
         closeAfterSelect: true,
@@ -75,10 +75,10 @@
 <% end %>
 
 <div class="field-unit__label" style="margin-top: 0.6em; margin-bottom: auto;">
-  <%= f.label field.attribute, for: "#{f.object_name}_asset_list" %>
+  <%= f.label field.attribute, for: "#{f.object_name}_asset_ids" %>
 </div>
-<div class="field-unit__field asset-list">
-  <%= f.select('assets', nil, {}, multiple: true, style: 'width: 100%') do %>
+<div class="field-unit__field">
+  <%= f.select('asset_ids', nil, {}, multiple: true) do %>
     <%= options_for_select(field.selected_assets) %>
   <% end %>
 </div>

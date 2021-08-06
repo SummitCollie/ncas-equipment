@@ -46,14 +46,14 @@ module NcasEquipment
     end
 
     config.after_initialize do
-      # if Rails.env.production?
-      if defined?(Rails::Server) # Run only on server start, not `rails c` etc.
-        Rails.application.reload_routes!
-        API::Telegram.connect_webhook
+      if Rails.env.production?
+        if defined?(Rails::Server) # Run only on server start, not `rails c` etc.
+          Rails.application.reload_routes!
+          API::Telegram.connect_webhook
+        end
+      else
+        Rails.logger.debug('Skipping Telegram webhook init, not running in production.')
       end
-      # else
-      #  Rails.logger.debug('Skipping Telegram webhook init, not running in production.')
-      # end
     end
   end
 end
