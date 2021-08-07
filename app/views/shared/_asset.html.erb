@@ -1,0 +1,18 @@
+<span class="asset-tag">
+  <% if asset.primary_tag_color %>
+    <span
+      class="asset-tag__color-dot"
+      style="background-color: <%= asset.primary_tag_color %>"
+    >
+      &nbsp;
+    </span>
+  <% else %>
+    <div class="asset-tag__color-dot asset-tag__color-dot--colorless">
+      &nbsp;
+    </div>
+  <% end %>
+
+  <span class="asset-tag__text">
+    <%= asset.name %>
+  </span>
+</span>

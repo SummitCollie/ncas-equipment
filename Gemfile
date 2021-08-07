@@ -45,7 +45,7 @@ group :development do
 
   gem 'rubocop', '~> 1.12.1', require: false
   gem 'rubocop-shopify', '~> 2.0.1', require: false
-  gem 'solargraph', '~> 0.42.3'
+  gem 'solargraph', '~> 0.43.0'
   gem 'pry', '~> 0.13.0'
   gem 'pry-byebug', '~> 3.9.0'
 end
