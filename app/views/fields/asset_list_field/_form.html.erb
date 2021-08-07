@@ -1,6 +1,9 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
     $(function() {
+      const DEFAULT_OPTIONS = <%= raw(field.default_options.to_json) %>;
+      console.log(DEFAULT_OPTIONS);
+
       function searchAssets(queryInput, callback) {
         if (!queryInput) return callback();
 
@@ -19,6 +22,7 @@
         create: false,
         persist: false,
         closeAfterSelect: true,
+        options: DEFAULT_OPTIONS,
         valueField: 'id',
         labelField: 'name',
         searchField: 'name',
@@ -79,6 +83,6 @@
 </div>
 <div class="field-unit__field">
   <%= f.select('asset_ids', nil, {}, multiple: true) do %>
-    <%= options_for_select(field.selected_assets) %>
+    <%= options_for_select(field.default_options, field.selected_assets) %>
   <% end %>
 </div>
