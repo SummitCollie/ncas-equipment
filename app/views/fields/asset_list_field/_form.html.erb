@@ -2,7 +2,6 @@
   <script type="text/javascript">
     $(function() {
       const DEFAULT_OPTIONS = <%= raw(field.default_options.to_json) %>;
-      console.log(DEFAULT_OPTIONS);
 
       function searchAssets(queryInput, callback) {
         if (!queryInput) return callback();
