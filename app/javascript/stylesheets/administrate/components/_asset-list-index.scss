@@ -1,0 +1,21 @@
+.asset-list-index {
+  display: flex;
+  align-items: center;
+
+  &__dots {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    transform: scaleX(-1);
+
+    .asset-tag__color-dot {
+      margin-right: -6px;
+    }
+  }
+
+  &__text {
+    margin: 0 0 0 1em;
+    white-space: nowrap;
+  }
+}

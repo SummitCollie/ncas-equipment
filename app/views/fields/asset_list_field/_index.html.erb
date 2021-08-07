@@ -1,1 +1,30 @@
-<%= field.to_s %>
+<div class="asset-list-index">
+  <div class="asset-list-index__dots">
+    <%# Reverse because CSS order reverses again, so left overlaps right %>
+    <% field.selected_assets.first(10).reverse.map.with_index do |asset, index| %>
+      <% if asset.primary_tag_color %>
+        <span
+          class="asset-tag__color-dot asset-tag__color-dot--18"
+          style="background-color: <%= asset.primary_tag_color %>"
+          title="<%= asset.name %>"
+        >
+          &nbsp;
+        </span>
+      <% else %>
+        <span
+          class="asset-tag__color-dot asset-tag__color-dot--18"
+          style="background-color: white; border: 1px solid black;"
+          title="<%= asset.name %>"
+        >
+          &nbsp;
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% if field.selected_assets.count > 10 %>
+    <p class="asset-list-index__text">
+      + <%= field.selected_assets.count - 10 %> more
+    </p>
+  <% end %>
+</div>

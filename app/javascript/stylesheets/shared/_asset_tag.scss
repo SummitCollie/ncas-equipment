@@ -20,17 +20,21 @@
 }
 
 .asset-tag__color-dot {
-  $size: 14px;
   flex: 0 0 auto;
 
   display: inline-block;
-  width: $size;
-  height: $size;
+  width: 14px;
+  height: 14px;
   border: 1px solid transparent;
   border-radius: 50%;
   background-color: gray;
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.3);
   user-select: none;
+
+  &--18 {
+    width: 18px;
+    height: 18px;
+  }
 
   &--colorless {
     background-color: transparent;
