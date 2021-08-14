@@ -4,6 +4,9 @@
     action_types: <%= raw(BarcodeUtils.action_types.to_json) %>,
     message_types: <%= raw(BarcodeUtils.message_types.to_json) %>,
     initial_action: <%= current_user.websocket_action ? raw("'#{current_user.websocket_action}'") : 'null' %>,
-    asset_base_path: '<%= admin_assets_path %>'
+    asset_base_path: '<%= admin_assets_path %>',
+
+    // Ref to a selectize instance on a given page, updated on page loads where relevant
+    selectizeRef: null,
   };
 </script>
