@@ -25,18 +25,23 @@ const initSocketConsumer = () => {
           }
 
           switch (data.message_type) {
+            // Server is telling us our connection_id, write it down...
             case BarcodeApp.message_types.YOUR_CONNECTION_ID:
               connectionId = data.connection_identifier;
               break;
 
+            // We should theoretically already be on the relevant page
+            // for each of these actions when this code runs
             case BarcodeApp.message_types.ACTION_PERFORMED:
               switch (data.action_type) {
                 case BarcodeApp.action_types.SET_ASSET_BARCODE:
                   $('#asset_barcode').val(data.barcode);
                   break;
                 case BarcodeApp.action_types.ADD_TO_CHECKOUT:
+                  addToSelectize(data);
                   break;
                 case BarcodeApp.action_types.ADD_TO_CHECKIN:
+                  addToSelectize(data);
                   break;
                 case BarcodeApp.action_types.OPEN_ON_PC:
                   openOnPC(data.asset_id);
@@ -75,6 +80,15 @@ function openOnPC(assetId) {
     return;
   }
   window.location.href = `${BarcodeApp.asset_base_path}/${assetId}`;
+}
+
+function addToSelectize(data) {
+  window.BarcodeApp.selectizeRef.addOption({
+    id: data.asset_id,
+    name: data.asset_name,
+    primary_tag_color: data.primary_tag_color,
+  });
+  window.BarcodeApp.selectizeRef.addItem(data.asset_id);
 }
 
 export default initSocketConsumer;

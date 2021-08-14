@@ -73,6 +73,9 @@
           `,
         },
       })[0].selectize;
+
+      // Save a reference in window.BarcodeApp globals so websocket script can update it
+      window.BarcodeApp.selectizeRef = selectize;
     });
   </script>
 <% end %>

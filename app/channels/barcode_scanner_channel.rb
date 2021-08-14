@@ -83,6 +83,8 @@ class BarcodeScannerChannel < ApplicationCable::Channel
       action_type: action_type,
       barcode: barcode,
       asset_id: asset&.id,
+      asset_name: asset&.name,
+      primary_tag_color: asset&.primary_tag_color,
     )
   end
 
