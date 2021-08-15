@@ -4,7 +4,7 @@
 <div class="field-unit__field">
   <div class="user-role-radios">
     <div class="section">
-      <%= f.radio_button :admin, true, :checked => field.data == true %>
+      <%= f.radio_button :admin, true, checked: field.resource.id.nil? || field.data == true %>
       <%= label :user, :admin, 'Admin', value: true %>
       <p class="description">
         Can access this admin panel, create and delete users/assets,
@@ -13,11 +13,16 @@
     </div>
 
     <div class="section">
-      <%= f.radio_button :admin, false, :checked => field.data == false %>
-      <%= label :user, :admin, 'Normal User', value: false %>
-      <p class="description">
+      <%= f.radio_button :admin, false, checked: field.resource.id.present? && field.data == false, disabled: true %>
+      <%= label :user, :admin, 'Normal User', value: false, style: 'color: #dfdfdf' %>
+      <p class="description" style="color: #dfdfdf">
         Can only check-out and return assets. Cannot add assets,
         see data about other users, or access this admin panel.
+        <br />
+        <span style="font-size: 0.8em; font-weight: bold; color: #676767">
+          Interface for 'normal' non-admin users isn't implemented yet.
+          We can add this feature later if we want, but it's disabled for now.
+        </span>
       </p>
     </div>
   </div>
