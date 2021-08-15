@@ -77,7 +77,7 @@ class BarcodeScanner {
 
   async onScanResult(result) {
     await this.videoElement.pause();
-    $('.message-container').text(result.getText());
+    // $('.message-container').text(result.getText());
 
     // Scanning will resume when action_screen is closed
     return new Promise(resolve => {

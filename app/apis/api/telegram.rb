@@ -75,10 +75,9 @@ module API
       options = {
         headers: { 'Content-Type': 'application/json' },
         body: {
-          url: Rails.application.credentials.base_url +
-            Rails.application.routes.url_helpers.telegram_webhook_path(BOT_TOKEN),
-          drop_pending_updates: true,
+          url: Rails.application.routes.url_helpers.telegram_webhook_url(BOT_TOKEN),
           allowed_updates: ['message', 'my_chat_member'],
+          drop_pending_updates: true,
         }.to_json,
       }
       post('/setWebhook', options)

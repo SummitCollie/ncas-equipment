@@ -2,8 +2,6 @@ class BarcodesController < ApplicationController
   skip_before_action :authenticate_user!, only: :start_scanner
   before_action :skip_authorization, only: :start_scanner
 
-  BASE_URL = Rails.application.credentials.base_url
-
   # Handles magic token auth
   def start_scanner
     sign_out(current_user) if current_user.present?
@@ -32,7 +30,7 @@ class BarcodesController < ApplicationController
     authorize(:asset, :show?)
 
     token = MagicToken.create(user: current_user, purpose: 'scan-barcodes').token
-    link = BASE_URL + start_barcode_scanner_path(token)
+    link = Rails.application.routes.url_helpers.start_barcode_scanner_url(token)
 
     telegram = API::Telegram.new(current_user)
     result = telegram.send_message(
