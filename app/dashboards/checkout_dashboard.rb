@@ -31,13 +31,11 @@ class CheckoutDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
+    assets
+    est_return
     user
     location
-    assets
-    id
-    est_return
     created_at
-    updated_at
   ].freeze
 
   # FORM_ATTRIBUTES

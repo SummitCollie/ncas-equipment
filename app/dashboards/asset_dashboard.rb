@@ -39,15 +39,12 @@ class AssetDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
     name
-    description
     tags
+    description
     location
     user
     barcode
-    checkout_scan_required
-    locked
     donated_by
     est_value_cents
     created_at
@@ -62,8 +59,6 @@ class AssetDashboard < Administrate::BaseDashboard
     description
     tags
     barcode
-    checkout_scan_required
-    locked
     donated_by
     est_value_cents
   ].freeze

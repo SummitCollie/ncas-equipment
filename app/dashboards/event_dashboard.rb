@@ -32,13 +32,10 @@ class EventDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    locations
-    id
     name
-    description
     active
-    created_at
-    updated_at
+    description
+    locations
   ].freeze
 
   # FORM_ATTRIBUTES
