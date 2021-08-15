@@ -2,6 +2,12 @@ class DashboardsController < ApplicationController
   def index
     skip_policy_scope
     authorize(:dashboard, :show)
+
+    # Temporary: redirect admin users to /admin because the non-admin
+    # site doesn't exist yet. Remove when it does.
+    if current_user.admin?
+      redirect_to(admin_root_url)
+    end
   end
 
   private
