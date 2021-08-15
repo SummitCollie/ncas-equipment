@@ -1,3 +1,21 @@
-<h2>Log in</h2>
+<div class="login-page">
+  <%= image_pack_tag 'media/images/mine-transparent.png', class: 'sexy-dog-pic', title: 'go away' %>
+  <h2>ncas asset management</h2>
 
-<%= render "devise/shared/links" %>
+  <div class="flashes">
+    <% if notice.present? %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% if alert.present? %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
+  </div>
+
+  <div class="<%= "login-form" + (notice.present? || alert.present? ? " with-flashes" : "") %>">
+    <%= render "devise/shared/links" %>
+    <hr />
+    <p>
+      contact the asset management department for access
+    </p>
+  </div>
+</div>

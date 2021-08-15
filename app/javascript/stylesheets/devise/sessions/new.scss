@@ -1,0 +1,83 @@
+.login-page {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+
+  max-width: 25em;
+  margin: 0 auto;
+  text-align: center;
+
+  h2 {
+    font-weight: normal;
+  }
+
+  .sexy-dog-pic {
+    width: 20em;
+    margin: 1em auto;
+  }
+
+  .flashes {
+    margin-top: 1em;
+  }
+
+  .login-form {
+    padding: 1em 1.5em;
+    border: 1px solid #999999;
+    border-radius: 4px;
+
+    &.with-flashes {
+      border-top: none;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    .google-signin-button {
+      $width: 12em;
+      width: $width;
+      height: $width / 4.152;
+      display: block;
+      background-image: url('../images/google_signin/normal.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .google-signin-link {
+      display: inline-block;
+      margin-left: auto;
+      margin-right: auto;
+      outline: none;
+
+      &:focus,
+      &:hover {
+        .google-signin-button {
+          background-image: url('../images/google_signin/focus.png');
+        }
+      }
+
+      &:active {
+        .google-signin-button {
+          background-image: url('../images/google_signin/pressed.png');
+        }
+      }
+    }
+
+    p {
+      font-size: 0.8em;
+    }
+  }
+
+  .notice {
+    display: block;
+    color: #184558;
+    background-color: #3baddd;
+    padding: 0.75em;
+    text-align: center;
+  }
+
+  .alert {
+    display: block;
+    color: #5e222a;
+    background-color: #ea546a;
+    padding: 0.75em;
+    text-align: center;
+  }
+}

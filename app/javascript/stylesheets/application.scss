@@ -1,1 +1,32 @@
+@import 'devise/sessions/new';
 @import 'shared/asset_tag';
+
+body {
+  color: #676767;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+hr {
+  border-bottom: 1px solid #dfe0e1;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+}
