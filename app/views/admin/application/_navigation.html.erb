@@ -1,0 +1,37 @@
+<%#
+# Navigation
+
+This partial is used to display the navigation in Administrate.
+By default, the navigation contains navigation links
+for all resources in the admin dashboard,
+as defined by the routes in the `admin/` namespace
+%>
+
+<% content_for :javascript do %>
+  <script>
+    $('.search-btn').on('click', (e) => {
+      e.preventDefault();
+      window.alert('Search feature is WIP :<');
+    });
+  </script>
+<% end %>
+
+<nav class="navigation" role="navigation">
+  <%= link_to('#', class: "button button--alt button--nav search-btn") do %>
+    <svg class="search__eyeglass-icon" role="img">
+      <title>
+        Search
+      </title>
+      <use xlink:href="#icon-eyeglass"></use>
+    </svg>
+    Search
+  <% end %>
+
+  <% Administrate::Namespace.new(namespace).resources_with_index_route.each do |resource| %>
+    <%= link_to(
+      display_resource_name(resource),
+      resource_index_route(resource),
+      class: "navigation__link navigation__link--#{nav_link_state(resource)}"
+    ) if valid_action?(:index, resource) && show_action?(:index, model_from_resource(resource)) %>
+  <% end %>
+</nav>

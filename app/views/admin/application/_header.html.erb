@@ -47,6 +47,8 @@
   <div class="admin-app-header__content">
     <h1>NCAS Asset Management</h1>
 
+    <%= link_to('Sign Out', destroy_user_session_path, method: 'DELETE', class: 'right-aligned') %>
+
     <div class="dropdown-wrapper">
       <button class="button button--alt dropdown-button barcode-scanner-btn">
         <%= image_pack_tag 'media/images/barcode-scanner.svg' %>
