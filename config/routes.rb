@@ -21,7 +21,10 @@ Rails.application.routes.draw do
     root to: 'users#index'
   end
 
-  root 'dashboards#index'
+  authenticated :user do
+    root 'dashboards#index', as: 'dashboards'
+  end
+  root to: redirect('/users/sign_in')
 
   get 'tags/search'
 
