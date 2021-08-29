@@ -1,0 +1,9 @@
+.global-search__form {
+  margin: auto;
+  max-width: unset;
+}
+
+.global-search__results {
+  // administrate uses something called "js-table", let's see if that works
+  display: block;
+}

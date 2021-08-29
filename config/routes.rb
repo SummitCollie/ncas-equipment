@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     }
 
   namespace :admin do
+    resources :search, only: :index
     resources :users do
       member do
         get :link_telegram_url

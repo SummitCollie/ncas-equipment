@@ -7,17 +7,8 @@ for all resources in the admin dashboard,
 as defined by the routes in the `admin/` namespace
 %>
 
-<% content_for :javascript do %>
-  <script>
-    $('.search-btn').on('click', (e) => {
-      e.preventDefault();
-      window.alert('Search feature is WIP :<');
-    });
-  </script>
-<% end %>
-
 <nav class="navigation" role="navigation">
-  <%= link_to('#', class: "button button--alt button--nav search-btn") do %>
+  <%= link_to(admin_search_index_path, class: "button button--alt button--nav search-btn") do %>
     <svg class="search__eyeglass-icon" role="img">
       <title>
         Search
@@ -28,6 +19,9 @@ as defined by the routes in the `admin/` namespace
   <% end %>
 
   <% Administrate::Namespace.new(namespace).resources_with_index_route.each do |resource| %>
+    <%# Search is shown as a button above ^ %>
+    <%= next if resource == 'search' %>
+
     <%= link_to(
       display_resource_name(resource),
       resource_index_route(resource),

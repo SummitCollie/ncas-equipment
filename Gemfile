@@ -64,5 +64,5 @@ gem 'devise', '~> 4.7'
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-google-oauth2', '~> 0.8.1'
 gem 'pundit', '~> 2.1'
-
 gem 'httparty', '~> 0.18.1'
+gem 'pg_search', '~> 2.3'

@@ -1,5 +1,13 @@
 class Asset < ApplicationRecord
+  include PgSearch::Model
+
   acts_as_ordered_taggable
+
+  pg_search_scope :search_by_name,
+    against: :name,
+    using: {
+      tsearch: { any_word: true },
+    }
 
   belongs_to :location, optional: true
   belongs_to :user, optional: true
