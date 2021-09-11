@@ -5,9 +5,8 @@ class Asset < ApplicationRecord
 
   pg_search_scope :search_by_name,
     against: :name,
-    using: {
-      tsearch: { any_word: true },
-    }
+    using: { tsearch: { prefix: true, any_word: true } },
+    order_within_rank: 'updated_at DESC'
 
   belongs_to :location, optional: true
   belongs_to :user, optional: true

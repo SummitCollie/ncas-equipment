@@ -1,3 +1,9 @@
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(function() { Packs.administrate.initSearchIndex(); });
+  </script>
+<% end %>
+
 <header class="main-content__header" role="banner">
   <form class="search global-search__form" role="search">
     <label class="search__label" for="search">
@@ -28,5 +34,44 @@
 </header>
 
 <section class="main-content__body main-content__body--flush global-search__results">
-  Uhh insert search page here
+  <table id="search-results" aria-labelledby="Search Results">
+    <thead>
+      <th
+        class="cell-label cell-label--tag"
+        scope="col"
+        role="columnheader"
+        width="80"
+      >
+        Tag
+      </th>
+
+      <th
+        class="cell-label cell-label--asset-name"
+        scope="col"
+        role="columnheader"
+      >
+        Asset
+      </th>
+
+      <th
+        class="cell-label cell-label--user"
+        scope="col"
+        role="columnheader"
+      >
+        Currently Held By
+      </th>
+
+      <th
+        class="cell-label cell-label--location"
+        scope="col"
+        role="columnheader"
+      >
+        Current Location
+      </th>
+    </thead>
+
+    <tbody>
+      <tr class="js-table-row"></tr>
+    </tbody>
+  </table>
 </section>

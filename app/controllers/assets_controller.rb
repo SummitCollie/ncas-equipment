@@ -4,9 +4,10 @@ class AssetsController < ApplicationController
 
   def search
     authorize(:asset, :show?)
-    return head(:bad_request) unless params[:query].present?
+    return head(:bad_request) unless params[:query].present? || params[:filters].present?
 
-    assets = Asset.where('name ILIKE ?', "%#{params[:query]}%").order(:name).limit(20)
+    # TODO: paginate?
+    assets = Asset.search_by_name(params[:query]).limit(200)
 
     render(json: assets, methods: :primary_tag_color)
   end

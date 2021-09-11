@@ -37,7 +37,7 @@ Rails.application.routes.draw do
 
   resources :assets, only: [:index] do
     collection do
-      get 'search'
+      post 'search'
     end
   end
 end
