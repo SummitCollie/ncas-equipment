@@ -1,0 +1,24 @@
+.filter-btn {
+  color: $base-font-color;
+  background-color: transparent;
+  font-weight: normal;
+  border: $base-border;
+  padding: 0.5em 0.75em;
+
+  &:hover {
+    color: $base-font-color;
+    background-color: lighten($blue, 50%);
+    border-color: mix($black, $base-border-color, 20%);
+  }
+
+  &:focus {
+    border-color: $action-color;
+    outline: none;
+  }
+
+  &--active {
+    color: white;
+    background-color: $blue;
+    border-color: lighten($blue, 5%);
+  }
+}

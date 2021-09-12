@@ -6,37 +6,48 @@
 
 <header class="main-content__header" role="banner">
   <form class="search global-search__form" role="search">
-    <label class="search__label" for="search">
-      <svg class="search__eyeglass-icon" role="img">
-        <title>
-          Filter asset names
-        </title>
-        <use xlink:href="#icon-eyeglass"></use>
-      </svg>
-    </label>
+    <div class="global-search__form__query-bar">
+      <label class="search__label" for="search">
+        <svg class="search__eyeglass-icon" role="img">
+          <title>
+            Filter asset names
+          </title>
+          <use xlink:href="#icon-eyeglass"></use>
+        </svg>
+      </label>
 
-    <input
-      class="search__input global-search__input"
-      id="search"
-      type="search"
-      name="search"
-      placeholder="Filter asset names"
-      value=""
-    />
+      <input
+        class="search__input global-search__input"
+        id="search"
+        type="search"
+        name="search"
+        placeholder="Filter asset names"
+        value=""
+      />
 
-    <a class="search__clear-link global-search__form__clear-btn" href="/admin/search">
-      <svg class="search__clear-icon" role="img">
-        <title>Clear search</title>
-        <use xlink:href="#icon-cancel"></use>
-      </svg>
-    </a>
+      <a class="search__clear-link global-search__form__clear-btn" href="/admin/search">
+        <svg class="search__clear-icon" role="img">
+          <title>Clear search</title>
+          <use xlink:href="#icon-cancel"></use>
+        </svg>
+      </a>
+    </div>
+
+    <div class="global-search__form__filter-bar">
+      <button class="filter-btn">Tags</button>
+      <button class="filter-btn">Held By</button>
+      <button class="filter-btn filter-btn--boolean filter-btn--active">Checked In</button>
+      <button class="filter-btn filter-btn--boolean">Checked Out</button>
+      <button class="filter-btn filter-btn--boolean">Out past estimated return</button>
+      <a href="#" id="clear-filters-btn">Clear Filters</a>
+    </div>
   </form>
 </header>
 
 <section class="main-content__body main-content__body--flush global-search__results">
   <div id="welcome-screen">
     <svg role="img">
-      <title>Enter Search</title>
+      <title>🔎w🔍</title>
       <use xlink:href="#icon-eyeglass"></use>
     </svg>
     <p>

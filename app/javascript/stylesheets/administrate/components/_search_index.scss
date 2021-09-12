@@ -1,6 +1,26 @@
 .global-search__form {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+
   margin: auto;
   max-width: unset;
+
+  &__query-bar {
+    position: relative;
+  }
+
+  &__filter-bar {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 1em;
+
+    a#clear-filters-btn {
+      margin-left: auto;
+      margin-right: 0;
+    }
+  }
 }
 
 .global-search__results {
@@ -42,7 +62,7 @@
     flex-flow: column nowrap;
     align-items: center;
 
-    padding-top: 1em;
+    padding-top: 2em;
 
     svg {
       fill: gray;

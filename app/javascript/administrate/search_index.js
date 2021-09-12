@@ -89,9 +89,11 @@ const initSearchIndex = () => {
     $.post(GLOBAL_SEARCH_URL, getFormState())
       .then(results => {
         renderPage(!!results);
-        if (results) renderResults(results);
+        if (results) {
+          renderResults(results);
+          tableSorter.refresh();
+        }
       })
-      .then(tableSorter.refresh)
       .catch(e => {
         console.error('Error while searching:\n', e);
         renderPage(false);
