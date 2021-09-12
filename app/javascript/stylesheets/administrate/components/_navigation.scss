@@ -9,6 +9,8 @@ $_navigation-link-padding: 0.6em;
     display: inline-flex;
     gap: 0.5em;
 
+    line-height: 0.9;
+
     svg.search__eyeglass-icon {
       fill: $blue;
       position: unset;
