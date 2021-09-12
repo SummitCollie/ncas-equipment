@@ -6,6 +6,10 @@
 .global-search__results {
   display: block;
 
+  table#search-results {
+    display: none;
+  }
+
   .cell-label {
     cursor: pointer;
   }
@@ -30,5 +34,29 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  #welcome-screen,
+  #no-results-screen {
+    display: none;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    padding-top: 1em;
+
+    svg {
+      fill: gray;
+      width: 4em;
+      height: 4em;
+    }
+
+    h2 {
+      font-size: 3em;
+      font-weight: normal;
+    }
+
+    p {
+      margin: 2em 0;
+    }
   }
 }

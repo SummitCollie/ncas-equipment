@@ -33,6 +33,8 @@ const initSearchIndex = () => {
   });
 
   const $results = $('#search-results__body');
+  const $welcomeScreen = $('#welcome-screen');
+  const $noResultsScreen = $('#no-results-screen');
 
   // Form setup
   const $searchForm = $('.global-search__form');
@@ -50,7 +52,7 @@ const initSearchIndex = () => {
     submitSearch();
   });
 
-  // Restore any previous search from this session
+  // Restore any previous search from current session
   restoreSearch();
 
   // Search query + filters represented as JSON
@@ -85,9 +87,15 @@ const initSearchIndex = () => {
     saveSearch();
     clearResults();
     $.post(GLOBAL_SEARCH_URL, getFormState())
-      .then(renderResults)
+      .then(results => {
+        renderPage(!!results);
+        if (results) renderResults(results);
+      })
       .then(tableSorter.refresh)
-      .catch(e => console.error('Error while searching:\n', e));
+      .catch(e => {
+        console.error('Error while searching:\n', e);
+        renderPage(false);
+      });
   }
 
   function clearResults() {
@@ -155,6 +163,27 @@ const initSearchIndex = () => {
         </tr>
       `);
     });
+  }
+
+  // Render either results table, welcome screen, or "no results" screen
+  function renderPage(hasResults) {
+    if (hasResults) {
+      $welcomeScreen.css('display', 'none');
+      $noResultsScreen.css('display', 'none');
+      tableElem.style.display = 'table';
+    } else {
+      tableElem.style.display = 'none';
+
+      const { query, filters } = getFormState();
+
+      if (query.length === 0 && Object.keys(filters).length === 0) {
+        $noResultsScreen.css('display', 'none');
+        $welcomeScreen.css('display', 'flex');
+      } else {
+        $welcomeScreen.css('display', 'none');
+        $noResultsScreen.css('display', 'flex');
+      }
+    }
   }
 };
 

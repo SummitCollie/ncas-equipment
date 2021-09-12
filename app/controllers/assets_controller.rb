@@ -15,10 +15,11 @@ class AssetsController < ApplicationController
   # For the big global search page, includes data for location/user/tags/etc
   def global_search
     authorize(:asset, :show?)
-    return head(:bad_request) unless params[:query].present? || params[:filters].present?
+    return render(body: nil) unless params[:query].present? || params[:filters].present?
 
-    # TODO: paginate?
     assets = Asset.search_by_name(params[:query]).limit(200)
+
+    return render(body: nil) if assets.empty?
 
     locations = assets.map(&:location).filter(&:present?).uniq
     users = assets.map(&:user).filter(&:present?).uniq
