@@ -9,7 +9,7 @@
         const query = queryInput.trim();
         if (query.length === 0) return callback();
 
-        $.post(`${window.location.origin}/assets/search`, { query })
+        $.post(`/assets/search`, { query })
           .then(callback)
           .catch(err => {
             console.error('Error searching assets:\n', err);

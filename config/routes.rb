@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   resources :assets, only: [:index] do
     collection do
       post 'search'
+      post 'global_search'
     end
   end
 end

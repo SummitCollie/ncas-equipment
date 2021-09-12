@@ -4,6 +4,9 @@
     "browser": true,
     "jquery": true
   },
+  "parserOptions": {
+    "ecmaVersion": 2021
+  },
   "settings": {
     "import/resolver": {
       "babel-module": {}
@@ -17,6 +20,7 @@
     "no-alert": "off",
     "func-names": "off",
     "no-use-before-define": ["error", { "functions": false, "classes": true }],
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
   }
 }

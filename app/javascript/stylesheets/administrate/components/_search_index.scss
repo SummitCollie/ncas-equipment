@@ -5,4 +5,30 @@
 
 .global-search__results {
   display: block;
+
+  .cell-label {
+    cursor: pointer;
+  }
+
+  .cell-label th[aria-sort]:not(.no-sort) {
+    font-weight: $bold-font-weight;
+  }
+
+  th[aria-sort]:not(.no-sort) .cell-label__sort-indicator {
+    float: right;
+    margin-left: 5px;
+
+    svg {
+      fill: $hint-grey;
+      height: 13px;
+      transition: transform $base-duration $base-timing;
+      width: 13px;
+    }
+  }
+
+  .asset-tag__color-dot {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
