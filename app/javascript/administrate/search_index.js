@@ -1,4 +1,8 @@
 import tablesort from 'tablesort';
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/themes/light.css';
+import 'tippy.js/animations/shift-toward.css';
 
 const GLOBAL_SEARCH_URL = `/assets/global_search`;
 const USER_VIEW_URL = id => `/admin/users/${id}`;
@@ -51,6 +55,43 @@ const initSearchIndex = () => {
     e.preventDefault();
     submitSearch();
   });
+
+  // Filter button setup
+  const $tagFilterBtn = $('#tag-filter-btn');
+  const $userFilterBtn = $('#user-filter-btn');
+  const $locationFilterBtn = $('#location-filter-btn');
+  const $checkedInFilterBtn = $('#checked-in-filter-btn');
+  const $checkedOutFilterBtn = $('#checked-out-filter-btn');
+  const $lateFilterBtn = $('#late-filter-btn');
+
+  const $tagTooltip = $('#tag-tooltip');
+  const $userTooltip = $('#user-tooltip');
+  const $locationTooltip = $('#location-tooltip');
+
+  const tippyOptions = {
+    allowHTML: true,
+    trigger: 'click',
+    placement: 'bottom',
+    interactive: true,
+    animation: 'shift-toward',
+    theme: 'light',
+    appendTo: document.body,
+  };
+
+  tippy($tagFilterBtn[0], {
+    content: $tagTooltip.html(),
+    ...tippyOptions,
+  });
+  tippy($userFilterBtn[0], {
+    content: $userTooltip.html(),
+    ...tippyOptions,
+  });
+  tippy($locationFilterBtn[0], {
+    content: $locationTooltip.html(),
+    ...tippyOptions,
+  });
+
+  // TODO - selectize dropdowns
 
   // Restore any previous search from current session
   restoreSearch();

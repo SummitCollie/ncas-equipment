@@ -22,3 +22,7 @@
     border-color: lighten($blue, 5%);
   }
 }
+
+.filter-tooltip__content {
+  display: none;
+}

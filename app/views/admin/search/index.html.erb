@@ -1,11 +1,15 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
-    $(function() { Packs.administrate.initSearchIndex(); });
+    $(function() { Packs.administrate.initSearchIndex() });
   </script>
 <% end %>
 
 <header class="main-content__header" role="banner">
-  <form class="search global-search__form" role="search">
+  <%= form_with(
+      url: global_search_assets_path,
+      class: 'search global-search__form',
+      html: { role: 'search' }
+  ) do |f| %>
     <div class="global-search__form__query-bar">
       <label class="search__label" for="search">
         <svg class="search__eyeglass-icon" role="img">
@@ -34,14 +38,39 @@
     </div>
 
     <div class="global-search__form__filter-bar">
-      <button class="filter-btn">Tags</button>
-      <button class="filter-btn">Held By</button>
-      <button class="filter-btn filter-btn--boolean filter-btn--active">Checked In</button>
-      <button class="filter-btn filter-btn--boolean">Checked Out</button>
-      <button class="filter-btn filter-btn--boolean">Out past estimated return</button>
+      <button class="filter-btn" id="tag-filter-btn">Tags</button>
+      <button class="filter-btn" id="user-filter-btn">Held By</button>
+      <button class="filter-btn" id="location-filter-btn">Location</button>
+      <button class="filter-btn filter-btn--boolean filter-btn--active" id="checked-in-filter-btn">Checked In</button>
+      <button class="filter-btn filter-btn--boolean" id="checked-out-filter-btn">Checked Out</button>
+      <button class="filter-btn filter-btn--boolean" id="late-filter-btn">Out past estimated return</button>
       <a href="#" id="clear-filters-btn">Clear Filters</a>
+
+      <div id="tag-tooltip" class="filter-tooltip__content">
+        <%= f.select('tags', @tags, {}, id: 'tag-select', multiple: true) %>
+      </div>
+
+      <div id="user-tooltip" class="filter-tooltip__content">
+        <%= f.select(
+          'users',
+          @users.collect { |u| [u.display_name || u.email, u.id] },
+          {},
+          id: 'user-select',
+          multiple: true
+        ) %>
+      </div>
+
+      <div id="location-tooltip" class="filter-tooltip__content">
+        <%= f.select(
+          'locations',
+          @locations.collect { |l| ["#{l.event.name} - #{l.name}", l.id] },
+          {},
+          id: 'location-select',
+          multiple: true
+        ) %>
+      </div>
     </div>
-  </form>
+  <% end %>
 </header>
 
 <section class="main-content__body main-content__body--flush global-search__results">
