@@ -1,0 +1,13 @@
+<div class="field-unit__label">
+  <%= f.label(content_for?(:label) ? yield(:label) : field.attribute) %>
+</div>
+
+<div class="field-unit__field">
+  <div class="checkbox-with-description">
+    <%= f.check_box field.attribute, checked: field.resource.id.nil? || field.data == true %>
+
+    <p class="description">
+      <%= yield(:description) %>
+    </p>
+  </div>
+</div>
