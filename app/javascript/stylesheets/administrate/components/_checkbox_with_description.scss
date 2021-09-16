@@ -1,0 +1,11 @@
+.field-unit--checkbox-with-description-field {
+  align-items: center;
+}
+
+div.checkbox-with-description {
+  display: flex;
+
+  p.description {
+    margin: 0 0 0 1em;
+  }
+}
