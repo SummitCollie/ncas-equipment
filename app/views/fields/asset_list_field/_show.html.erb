@@ -1,3 +1,7 @@
 <div class="show-tag-list__wrapper">
-  <%= render partial: 'shared/asset', collection: field.selected_assets %>
+  <% field.selected_assets.each do |asset| %>
+    <a href='<%= admin_asset_path(asset) %>'>
+      <%= render partial: 'shared/asset', object: asset %>
+    </a>
+  <% end %>
 </div>
