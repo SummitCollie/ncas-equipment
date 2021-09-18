@@ -50,6 +50,13 @@ there's no login page where you can enter these passwords.)
 
 ## Environment Variables
 
+Only env var of note that doesn't go in there is the `BASE_URL`, which sets the
+base URL on production. It should be declared in Heroku (or other host) config:
+
+```
+BASE_URL=ncas.equipment
+```
+
 ### config/application.yml
 
 Copy contents of `config/application.yml.EXAMPLE` into `config/application.yml`
