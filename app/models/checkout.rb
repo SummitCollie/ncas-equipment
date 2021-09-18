@@ -7,7 +7,7 @@ class Checkout < ApplicationRecord
   after_save :update_assets
 
   validates :assets, presence: true
-  validate :asset_not_checked_out, on: :create
+  validate :assets_can_be_checked_out, on: :create
 
   private
 
@@ -19,11 +19,16 @@ class Checkout < ApplicationRecord
     end
   end
 
-  def asset_not_checked_out
+  def assets_can_be_checked_out
+    valid_ids = Asset.can_check_out.pluck(:id)
     assets.each do |asset|
-      unless asset.available_to_check_out?
-        errors.add(:asset, "\"#{asset.name}\" has already been checked out")
-      end
+      errors.add(
+        :asset,
+        <<~HEREDOC
+          "#{asset.name}" is already checked out by
+          #{asset&.user&.display_name || asset&.user&.email || "someone"}
+        HEREDOC
+      ) unless valid_ids.include?(asset.id)
     end
   end
 end
