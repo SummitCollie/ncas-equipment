@@ -16,15 +16,9 @@ class Asset < ApplicationRecord
   }
   scope :can_check_in, -> {
     # Not the inverse of above, because we want locked assets to be check-in-able
-    # where.not(id: available_to_check_out)
+    # where.not(id: can_check_out)
     where.not(user_id: nil, location_id: nil)
   }
-
-  def available_to_check_out?
-    return false if locked
-    return false if user.present?
-    location.blank?
-  end
 
   def primary_tag_color
     tags.first&.color
