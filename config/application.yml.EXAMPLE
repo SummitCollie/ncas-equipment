@@ -1,0 +1,5 @@
+# Useful for ngrok testing of webhooks like Telegram bot
+# Prod uses "#{ENV['HEROKU_APP_NAME']}.herokuapp.com"
+DEV_BASE_URL: 'a062-83-132-198-232.ngrok.io'
+
+CONNECT_TELEGRAM_BOT: 'false'

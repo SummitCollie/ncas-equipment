@@ -50,17 +50,16 @@ there's no login page where you can enter these passwords.)
 
 ## Environment Variables
 
-These are stored in rails credentials. Here's all necessary keys:
+### config/application.yml
+
+Copy contents of `config/application.yml.EXAMPLE` into `config/application.yml`
+and customize as-needed.
+
+### Rails credentials
 
 `EDITOR=nano rails credentials:edit`
 
 ```yml
-# Local dev only: ngrok (or similar) base URL, used for
-# generating links, webhook callback URLs, etc.
-#
-# Prod uses "#{ENV['HEROKU_APP_NAME']}.herokuapp.com"
-dev_base_url: a062-83-132-198-232.ngrok.io
-
 # Default admin (google account) account to add on prod if
 # you run `rails db:seed` on your Heroku app
 prod_default_admin: myAdmin@gmail.com
