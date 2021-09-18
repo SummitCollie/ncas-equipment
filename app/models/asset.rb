@@ -11,10 +11,19 @@ class Asset < ApplicationRecord
 
   after_commit :ensure_tag_colors_present, on: [:create, :update]
 
+  scope :can_check_out, -> {
+    where(locked: false, user_id: nil, location_id: nil)
+  }
+  scope :can_check_in, -> {
+    # Not the inverse of above, because we want locked assets to be check-in-able
+    # where.not(id: available_to_check_out)
+    where.not(user_id: nil, location_id: nil)
+  }
+
   def available_to_check_out?
     return false if locked
     return false if user.present?
-    location.blank? || location.for_checkin?
+    location.blank?
   end
 
   def primary_tag_color
