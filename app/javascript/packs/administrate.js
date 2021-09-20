@@ -20,4 +20,4 @@ require('@rails/activestorage').start();
 require('../administrate/index');
 
 export { default as initTagsIndex } from 'administrate/tags_index';
-export { default as initSearchIndex } from 'administrate/search_index';
+export { default as initSearchIndex } from 'administrate/global_search/index';
