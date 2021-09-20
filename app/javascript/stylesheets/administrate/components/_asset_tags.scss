@@ -63,4 +63,14 @@
   flex-flow: row wrap;
   align-items: center;
   gap: 3px;
+
+  a {
+    color: initial;
+    text-decoration: none;
+    outline: none;
+  }
+
+  .asset-tag {
+    cursor: pointer;
+  }
 }

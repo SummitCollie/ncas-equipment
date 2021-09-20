@@ -6,8 +6,11 @@ class AssetsController < ApplicationController
   def search
     authorize(:asset, :show?)
     return head(:bad_request) unless params[:query].present?
+    return head(:bad_request) if params[:scope].present? && ['can_check_in',
+                                                             'can_check_out',].exclude?(params[:scope])
 
-    assets = Asset.search_by_name(params[:query]).limit(20)
+    search_scope = params[:scope].present? ? Asset.public_send(params[:scope]) : Asset.all
+    assets = search_scope.search_by_name(params[:query]).limit(20)
 
     render(json: assets, methods: :primary_tag_color)
   end

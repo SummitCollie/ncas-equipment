@@ -2,6 +2,7 @@
   <script type="text/javascript">
     $(function() {
       const DEFAULT_OPTIONS = <%= raw(field.default_options.to_json) %>;
+      const ASSET_SCOPE = <%= @asset_scope ? raw("'#{@asset_scope}'") : 'null' %>;
 
       function searchAssets(queryInput, callback) {
         if (!queryInput) return callback();
@@ -9,7 +10,7 @@
         const query = queryInput.trim();
         if (query.length === 0) return callback();
 
-        $.post(`/assets/search`, { query })
+        $.post(`/assets/search`, { query, scope: ASSET_SCOPE })
           .then(callback)
           .catch(err => {
             console.error('Error searching assets:\n', err);

@@ -11,6 +11,8 @@ class LocationDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     event: Field::BelongsTo,
+    for_checkin: CheckboxWithDescriptionField,
+    for_checkout: CheckboxWithDescriptionField,
     assets: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -22,9 +24,10 @@ class LocationDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
     name
     event
+    for_checkout
+    for_checkin
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -33,6 +36,8 @@ class LocationDashboard < Administrate::BaseDashboard
     name
     event
     assets
+    for_checkout
+    for_checkin
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -41,6 +46,8 @@ class LocationDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     name
     event
+    for_checkout
+    for_checkin
   ].freeze
 
   # COLLECTION_FILTERS

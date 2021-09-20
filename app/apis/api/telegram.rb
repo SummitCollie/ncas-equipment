@@ -9,10 +9,13 @@ module API
       wat: 'CAACAgQAAxkBAANoYJdRHsB9ag9RZheMuFFhVb0bY04AAgcAA6jdCBJT9BM6g2HANR8E',
     }
 
+    ENABLED = ENV['CONNECT_TELEGRAM_BOT'] == 'true'
     BOT_TOKEN = Rails.application.credentials.telegram[:bot_token]
     base_uri "https://api.telegram.org/bot#{BOT_TOKEN}"
 
     def initialize(chat_id)
+      return unless ENABLED
+
       @chat_id = if chat_id.is_a?(User)
         chat_id.telegram_chat_id
       else
@@ -23,6 +26,8 @@ module API
     end
 
     def send_message(text)
+      return unless ENABLED
+
       opts = options.merge({ body: {
         text: text,
         chat_id: chat_id,
@@ -38,6 +43,8 @@ module API
     end
 
     def delete_message(message_id)
+      return unless ENABLED
+
       opts = options.merge({ body: {
         chat_id: chat_id,
         message_id: message_id,
@@ -51,6 +58,8 @@ module API
     end
 
     def send_sticker(file_id)
+      return unless ENABLED
+
       opts = options.merge({ body: {
         sticker: file_id,
         chat_id: chat_id,
@@ -64,6 +73,8 @@ module API
     end
 
     def get_stickers_in_set(name)
+      return unless ENABLED
+
       opts = options.merge({ body: {
         name: name,
       }.to_json })
@@ -72,6 +83,8 @@ module API
     end
 
     def self.connect_webhook
+      return unless ENABLED
+
       options = {
         headers: { 'Content-Type': 'application/json' },
         body: {

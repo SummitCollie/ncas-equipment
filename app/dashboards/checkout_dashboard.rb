@@ -10,8 +10,8 @@ class CheckoutDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     user: Field::BelongsTo,
-    location: Field::BelongsTo,
-    assets: AssetListField,
+    location: Field::BelongsTo.with_options(scope: -> { Location.where(for_checkout: true) }),
+    assets: AssetListField.with_options(scope: -> { Asset.can_check_out }),
     est_return: Field::DateTime,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
