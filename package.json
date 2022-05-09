@@ -14,6 +14,7 @@
     "@rails/webpacker": "5.4.3",
     "@simonwep/pickr": "^1.8.0",
     "@zxing/library": "0.18.5",
+    "babel-plugin-jsx-pragmatic": "^1.0.2",
     "core-js": "^3.8.2",
     "expose-loader": "^1.0.3",
     "flatpickr": "^4.6.9",

@@ -74,6 +74,14 @@ module.exports = function (api) {
           pragmaFrag: 'Fragment',
         },
       ],
+      [
+        'babel-plugin-jsx-pragmatic',
+        {
+          module: 'preact',
+          import: 'h',
+          export: 'h',
+        },
+      ],
       ['module-resolver', { root: ['./app/javascript'], alias: {} }],
     ].filter(Boolean),
   };

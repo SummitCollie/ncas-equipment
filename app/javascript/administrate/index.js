@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Mount Preact app on pages with a container for it
   const preactContainer = document.getElementById('preact-container--admin');
-  if (preactContainer) render(<div>preact works</div>, preactContainer);
+  if (preactContainer) render(<p>preact works</p>, preactContainer);
 });
 
 // Update websocket server with current URL on every page change
