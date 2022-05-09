@@ -1,8 +1,8 @@
 <% content_for :javascript do %>
-  <script type="text/javascript">
-    $(function() { Packs.administrate.initSearchIndex() });
-  </script>
+  <%= javascript_pack_tag 'administrate' %>
 <% end %>
+
+<div id="preact-container--admin"></div>
 
 <header class="main-content__header" role="banner">
   <%= form_with(

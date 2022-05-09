@@ -18,6 +18,7 @@ module.exports = function (api) {
 
   return {
     presets: [
+      '@babel/preset-react',
       isTestEnv && [
         '@babel/preset-env',
         {
@@ -45,7 +46,7 @@ module.exports = function (api) {
       [
         '@babel/plugin-proposal-class-properties',
         {
-          loose: true,
+          loose: false,
         },
       ],
       [

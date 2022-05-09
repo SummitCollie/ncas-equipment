@@ -1,14 +1,4 @@
-const webpack = require('webpack'); // eslint-disable-line import/no-extraneous-dependencies
 const { environment } = require('@rails/webpacker');
-
-environment.plugins.append(
-  'jquery', // arbitrary
-  new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery',
-    Popper: ['popper.js', 'default'],
-  })
-);
 
 environment.loaders.append('jquery', {
   test: require.resolve('jquery'),
