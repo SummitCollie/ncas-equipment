@@ -36,6 +36,8 @@
 @import 'administrate/components/asset-list-index';
 @import 'administrate/components/filter-buttons';
 @import 'administrate/components/checkbox_with_description';
+@import 'administrate/components/preact-wrapper';
+@import 'shared/loading-indicator';
 @import 'shared/asset_tag';
 
 // We need to override trix.css’s image gallery styles to accommodate the
