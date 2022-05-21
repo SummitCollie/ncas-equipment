@@ -5,19 +5,20 @@
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
-import 'stylesheets/administrate.scss';
-
-require('@rails/ujs').start();
 require('turbolinks').start();
 
 // The next line you only need if you want ActiveStorage support
-require('@rails/activestorage').start();
+// require('@rails/activestorage').start();
 
 // The next two lines you only need if you want ActionText support
 // require('trix')
 // require('@rails/actiontext')
 
-require('../administrate/index');
+import Rails from '@rails/ujs';
+import '../administrate/index';
+import 'stylesheets/administrate.scss';
+
+Rails.start();
 
 export { default as initTagsIndex } from 'administrate/tags_index';
 export { default as initSearchIndex } from 'administrate/global_search/index';

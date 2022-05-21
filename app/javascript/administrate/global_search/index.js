@@ -1,6 +1,7 @@
+import { useMemo } from 'preact/hooks';
 import Select from 'react-select';
 
-// import initGlobalSearchForm from 'administrate/global_search/form';
+import useGlobalSearchForm from 'administrate/global_search/useGlobalSearchForm';
 
 const GLOBAL_SEARCH_URL = `/assets/global_search`;
 const USER_VIEW_URL = id => `/admin/users/${id}`;
@@ -8,6 +9,14 @@ const ASSET_VIEW_URL = id => `/admin/assets/${id}`;
 const LOCATION_VIEW_URL = id => `/admin/locations/${id}`;
 
 const GlobalSearchIndex = () => {
+  const { query, filters } = useGlobalSearchForm();
+
+  // These are all populated by rails template views/admin/search/index.html.erb,
+  // no async data loading so no dependencies should be safe.
+  const tagOptions = useMemo(() => {}, []);
+  const heldByOptions = useMemo(() => {}, []);
+  const locationOptions = useMemo(() => {}, []);
+
   return (
     <div>
       <header class="main-content__header" role="banner">

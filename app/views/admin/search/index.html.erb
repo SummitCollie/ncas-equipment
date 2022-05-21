@@ -1,4 +1,6 @@
 <% content_for :javascript do %>
+  const FULL_TAG_LIST = <%= raw(@tags.to_json) %>;
+
   <%= javascript_pack_tag 'administrate' %>
 <% end %>
 

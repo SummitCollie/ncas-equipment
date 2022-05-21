@@ -1,10 +1,12 @@
 // Preact dev tools
 if (process.env.NODE_ENV === 'development') require('preact/debug');
 
+import jQuery from 'jquery';
+window.$ = window.jQuery = jQuery; // eslint-disable-line no-multi-assign
+
 import { render } from 'preact';
 import { Router } from 'preact-router';
 import AsyncRoute from 'preact-async-route';
-import 'jquery-ui';
 import 'jquery-ui/ui/widgets/sortable';
 import 'selectize';
 
