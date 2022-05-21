@@ -18,6 +18,7 @@ module.exports = function (api) {
 
   return {
     presets: [
+      '@babel/preset-react',
       isTestEnv && [
         '@babel/preset-env',
         {
@@ -45,7 +46,7 @@ module.exports = function (api) {
       [
         '@babel/plugin-proposal-class-properties',
         {
-          loose: true,
+          loose: false,
         },
       ],
       [
@@ -64,6 +65,21 @@ module.exports = function (api) {
         '@babel/plugin-transform-regenerator',
         {
           async: false,
+        },
+      ],
+      [
+        '@babel/plugin-transform-react-jsx',
+        {
+          pragma: 'h',
+          pragmaFrag: 'Fragment',
+        },
+      ],
+      [
+        'babel-plugin-jsx-pragmatic',
+        {
+          module: 'preact',
+          import: 'h',
+          export: 'h',
         },
       ],
       ['module-resolver', { root: ['./app/javascript'], alias: {} }],

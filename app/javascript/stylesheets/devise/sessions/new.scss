@@ -34,7 +34,7 @@
     .google-signin-button {
       $width: 12em;
       width: $width;
-      height: $width / 4.152;
+      height: calc($width / 4.152);
       display: block;
       background-image: url('../images/google_signin/normal.png');
       background-size: contain;
