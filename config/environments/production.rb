@@ -28,8 +28,7 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  # https://github.com/heroku/heroku-buildpack-ruby/issues/576#issuecomment-1013923925
-  # config.assets.compile = false
+  config.assets.compile = true
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = 'http://assets.example.com'
