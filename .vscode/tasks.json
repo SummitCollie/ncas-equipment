@@ -7,7 +7,7 @@
       "label": "webpack-dev-server",
       "type": "shell",
       "isBackground": true,
-      "command": "export NODE_OPTIONS=--openssl-legacy-provider; ./bin/webpack-dev-server --progress",
+      "command": "./bin/webpack-dev-server --progress",
       "problemMatcher": [
         {
           "pattern": [

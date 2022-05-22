@@ -4,11 +4,11 @@
   "version": "1.0.0",
   "license": "SEE LICENSE IN LICENSE.txt",
   "scripts": {
-    "start": "export NODE_OPTIONS=--openssl-legacy-provider; ./bin/webpack-dev-server --progress",
+    "start": "./bin/webpack-dev-server --progress",
     "lint": "eslint app/javascript"
   },
   "engines": {
-    "node": "18.x"
+    "node": "16.x"
   },
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
