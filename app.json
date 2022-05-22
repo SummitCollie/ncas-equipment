@@ -3,6 +3,5 @@
   "description": "NCAS Asset Management Platform",
   "website": "https://ncas.equipment/",
   "repository": "https://github.com/SummitCollie/ncas-equipment",
-  "image": "heroku/ruby",
   "buildpacks": [{ "url": "heroku/nodejs" }, { "url": "heroku/ruby" }]
 }
